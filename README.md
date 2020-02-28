@@ -1,2 +1,2 @@
 # ChessFinals
-Una aplicación de PyQt para jugar finales de ajedrez
+Una aplicación de Python para jugar finales de ajedrez
