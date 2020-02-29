@@ -34,6 +34,9 @@ def main():
 	pygame.display.set_icon(logo)
 	pygame.display.set_caption("Chess Finals")
 
+	# now i'll declare variables for all the resources
+	tower_image = pygame.image.load("resources/pieces/tower.png")
+
 	# create a surface on screen that has the size of 800 x 600
 	screen = pygame.display.set_mode((800, 600))
 
@@ -44,18 +47,17 @@ def main():
 	clock = pygame.time.Clock()
 
 	# i need to define the bounds for the main board
-	boardWidth = 555
-	boardHeight = 555
+	board_width = 555
+	board_height = 555
 
 	# and the amount of distance between the board cells
 	margin = 5
 
 	# i need to keep info on this board
 	board = []
-
 	for row in range(0, 8):
 		board.append([])
-		for column in range(0,8):
+		for column in range(0, 8):
 			board[row].append(0)
 
 	# define a variable to control the main loop
@@ -73,11 +75,22 @@ def main():
 		# reset the screen's background
 		screen.fill((0, 0, 0))
 
+		# cells drawing needs to be intermittent to make it black and white
+		white = True
+
 		# i need to draw the board
 		for row in range(0, 8):
 			for column in range(0, 8):
-				color = (255, 255, 255)
-				pygame.draw.rect(screen, color, [(boardWidth//8 + 5) * column + 5, (boardHeight//8 + 5) * row + 5, boardWidth//8, boardHeight//8])
+				if white:
+					color = (255, 255, 255)
+					pygame.draw.rect(screen, color, [(board_width//8 + 5) * column + 5, (board_height//8 + 5) * row + 5, board_width//8, board_height//8])
+
+				# 1 for tower
+				if board[row][column] == 0:
+					screen.blit(tower_image, ((board_width//8 + 5) * column + 5, (board_height//8 + 5) * row + 5))
+				white = not white
+			white = not white
+
 
 		# make this 60 times per second
 		clock.tick(60)
