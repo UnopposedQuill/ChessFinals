@@ -35,7 +35,8 @@ def main():
 	pygame.display.set_caption("Chess Finals")
 
 	# now i'll declare variables for all the resources
-	tower_image = pygame.image.load("resources/pieces/tower.png")
+	white_tower_image = pygame.image.load("resources/pieces/white-tower.png")
+	black_tower_image = pygame.image.load("resources/pieces/black-tower.png")
 
 	# create a surface on screen that has the size of 800 x 600
 	screen = pygame.display.set_mode((800, 600))
@@ -54,11 +55,22 @@ def main():
 	margin = 0
 
 	# i need to keep info on this board
+	"""
 	board = []
 	for row in range(0, 8):
 		board.append([])
 		for column in range(0, 8):
 			board[row].append(0)
+	"""
+	board = [
+			[-1, -2, -3, -4, -5, -3, -2, -1],
+			[-6, -6, -6, -6, -6, -6, -6, -6],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[6, 6, 6, 6, 6, 6, 6, 6],
+			[1, 2, 3, 4, 5, 3, 2, 1]]
 
 	# define a variable to control the main loop
 	running = True
@@ -93,9 +105,13 @@ def main():
 												board_height // 8])
 
 				# 1 for tower
-				if board[row][column] == 0:
-					screen.blit(tower_image,
+				if board[row][column] == 1:
+					screen.blit(white_tower_image,
 								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -1:
+					screen.blit(black_tower_image,
+								((board_width // 8 + margin) * column + margin,
+								(board_height // 8 + margin) * row + margin))
 				white = not white
 			white = not white
 
