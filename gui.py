@@ -35,8 +35,23 @@ def main():
 	pygame.display.set_caption("Chess Finals")
 
 	# now i'll declare variables for all the resources
-	white_tower_image = pygame.image.load("resources/pieces/white-tower.png")
-	black_tower_image = pygame.image.load("resources/pieces/black-tower.png")
+	white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
+	black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
+
+	white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
+	black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
+
+	white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
+	black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
+
+	white_king_image = pygame.image.load("resources/pieces/white-king.png")
+	black_king_image = pygame.image.load("resources/pieces/black-king.png")
+
+	white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
+	black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
+
+	white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
+	black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
 
 	# create a surface on screen that has the size of 800 x 600
 	screen = pygame.display.set_mode((800, 600))
@@ -104,14 +119,48 @@ def main():
 												(board_height // 8 + margin) * row + margin, board_width // 8,
 												board_height // 8])
 
-				# 1 for tower
+				# 1 for rook
 				if board[row][column] == 1:
-					screen.blit(white_tower_image,
+					screen.blit(white_rook_image,
 								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
 				elif board[row][column] == -1:
-					screen.blit(black_tower_image,
-								((board_width // 8 + margin) * column + margin,
-								(board_height // 8 + margin) * row + margin))
+					screen.blit(black_rook_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 2 for knight
+				elif board[row][column] == 2:
+					screen.blit(white_knight_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -2:
+					screen.blit(black_knight_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 3 for bishop
+				elif board[row][column] == 3:
+					screen.blit(white_bishop_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -3:
+					screen.blit(black_bishop_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 4 for queen
+				elif board[row][column] == 4:
+					screen.blit(white_queen_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -4:
+					screen.blit(black_queen_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 5 for king
+				elif board[row][column] == 5:
+					screen.blit(white_king_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -5:
+					screen.blit(black_king_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 6 for pawn
+				elif board[row][column] == 6:
+					screen.blit(white_pawn_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -6:
+					screen.blit(black_pawn_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
 				white = not white
 			white = not white
 
