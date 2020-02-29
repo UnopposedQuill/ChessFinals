@@ -51,7 +51,7 @@ def main():
 	board_height = 555
 
 	# and the amount of distance between the board cells
-	margin = 5
+	margin = 0
 
 	# i need to keep info on this board
 	board = []
@@ -75,6 +75,9 @@ def main():
 		# reset the screen's background
 		screen.fill((0, 0, 0))
 
+		# i wish to surround the board with a white line
+		pygame.draw.rect(screen, (255, 255, 255), [0, 0, board_height + 8 * margin + 3, board_height + 8 * margin + 3])
+
 		# cells drawing needs to be intermittent to make it black and white
 		white = True
 
@@ -83,14 +86,18 @@ def main():
 			for column in range(0, 8):
 				if white:
 					color = (255, 255, 255)
-					pygame.draw.rect(screen, color, [(board_width//8 + 5) * column + 5, (board_height//8 + 5) * row + 5, board_width//8, board_height//8])
+				else:
+					color = (0, 0, 0)
+				pygame.draw.rect(screen, color, [(board_width // 8 + margin) * column + margin,
+												(board_height // 8 + margin) * row + margin, board_width // 8,
+												board_height // 8])
 
 				# 1 for tower
 				if board[row][column] == 0:
-					screen.blit(tower_image, ((board_width//8 + 5) * column + 5, (board_height//8 + 5) * row + 5))
+					screen.blit(tower_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
 				white = not white
 			white = not white
-
 
 		# make this 60 times per second
 		clock.tick(60)
