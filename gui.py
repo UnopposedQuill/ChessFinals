@@ -78,14 +78,14 @@ def main():
 			board[row].append(0)
 	"""
 	board = [
-			[-1, -2, -3, -4, -5, -3, -2, -1],
-			[-6, -6, -6, -6, -6, -6, -6, -6],
+			[-2, -3, -4, -5, -6, -4, -3, -2],
+			[-1, -1, -1, -1, -1, -1, -1, -1],
 			[0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0],
-			[6, 6, 6, 6, 6, 6, 6, 6],
-			[1, 2, 3, 4, 5, 3, 2, 1]]
+			[1, 1, 1, 1, 1, 1, 1, 1],
+			[2, 3, 4, 5, 6, 4, 3, 2]]
 
 	# define a variable to control the main loop
 	running = True
@@ -119,47 +119,47 @@ def main():
 												(board_height // 8 + margin) * row + margin, board_width // 8,
 												board_height // 8])
 
-				# 1 for rook
+				# 1 for pawn
 				if board[row][column] == 1:
-					screen.blit(white_rook_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -1:
-					screen.blit(black_rook_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 2 for knight
-				elif board[row][column] == 2:
-					screen.blit(white_knight_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -2:
-					screen.blit(black_knight_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 3 for bishop
-				elif board[row][column] == 3:
-					screen.blit(white_bishop_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -3:
-					screen.blit(black_bishop_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 4 for queen
-				elif board[row][column] == 4:
-					screen.blit(white_queen_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -4:
-					screen.blit(black_queen_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 5 for king
-				elif board[row][column] == 5:
-					screen.blit(white_king_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -5:
-					screen.blit(black_king_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 6 for pawn
-				elif board[row][column] == 6:
 					screen.blit(white_pawn_image,
 								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -6:
+				elif board[row][column] == -1:
 					screen.blit(black_pawn_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 2 for rook
+				elif board[row][column] == 2:
+					screen.blit(white_rook_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -2:
+					screen.blit(black_rook_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 3 for knight
+				elif board[row][column] == 3:
+					screen.blit(white_knight_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -3:
+					screen.blit(black_knight_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 4 for bishop
+				elif board[row][column] == 4:
+					screen.blit(white_bishop_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -4:
+					screen.blit(black_bishop_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 5 for queen
+				elif board[row][column] == 5:
+					screen.blit(white_queen_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -5:
+					screen.blit(black_queen_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				# 6 for king
+				elif board[row][column] == 6:
+					screen.blit(white_king_image,
+								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
+				elif board[row][column] == -6:
+					screen.blit(black_king_image,
 								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
 				white = not white
 			white = not white
