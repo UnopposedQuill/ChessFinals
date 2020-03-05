@@ -51,7 +51,7 @@ board = [
 board_width = 555
 board_height = 555
 column_margin = 120
-row_margin = 20
+row_margin = 60
 
 # VARIABLES DE CONTROL
 actual_selected_piece = none_piece
@@ -63,7 +63,7 @@ def main():
 	pygame.init()
 	pygame.display.set_icon(logo)
 	pygame.display.set_caption("Chess Finals")
-	screen = pygame.display.set_mode((800, 600))
+	screen = pygame.display.set_mode((1200, 700))
 	clock = pygame.time.Clock()
 
 	# MAIN LOOP.
@@ -74,7 +74,7 @@ def main():
 		screen.blit(background, (0, 0))
 
 		# i wish to surround the board with a white line
-		pygame.draw.rect(screen, (51, 25, 0), [column_margin - 2, row_margin - 2, board_height + 2, board_height + 2])
+		pygame.draw.rect(screen, (0, 0, 0), [column_margin - 2, row_margin - 2, board_height + 2, board_height + 2])
 
 		# cells drawing needs to be intermittent to make it black and white
 		white = True
@@ -97,7 +97,7 @@ def main():
 				mouse = pygame.mouse.get_pos()
 				x = mouse[0]
 				y = mouse[1]
-				if (pygame.mouse.get_pressed()[0] and 671 >= x >= 120 and 564 >= y >= 20):
+				if (pygame.mouse.get_pressed()[0] and 671 >= x >= 120 and 564 >= y >= 60):
 					cell = get_cell_piece(x, y)
 					if not cell == "Not selected":
 						actual_selected_piece = board[cell[0]][cell[1]]
