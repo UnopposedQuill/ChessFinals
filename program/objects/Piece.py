@@ -1,12 +1,12 @@
 class Piece:
 
-    def __init__(self, color, type):
+    def __init__(self, color, name):
         self.color = color
-        self.type = type
+        self.name = name
 
     def get_color(self):
         return self.color
 
-    def get_type(self):
-        return self.type
+    def get_name(self):
+        return self.name
 
