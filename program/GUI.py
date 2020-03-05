@@ -1,17 +1,17 @@
 # import the pygame module, so you can use it
 import pygame
 
-from Piece import Piece
+from program.objects.Piece import *
+from program.functions.GUIFunctions import *
 
+# PIEZAS DE JUEGO.
 none_piece = Piece("None", "None")
-
 black_pawn = Piece("black", "pawn")
 black_rook = Piece("black", "rook")
 black_knight = Piece("black", "knight")
 black_bishop = Piece("black", "bishop")
 black_queen = Piece("black", "queen")
 black_king = Piece("black", "king")
-
 white_pawn = Piece("white", "pawn")
 white_rook = Piece("white", "rook")
 white_knight = Piece("white", "knight")
@@ -19,32 +19,23 @@ white_bishop = Piece("white", "bishop")
 white_queen = Piece("white", "queen")
 white_king = Piece("white", "king")
 
+# RECURSOS DE IMÁGENES DE FONDO.
+white_rook_image = pygame.image.load("program/resources/pieces/white-rook.png")
+black_rook_image = pygame.image.load("program/resources/pieces/black-rook.png")
+white_knight_image = pygame.image.load("program/resources/pieces/white-knight.png")
+black_knight_image = pygame.image.load("program/resources/pieces/black-knight.png")
+white_bishop_image = pygame.image.load("program/resources/pieces/white-bishop.png")
+black_bishop_image = pygame.image.load("program/resources/pieces/black-bishop.png")
+white_king_image = pygame.image.load("program/resources/pieces/white-king.png")
+black_king_image = pygame.image.load("program/resources/pieces/black-king.png")
+white_queen_image = pygame.image.load("program/resources/pieces/white-queen.png")
+black_queen_image = pygame.image.load("program/resources/pieces/black-queen.png")
+white_pawn_image = pygame.image.load("program/resources/pieces/white-pawn.png")
+black_pawn_image = pygame.image.load("program/resources/pieces/black-pawn.png")
+logo = pygame.image.load("program/resources/logo32x32.png")
+background = pygame.image.load("program/resources/background.jpg")
 
-
-# now i'll declare variables for all the resources
-white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
-black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
-
-white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
-black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
-
-white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
-black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
-
-white_king_image = pygame.image.load("resources/pieces/white-king.png")
-black_king_image = pygame.image.load("resources/pieces/black-king.png")
-
-white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
-black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
-
-white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
-black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
-
-
-
-
-
-# i need to keep info on this board
+# TABLERO.
 board = [
 	[black_rook, black_knight, black_bishop, black_king, black_queen, black_bishop, black_knight, black_rook],
 	[black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn],
@@ -56,53 +47,28 @@ board = [
 	[white_rook, white_knight, white_bishop, white_queen, white_king, white_bishop, white_knight, white_rook]
 ]
 
+# DIMENCIONES.
+board_width = 555
+board_height = 555
+column_margin = 120
+row_margin = 20
 
-
-
-def get_cell_gui(x, y):
-	if 186 > x > 120 and 86 > y > 20:
-		return [0, 0]
-	elif 120 + 60 > x > 120 and 430 + 60 > y > 430:
-		return [6, 0]
-	else:
-		return [0, 0]
-
-
-
-# define a main function
+# FUNCIÓN PRINCIPAL.
 def main():
-	# initialize the pygame module
-	pygame.init()
 
-	# load and set the logo
-	logo = pygame.image.load("resources/logo32x32.png")
+	# INICIALIZACIÓN DE GUI.
+	pygame.init()
 	pygame.display.set_icon(logo)
 	pygame.display.set_caption("Chess Finals")
-
-	# create a surface on screen that has the size of 800 x 600
 	screen = pygame.display.set_mode((800, 600))
-
-	# create a cursor
-	# cursor = Cursor()
-
-	# i'll be needing a clock
 	clock = pygame.time.Clock()
 
-	# i need to define the bounds for the main board
-	board_width = 555
-	board_height = 555
-
-	column_margin = 120
-	row_margin = 20
-
-	selected_piece = False
-
-	# main loop
+	# MAIN LOOP.
 	while True:
 		if pygame.event.poll().type == pygame.QUIT:
 			return
 
-		screen.blit(pygame.image.load("resources/background.jpg"), [0, 0])
+		screen.blit(background, (0, 0))
 
 		# i wish to surround the board with a white line
 		pygame.draw.rect(screen, (51, 25, 0), [column_margin - 2, row_margin - 2, board_height + 2, board_height + 2])
@@ -124,18 +90,18 @@ def main():
 				pygame.draw.rect(screen, color,
 								 [board_width_value, board_height_value, board_width // 8, board_height // 8])
 
-
+				# CLICK Y SELECCIÓN SE CELDA/PIEZA.
 				mouse = pygame.mouse.get_pos()
-				# print("x=" + str(mouse[0]) + "  -  y=" + str(mouse[1]))
-				if (pygame.mouse.get_pressed()[0]):
-					coordinates = get_cell_gui(mouse[0], mouse[1])
-					selected_piece = board[coordinates[0]][coordinates[1]]
-					if not selected_piece.get_type() == "None":
-						print(selected_piece.get_type() + " - " + selected_piece.get_color())
+				x = mouse[0]
+				y = mouse[1]
+				if (pygame.mouse.get_pressed()[0] and 671 >= x >= 120 and 564 >= y >= 20):
+					cell = get_cell_piece(x, y)
+					if not cell == "Not selected":
+						selected_piece = board[cell[0]][cell[1]]
+						print(selected_piece.get_type() + " - " + selected_piece.get_color() + ", in pos: " + str(cell))
 
-
+				# DIBUJA LA PIEZA EN EL TABLERO.
 				piece = board[row][column]
-
 				if piece.type == "pawn":
 					if piece.color == "black":
 						screen.blit(black_pawn_image, (board_width_value, board_height_value))
