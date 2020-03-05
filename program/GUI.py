@@ -53,6 +53,9 @@ board_height = 555
 column_margin = 120
 row_margin = 20
 
+# VARIABLES DE CONTROL
+actual_selected_piece = none_piece
+
 # FUNCIÓN PRINCIPAL.
 def main():
 
@@ -97,8 +100,8 @@ def main():
 				if (pygame.mouse.get_pressed()[0] and 671 >= x >= 120 and 564 >= y >= 20):
 					cell = get_cell_piece(x, y)
 					if not cell == "Not selected":
-						selected_piece = board[cell[0]][cell[1]]
-						print(selected_piece.get_type() + " - " + selected_piece.get_color() + ", in pos: " + str(cell))
+						actual_selected_piece = board[cell[0]][cell[1]]
+						print(actual_selected_piece.get_type() + " - " + actual_selected_piece.get_color() + ", in pos: " + str(cell))
 
 				# DIBUJA LA PIEZA EN EL TABLERO.
 				piece = board[row][column]
