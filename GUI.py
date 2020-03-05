@@ -60,8 +60,9 @@ board = [
 
 
 def get_cell_gui(x, y):
-	if (120 + 60 > x  > 120 and 430 + 60 > y > 430):
-		board[6][0] = black_pawn
+	if 186 > x > 120 and 86 > y > 20:
+		return [0, 0]
+	elif 120 + 60 > x > 120 and 430 + 60 > y > 430:
 		return [6, 0]
 	else:
 		return [0, 0]
@@ -125,14 +126,12 @@ def main():
 
 
 				mouse = pygame.mouse.get_pos()
+				# print("x=" + str(mouse[0]) + "  -  y=" + str(mouse[1]))
 				if (pygame.mouse.get_pressed()[0]):
-					#print("x: " + str(mouse[0]) + ", y: " + str(mouse[1]))
-					#print(str(get_cell_gui(mouse[0], mouse[1])))
-
 					coordinates = get_cell_gui(mouse[0], mouse[1])
 					selected_piece = board[coordinates[0]][coordinates[1]]
 					if not selected_piece.get_type() == "None":
-						board[coordinates[0]][coordinates[1]] = black_pawn
+						print(selected_piece.get_type() + " - " + selected_piece.get_color())
 
 
 				piece = board[row][column]
