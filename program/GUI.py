@@ -63,18 +63,27 @@ def main():
     screen = pygame.display.set_mode((1200, 700))
     clock = pygame.time.Clock()
 
+    # PIEZA ACTUAL SELECCIONADA.
+    selected_piece = none_piece
+
     # MAIN LOOP.
     while True:
+
+        # EVENTO DE SALIR DEL JUEGO.
         if pygame.event.poll().type == pygame.QUIT:
             return
 
+        # CARGA DEL FONDO DE LA PANTALLA.
         screen.blit(background, (0, 0))
 
-        # i wish to surround the board with a white line
+        # i wish to surround the board with a black line
         pygame.draw.rect(screen, (0, 0, 0), [column_margin - 2, row_margin - 2, board_height + 2, board_height + 2])
 
         # cells drawing needs to be intermittent to make it black and white
         white = True
+
+        # TURNOS, PIEZA SELECCIONADA Y MOVIMIENTO.
+
 
         # i need to draw the board
         for row in range(0, 8):
@@ -94,13 +103,17 @@ def main():
                 mouse = pygame.mouse.get_pos()
                 x = mouse[0]
                 y = mouse[1]
-                if pygame.mouse.get_pressed()[0] and 671 >= x >= 120 and 564 >= y >= 60:
+                if pygame.mouse.get_pressed()[0] and 671 >= x >= 120 and 632 >= y >= 60:
                     cell = get_cell_piece(x, y)
-                    if not cell == "Not selected":
+
+                    # SELECCIÓN DE PIEZA PARA UNA JUGADA.
+                    if selected_piece.get_name() == "None":
                         selected_piece = board[cell[0]][cell[1]]
-                        print(
-                            selected_piece.get_name() + " - " + selected_piece.get_color() +
-                            ", in pos: " + str(cell))
+                        board[cell[0]][cell[1]] = none_piece
+                    else:
+                        board[cell[0]][cell[1]] = selected_piece
+                        selected_piece = none_piece
+                    pygame.event.wait()
 
                 # DIBUJA LA PIEZA EN EL TABLERO.
                 piece = board[row][column]
