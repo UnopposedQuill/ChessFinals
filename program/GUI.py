@@ -63,15 +63,15 @@ def main():
     screen = pygame.display.set_mode((1200, 700))
     clock = pygame.time.Clock()
 
-    # PIEZA ACTUAL SELECCIONADA.
+    # VARIABLES DE CONTROL.
     selected_piece = none_piece
+    actual_player = "white"
+    actual_event = "select"
 
     # MAIN LOOP.
     while True:
 
         # EVENTO DE SALIR DEL JUEGO.
-        if pygame.event.poll().type == pygame.QUIT:
-            return
 
         # CARGA DEL FONDO DE LA PANTALLA.
         screen.blit(background, (0, 0))
@@ -83,7 +83,34 @@ def main():
         white = True
 
         # TURNOS, PIEZA SELECCIONADA Y MOVIMIENTO.
+        # CLICK Y SELECCIÓN SE CELDA/PIEZA.
+        mouse = pygame.mouse.get_pos()
+        x = mouse[0]
+        y = mouse[1]
 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+            elif event.type == pygame.MOUSEBUTTONDOWN and 671 >= x >= 120 and 632 >= y >= 60:
+                print("pressed")
+                cell = get_cell_piece(x, y)
+
+
+                # SELECCIÓN DE PIEZA PARA UNA JUGADA.
+                # ALTERNA ENTRE JUGADORES BLANCO O NEGRO.
+                if selected_piece.get_name() == "None":
+                    selected_piece = board[cell[0]][cell[1]]
+                    if selected_piece.get_color() == actual_player:
+                        board[cell[0]][cell[1]] = none_piece
+                    else:
+                        selected_piece = none_piece
+                else:
+                    board[cell[0]][cell[1]] = selected_piece
+                    selected_piece = none_piece
+                    if actual_player == "white":
+                        actual_player = "black"
+                    else:
+                        actual_player = "white"
 
         # i need to draw the board
         for row in range(0, 8):
@@ -98,22 +125,6 @@ def main():
 
                 pygame.draw.rect(screen, color,
                                  [board_width_value, board_height_value, board_width // 8, board_height // 8])
-
-                # CLICK Y SELECCIÓN SE CELDA/PIEZA.
-                mouse = pygame.mouse.get_pos()
-                x = mouse[0]
-                y = mouse[1]
-                if pygame.mouse.get_pressed()[0] and 671 >= x >= 120 and 632 >= y >= 60:
-                    cell = get_cell_piece(x, y)
-
-                    # SELECCIÓN DE PIEZA PARA UNA JUGADA.
-                    if selected_piece.get_name() == "None":
-                        selected_piece = board[cell[0]][cell[1]]
-                        board[cell[0]][cell[1]] = none_piece
-                    else:
-                        board[cell[0]][cell[1]] = selected_piece
-                        selected_piece = none_piece
-                    pygame.event.wait()
 
                 # DIBUJA LA PIEZA EN EL TABLERO.
                 piece = board[row][column]
