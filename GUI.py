@@ -61,7 +61,10 @@ board = [
 
 def get_cell_gui(x, y):
 	if (120 + 60 > x  > 120 and 430 + 60 > y > 430):
+		board[6][0] = black_pawn
 		return [6, 0]
+	else:
+		return [0, 0]
 
 
 
@@ -127,11 +130,9 @@ def main():
 					#print(str(get_cell_gui(mouse[0], mouse[1])))
 
 					coordinates = get_cell_gui(mouse[0], mouse[1])
-
 					selected_piece = board[coordinates[0]][coordinates[1]]
-
 					if not selected_piece.get_type() == "None":
-						board[coordinates[0]][coordinates[1]] = none_piece
+						board[coordinates[0]][coordinates[1]] = black_pawn
 
 
 				piece = board[row][column]
