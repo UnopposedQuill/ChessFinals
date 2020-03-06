@@ -1,178 +1,182 @@
 # import the pygame module, so you can use it
 import pygame
 
+from objects.Piece import *
+from functions.GUIFunctions import *
 
-# class to implement the cursor
-class Cursor(pygame.Rect):
-	def __init__(self):
-		pygame.Rect.__init__(self, 0, 0, 1, 1)
+# PIEZAS DE JUEGO.
+none_piece = Piece("None", "None")
+black_pawn = Piece("black", "pawn")
+black_rook = Piece("black", "rook")
+black_knight = Piece("black", "knight")
+black_bishop = Piece("black", "bishop")
+black_queen = Piece("black", "queen")
+black_king = Piece("black", "king")
+white_pawn = Piece("white", "pawn")
+white_rook = Piece("white", "rook")
+white_knight = Piece("white", "knight")
+white_bishop = Piece("white", "bishop")
+white_queen = Piece("white", "queen")
+white_king = Piece("white", "king")
 
-	def update(self):
-		self.left, self.top = pygame.mouse.get_pos()
+# RECURSOS DE IMÁGENES DE FONDO.
+white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
+black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
+white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
+black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
+white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
+black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
+white_king_image = pygame.image.load("resources/pieces/white-king.png")
+black_king_image = pygame.image.load("resources/pieces/black-king.png")
+white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
+black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
+white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
+black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
+logo = pygame.image.load("resources/logo32x32.png")
+background = pygame.image.load("resources/background.jpg")
+
+# TABLERO.
+board = [
+    [black_rook, black_knight, black_bishop, black_king, black_queen, black_bishop, black_knight, black_rook],
+    [black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn],
+    [white_rook, white_knight, white_bishop, white_queen, white_king, white_bishop, white_knight, white_rook]
+]
+
+# DIMENCIONES.
+board_width = 555
+board_height = 555
+column_margin = 120
+row_margin = 60
 
 
-# class to implement a hover-like animation on buttons
-class Button(pygame.sprite.Sprite):
-	# image1 image to be set on standby
-	# image2 image to be set on hovering
-	# x x offset to be placed at
-	# y y offset to be placed at
-	def __init__(self, image1, image2, x=200, y=200):
-		self.normal_image = image1
-		self.selected_image = image2
-		self.current_image = self.normal_image
-		self.rect = self.current_image.get_rect()
-		self.rect.left, self.rect.top = (x, y)
-
-
-# define a main function
+# FUNCIÓN PRINCIPAL.
 def main():
-	# initialize the pygame module
-	pygame.init()
-	# load and set the logo
-	logo = pygame.image.load("resources/logo32x32.png")
-	pygame.display.set_icon(logo)
-	pygame.display.set_caption("Chess Finals")
+    # INICIALIZACIÓN DE GUI.
+    pygame.init()
+    pygame.display.set_icon(logo)
+    pygame.display.set_caption("Chess Finals")
+    screen = pygame.display.set_mode((1200, 700))
+    clock = pygame.time.Clock()
 
-	# now i'll declare variables for all the resources
-	white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
-	black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
+    # VARIABLES DE CONTROL.
+    selected_piece = none_piece
+    actual_player = "white"
+    actual_event = "select"
 
-	white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
-	black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
+    # MAIN LOOP.
+    while True:
 
-	white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
-	black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
+        # EVENTO DE SALIR DEL JUEGO.
 
-	white_king_image = pygame.image.load("resources/pieces/white-king.png")
-	black_king_image = pygame.image.load("resources/pieces/black-king.png")
+        # CARGA DEL FONDO DE LA PANTALLA.
+        screen.blit(background, (0, 0))
 
-	white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
-	black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
+        # i wish to surround the board with a black line
+        pygame.draw.rect(screen, (0, 0, 0), [column_margin - 2, row_margin - 2, board_height + 2, board_height + 2])
 
-	white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
-	black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
+        # cells drawing needs to be intermittent to make it black and white
+        white = True
 
-	# create a surface on screen that has the size of 800 x 600
-	screen = pygame.display.set_mode((800, 600))
+        # TURNOS, PIEZA SELECCIONADA Y MOVIMIENTO.
+        # CLICK Y SELECCIÓN SE CELDA/PIEZA.
+        mouse = pygame.mouse.get_pos()
+        x = mouse[0]
+        y = mouse[1]
 
-	# create a cursor
-	cursor = Cursor()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+            elif event.type == pygame.MOUSEBUTTONDOWN and 671 >= x >= 120 and 632 >= y >= 60:
+                print("pressed")
+                cell = get_cell_piece(x, y)
 
-	# i'll be needing a clock
-	clock = pygame.time.Clock()
 
-	# i need to define the bounds for the main board
-	board_width = 555
-	board_height = 555
+                # SELECCIÓN DE PIEZA PARA UNA JUGADA.
+                # ALTERNA ENTRE JUGADORES BLANCO O NEGRO.
+                if selected_piece.get_name() == "None":
+                    selected_piece = board[cell[0]][cell[1]]
+                    if selected_piece.get_color() == actual_player:
+                        board[cell[0]][cell[1]] = none_piece
+                    else:
+                        selected_piece = none_piece
+                else:
+                    board[cell[0]][cell[1]] = selected_piece
+                    selected_piece = none_piece
+                    if actual_player == "white":
+                        actual_player = "black"
+                    else:
+                        actual_player = "white"
 
-	# and the amount of distance between the board cells
-	margin = 0
+        # i need to draw the board
+        for row in range(0, 8):
+            for column in range(0, 8):
+                if white:
+                    color = (255, 255, 255)
+                else:
+                    color = (0, 0, 0)
 
-	# i need to keep info on this board
-	"""
-	board = []
-	for row in range(0, 8):
-		board.append([])
-		for column in range(0, 8):
-			board[row].append(0)
-	"""
-	board = [
-			[-2, -3, -4, -5, -6, -4, -3, -2],
-			[-1, -1, -1, -1, -1, -1, -1, -1],
-			[0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0],
-			[1, 1, 1, 1, 1, 1, 1, 1],
-			[2, 3, 4, 5, 6, 4, 3, 2]]
+                board_width_value = (board_width // 8) * column + column_margin
+                board_height_value = (board_height // 8) * row + row_margin
 
-	# define a variable to control the main loop
-	running = True
+                pygame.draw.rect(screen, color,
+                                 [board_width_value, board_height_value, board_width // 8, board_height // 8])
 
-	# main loop
-	while running:
-		# event handling, gets all event from the event queue
-		for event in pygame.event.get():
-			# only do something if the event is of type QUIT
-			if event.type == pygame.QUIT:
-				# change the value to False, to exit the main loop
-				running = False
+                # DIBUJA LA PIEZA EN EL TABLERO.
+                piece = board[row][column]
+                if piece.get_name() == "pawn":
+                    if piece.color == "black":
+                        screen.blit(black_pawn_image, (board_width_value, board_height_value))
+                    else:
+                        screen.blit(white_pawn_image, (board_width_value, board_height_value))
 
-		# reset the screen's background
-		screen.fill((0, 0, 0))
+                elif piece.get_name() == "rook":
+                    if piece.color == "black":
+                        screen.blit(black_rook_image, (board_width_value, board_height_value))
+                    else:
+                        screen.blit(white_rook_image, (board_width_value, board_height_value))
 
-		# i wish to surround the board with a white line
-		pygame.draw.rect(screen, (255, 255, 255), [0, 0, board_height + 8 * margin + 3, board_height + 8 * margin + 3])
+                elif piece.get_name() == "knight":
+                    if piece.color == "black":
+                        screen.blit(black_knight_image, (board_width_value, board_height_value))
+                    else:
+                        screen.blit(white_knight_image, (board_width_value, board_height_value))
 
-		# cells drawing needs to be intermittent to make it black and white
-		white = True
+                elif piece.get_name() == "bishop":
+                    if piece.color == "black":
+                        screen.blit(black_bishop_image, (board_width_value, board_height_value))
+                    else:
+                        screen.blit(white_bishop_image, (board_width_value, board_height_value))
 
-		# i need to draw the board
-		for row in range(0, 8):
-			for column in range(0, 8):
-				if white:
-					color = (255, 255, 255)
-				else:
-					color = (0, 0, 0)
-				pygame.draw.rect(screen, color, [(board_width // 8 + margin) * column + margin,
-												(board_height // 8 + margin) * row + margin, board_width // 8,
-												board_height // 8])
+                elif piece.get_name() == "queen":
+                    if piece.color == "black":
+                        screen.blit(black_queen_image, (board_width_value, board_height_value))
+                    else:
+                        screen.blit(white_queen_image, (board_width_value, board_height_value))
 
-				# 1 for pawn
-				if board[row][column] == 1:
-					screen.blit(white_pawn_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -1:
-					screen.blit(black_pawn_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 2 for rook
-				elif board[row][column] == 2:
-					screen.blit(white_rook_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -2:
-					screen.blit(black_rook_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 3 for knight
-				elif board[row][column] == 3:
-					screen.blit(white_knight_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -3:
-					screen.blit(black_knight_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 4 for bishop
-				elif board[row][column] == 4:
-					screen.blit(white_bishop_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -4:
-					screen.blit(black_bishop_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 5 for queen
-				elif board[row][column] == 5:
-					screen.blit(white_queen_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -5:
-					screen.blit(black_queen_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				# 6 for king
-				elif board[row][column] == 6:
-					screen.blit(white_king_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				elif board[row][column] == -6:
-					screen.blit(black_king_image,
-								((board_width // 8 + margin) * column + margin, (board_height // 8 + margin) * row + margin))
-				white = not white
-			white = not white
+                elif piece.get_name() == "king":
+                    if piece.color == "black":
+                        screen.blit(black_king_image, (board_width_value, board_height_value))
+                    else:
+                        screen.blit(white_king_image, (board_width_value, board_height_value))
 
-		# make this 60 times per second
-		clock.tick(60)
+                white = not white
+            white = not white
 
-		# and now commit the draw
-		pygame.display.flip()
+        # make this 60 times per second
+        clock.tick(60)
+
+        # and now commit the draw
+        pygame.display.flip()
+        pygame.display.update()
 
 
 # run the main function only if this module is executed as the main script
 # (if you import this as a module then nothing is executed)
 if __name__ == "__main__":
-	# call the main function
-	main()
+    # call the main function
+    main()
