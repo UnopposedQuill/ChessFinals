@@ -1,8 +1,8 @@
 # import the pygame module, so you can use it
 import pygame
 
-from program.objects.Piece import *
-from program.functions.GUIFunctions import *
+from objects.Piece import *
+from functions.GUIFunctions import *
 
 # PIEZAS DE JUEGO.
 none_piece = Piece("None", "None")
@@ -20,20 +20,20 @@ white_queen = Piece("white", "queen")
 white_king = Piece("white", "king")
 
 # RECURSOS DE IMÁGENES DE FONDO.
-white_rook_image = pygame.image.load("program/resources/pieces/white-rook.png")
-black_rook_image = pygame.image.load("program/resources/pieces/black-rook.png")
-white_knight_image = pygame.image.load("program/resources/pieces/white-knight.png")
-black_knight_image = pygame.image.load("program/resources/pieces/black-knight.png")
-white_bishop_image = pygame.image.load("program/resources/pieces/white-bishop.png")
-black_bishop_image = pygame.image.load("program/resources/pieces/black-bishop.png")
-white_king_image = pygame.image.load("program/resources/pieces/white-king.png")
-black_king_image = pygame.image.load("program/resources/pieces/black-king.png")
-white_queen_image = pygame.image.load("program/resources/pieces/white-queen.png")
-black_queen_image = pygame.image.load("program/resources/pieces/black-queen.png")
-white_pawn_image = pygame.image.load("program/resources/pieces/white-pawn.png")
-black_pawn_image = pygame.image.load("program/resources/pieces/black-pawn.png")
-logo = pygame.image.load("program/resources/logo32x32.png")
-background = pygame.image.load("program/resources/background.jpg")
+white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
+black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
+white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
+black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
+white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
+black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
+white_king_image = pygame.image.load("resources/pieces/white-king.png")
+black_king_image = pygame.image.load("resources/pieces/black-king.png")
+white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
+black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
+white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
+black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
+logo = pygame.image.load("resources/logo32x32.png")
+background = pygame.image.load("resources/background.jpg")
 
 # TABLERO.
 board = [
