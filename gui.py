@@ -92,9 +92,7 @@ def main():
             if event.type == pygame.QUIT:
                 return
             elif event.type == pygame.MOUSEBUTTONDOWN and 671 >= x >= 120 and 632 >= y >= 60:
-                print("pressed")
                 cell = get_cell_piece(x, y)
-
 
                 # SELECCIÓN DE PIEZA PARA UNA JUGADA.
                 # ALTERNA ENTRE JUGADORES BLANCO O NEGRO.
@@ -172,7 +170,6 @@ def main():
 
         # and now commit the draw
         pygame.display.flip()
-        pygame.display.update()
 
 
 # run the main function only if this module is executed as the main script
