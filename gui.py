@@ -2,6 +2,7 @@
 import pygame
 
 from objects.Piece import *
+from objects.button import *
 from functions.GUIFunctions import *
 
 # PIEZAS DE JUEGO.
@@ -34,9 +35,22 @@ white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
 black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
 logo = pygame.image.load("resources/logo32x32.png")
 background = pygame.image.load("resources/background.jpg")
+reset = pygame.image.load("resources/buttons/reset.png")
+reset_hover = pygame.image.load("resources/buttons/reset_hover.png")
 
 # TABLERO.
 board = [
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+]
+
+default_board = [
     [black_rook, black_knight, black_bishop, black_king, black_queen, black_bishop, black_knight, black_rook],
     [black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn],
     [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
@@ -47,7 +61,7 @@ board = [
     [white_rook, white_knight, white_bishop, white_queen, white_king, white_bishop, white_knight, white_rook]
 ]
 
-# DIMENCIONES.
+# DIMENSIONES.
 board_width = 555
 board_height = 555
 column_margin = 120
@@ -67,6 +81,9 @@ def main():
     selected_piece = none_piece
     actual_player = "white"
     actual_event = "select"
+
+    # buttons
+    reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=10, width=150, height=30)
 
     # MAIN LOOP.
     while True:
@@ -88,27 +105,37 @@ def main():
         x = mouse[0]
         y = mouse[1]
 
+        # mouse and keys events handler
         for event in pygame.event.get():
+
+            # exit event
             if event.type == pygame.QUIT:
                 return
-            elif event.type == pygame.MOUSEBUTTONDOWN and 671 >= x >= 120 and 632 >= y >= 60:
-                cell = get_cell_piece(x, y)
 
-                # SELECCIÓN DE PIEZA PARA UNA JUGADA.
-                # ALTERNA ENTRE JUGADORES BLANCO O NEGRO.
-                if selected_piece.get_name() == "None":
-                    selected_piece = board[cell[0]][cell[1]]
-                    if selected_piece.get_color() == actual_player:
-                        board[cell[0]][cell[1]] = none_piece
+            # mouse handler
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                # check if it's inside the board
+                if 671 >= x >= 120 and 632 >= y >= 60:
+                    cell = get_cell_piece(x, y)
+
+                    # SELECCIÓN DE PIEZA PARA UNA JUGADA.
+                    # ALTERNA ENTRE JUGADORES BLANCO O NEGRO.
+                    if selected_piece.get_name() == "None":
+                        selected_piece = board[cell[0]][cell[1]]
+                        if selected_piece.get_color() == actual_player:
+                            board[cell[0]][cell[1]] = none_piece
+                        else:
+                            selected_piece = none_piece
                     else:
+                        board[cell[0]][cell[1]] = selected_piece
                         selected_piece = none_piece
-                else:
-                    board[cell[0]][cell[1]] = selected_piece
-                    selected_piece = none_piece
-                    if actual_player == "white":
-                        actual_player = "black"
-                    else:
-                        actual_player = "white"
+                        if actual_player == "white":
+                            actual_player = "black"
+                        else:
+                            actual_player = "white"
+                # check if it was inside on of the buttons
+                elif reset_button.is_cursor_inside(mouse):
+                    board = default_board
 
         # i need to draw the board
         for row in range(0, 8):
@@ -164,6 +191,12 @@ def main():
 
                 white = not white
             white = not white
+
+        # visual buttons handling
+        if reset_button.is_cursor_inside(cursor=mouse):
+            screen.blit(reset_hover, (reset_button.x_offset, reset_button.y_offset))
+        else:
+            screen.blit(reset, (reset_button.x_offset, reset_button.y_offset))
 
         # make this 60 times per second
         clock.tick(60)
