@@ -132,7 +132,9 @@ def main():
                             current_player = "white"
                 # check if it was inside on of the buttons
                 elif reset_button.is_cursor_inside(mouse):
-                    board = default_board
+                    for i in range(len(board)):
+                        for j in range(len(board[i])):
+                            board[i][j] = default_board[i][j]
                     current_player = "white"
 
         # i need to draw the board
