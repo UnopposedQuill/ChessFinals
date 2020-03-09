@@ -5,71 +5,72 @@ from objects.Piece import *
 from objects.button import *
 from functions.GUIFunctions import *
 
-# PIEZAS DE JUEGO.
-none_piece = Piece("None", "None")
-black_pawn = Piece("black", "pawn")
-black_rook = Piece("black", "rook")
-black_knight = Piece("black", "knight")
-black_bishop = Piece("black", "bishop")
-black_queen = Piece("black", "queen")
-black_king = Piece("black", "king")
-white_pawn = Piece("white", "pawn")
-white_rook = Piece("white", "rook")
-white_knight = Piece("white", "knight")
-white_bishop = Piece("white", "bishop")
-white_queen = Piece("white", "queen")
-white_king = Piece("white", "king")
-
-# RECURSOS DE IMÁGENES DE FONDO.
-white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
-black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
-white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
-black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
-white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
-black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
-white_king_image = pygame.image.load("resources/pieces/white-king.png")
-black_king_image = pygame.image.load("resources/pieces/black-king.png")
-white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
-black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
-white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
-black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
-logo = pygame.image.load("resources/logo32x32.png")
-background = pygame.image.load("resources/background.jpg")
-reset = pygame.image.load("resources/buttons/reset.png")
-reset_hover = pygame.image.load("resources/buttons/reset_hover.png")
-
-# TABLERO.
-board = [
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-]
-
-default_board = [
-    [black_rook, black_knight, black_bishop, black_king, black_queen, black_bishop, black_knight, black_rook],
-    [black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    [white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn],
-    [white_rook, white_knight, white_bishop, white_queen, white_king, white_bishop, white_knight, white_rook]
-]
-
-# DIMENSIONES.
-board_width = 555
-board_height = 555
-column_margin = 120
-row_margin = 60
-
 
 # FUNCIÓN PRINCIPAL.
 def main():
+    # main assets loading
+    # PIEZAS DE JUEGO.
+    none_piece = Piece("None", "None")
+    black_pawn = Piece("black", "pawn")
+    black_rook = Piece("black", "rook")
+    black_knight = Piece("black", "knight")
+    black_bishop = Piece("black", "bishop")
+    black_queen = Piece("black", "queen")
+    black_king = Piece("black", "king")
+    white_pawn = Piece("white", "pawn")
+    white_rook = Piece("white", "rook")
+    white_knight = Piece("white", "knight")
+    white_bishop = Piece("white", "bishop")
+    white_queen = Piece("white", "queen")
+    white_king = Piece("white", "king")
+
+    # RECURSOS DE IMÁGENES DE FONDO.
+    white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
+    black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
+    white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
+    black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
+    white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
+    black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
+    white_king_image = pygame.image.load("resources/pieces/white-king.png")
+    black_king_image = pygame.image.load("resources/pieces/black-king.png")
+    white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
+    black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
+    white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
+    black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
+    logo = pygame.image.load("resources/logo32x32.png")
+    background = pygame.image.load("resources/background.jpg")
+    reset = pygame.image.load("resources/buttons/reset.png")
+    reset_hover = pygame.image.load("resources/buttons/reset_hover.png")
+
+    # TABLERO.
+    board = [
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+    ]
+
+    default_board = [
+        [black_rook, black_knight, black_bishop, black_king, black_queen, black_bishop, black_knight, black_rook],
+        [black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
+        [white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn],
+        [white_rook, white_knight, white_bishop, white_queen, white_king, white_bishop, white_knight, white_rook]
+    ]
+
+    # DIMENSIONES.
+    board_width = 555
+    board_height = 555
+    column_margin = 120
+    row_margin = 60
+
     # INICIALIZACIÓN DE GUI.
     pygame.init()
     pygame.display.set_icon(logo)
