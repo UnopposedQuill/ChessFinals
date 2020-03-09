@@ -4,6 +4,7 @@ import pygame
 from objects.piece import *
 from objects.button import *
 from functions.guifunctions import *
+from tkinter import Tk, filedialog
 
 
 # main function
@@ -41,6 +42,8 @@ def main():
     background = pygame.image.load("resources/background.jpg")
     reset = pygame.image.load("resources/buttons/reset.png")
     reset_hover = pygame.image.load("resources/buttons/reset_hover.png")
+    load = pygame.image.load("resources/buttons/load.png")
+    load_hover = pygame.image.load("resources/buttons/load_hover.png")
 
     # board variables
     board = [
@@ -85,6 +88,7 @@ def main():
 
     # buttons
     reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=10, width=150, height=30)
+    load_button = Button(x_offset=board_width + column_margin + 30, y_offset=50, width=150, height=30)
 
     # MAIN LOOP.
     while True:
@@ -197,6 +201,11 @@ def main():
             screen.blit(reset_hover, (reset_button.x_offset, reset_button.y_offset))
         else:
             screen.blit(reset, (reset_button.x_offset, reset_button.y_offset))
+
+        if load_button.is_cursor_inside(cursor=mouse):
+            screen.blit(load_hover, (load_button.x_offset, load_button.y_offset))
+        else:
+            screen.blit(load, (load_button.x_offset, load_button.y_offset))
 
         # make this 60 times per second
         clock.tick(60)
