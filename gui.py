@@ -4,6 +4,7 @@ import pygame
 from objects.piece import *
 from objects.button import *
 from functions.guifunctions import *
+from functions.loader import load_file
 from tkinter import Tk, filedialog
 
 
@@ -58,7 +59,7 @@ def main():
     ]
 
     default_board = [
-        [black_rook, black_knight, black_bishop, black_king, black_queen, black_bishop, black_knight, black_rook],
+        [black_rook, black_knight, black_bishop, black_queen, black_king, black_bishop, black_knight, black_rook],
         [black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn],
         [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
         [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
@@ -85,10 +86,12 @@ def main():
     selected_piece = none_piece
     current_player = "white"
     current_event = "select"
+    final_path = ""
+    loaded_final = None
 
     # buttons
-    reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=10, width=150, height=30)
-    load_button = Button(x_offset=board_width + column_margin + 30, y_offset=50, width=150, height=30)
+    reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=30, width=150, height=30)
+    load_button = Button(x_offset=board_width + column_margin + 30, y_offset=80, width=150, height=30)
 
     # MAIN LOOP.
     while True:
@@ -135,11 +138,33 @@ def main():
                         else:
                             current_player = "white"
                 # check if it was inside on of the buttons
+                # reset board button
                 elif reset_button.is_cursor_inside(mouse):
-                    for i in range(len(board)):
-                        for j in range(len(board[i])):
-                            board[i][j] = default_board[i][j]
+                    if loaded_final is None:
+                        for i in range(len(board)):
+                            for j in range(len(board[i])):
+                                board[i][j] = default_board[i][j]
+                    else:
+                        for i in range(len(board)):
+                            for j in range(len(board[i])):
+                                board[i][j] = loaded_final[i][j]
                     current_player = "white"
+                # load board button
+                elif load_button.is_cursor_inside(mouse):
+                    root = Tk()
+                    root.iconify()
+                    root.filename = filedialog.askopenfilename(initialdir="/", title="Select file",
+                                                               filetypes=(("Plain Text files", "*.txt"), ("all files", "*.*")))
+                    print(root.filename)
+                    root.destroy()
+
+                    # time to load the board
+                    final_path, loaded_final = load_file(root.filename)
+                    if loaded_final is not None:
+                        for i in range(len(board)):
+                            for j in range(len(board[i])):
+                                board[i][j] = loaded_final[i][j]
+                        current_player = "white"
 
         # i need to draw the board
         for row in range(0, 8):
