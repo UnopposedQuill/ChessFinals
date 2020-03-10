@@ -45,6 +45,8 @@ def main():
     reset_hover = pygame.image.load("resources/buttons/reset_hover.png")
     load = pygame.image.load("resources/buttons/load.png")
     load_hover = pygame.image.load("resources/buttons/load_hover.png")
+    new = pygame.image.load("resources/buttons/new.png")
+    new_hover = pygame.image.load("resources/buttons/new_hover.png")
 
     # board variables
     board = [
@@ -92,6 +94,7 @@ def main():
     # buttons
     reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=30, width=150, height=30)
     load_button = Button(x_offset=board_width + column_margin + 30, y_offset=80, width=150, height=30)
+    new_button = Button(x_offset=board_width + column_margin + 30, y_offset=130, width=150, height=30)
 
     # MAIN LOOP.
     while True:
@@ -165,6 +168,12 @@ def main():
                             for j in range(len(board[i])):
                                 board[i][j] = loaded_final[i][j]
                         current_player = "white"
+                elif new_button.is_cursor_inside(mouse):
+                    loaded_final = None
+                    final_path = ""
+                    for i in range(len(board)):
+                        for j in range(len(board[i])):
+                            board[i][j] = default_board[i][j]
 
         # i need to draw the board
         for row in range(0, 8):
@@ -231,6 +240,11 @@ def main():
             screen.blit(load_hover, (load_button.x_offset, load_button.y_offset))
         else:
             screen.blit(load, (load_button.x_offset, load_button.y_offset))
+
+        if new_button.is_cursor_inside(cursor=mouse):
+            screen.blit(new_hover, (new_button.x_offset, new_button.y_offset))
+        else:
+            screen.blit(new, (new_button.x_offset, new_button.y_offset))
 
         # make this 60 times per second
         clock.tick(60)
