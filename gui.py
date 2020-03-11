@@ -140,9 +140,13 @@ def main():
                             current_piece_cell = [cell[0], cell[1]]
                         else:
                             selected_piece = none_piece
+
+                    # cell selection for a movement
                     else:
                         next_piece_cell = [cell[0], cell[1]]
 
+                        # verify if the selected piece is pawn type
+                        # is necessary to check if the player who moves is white or black
                         if selected_piece.get_name() == "pawn":
                             if is_white_player:
                                 is_valid_move = get_white_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
@@ -150,19 +154,22 @@ def main():
                             else:
                                 is_valid_move = get_black_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
                                                                      next_piece_cell)
-
+                        # verify if the selected piece is rook type
                         elif selected_piece.get_name() == "rook":
                             is_valid_move = get_rook_moves(board, board[cell[0]][cell[1]], current_piece_cell,
                                                                 next_piece_cell, selected_piece.get_color())
 
+                        # default case is false
                         else:
-                            is_valid_move = True
+                            is_valid_move = False
 
+                        # if the move is correct, updates the gui and the board
                         if is_valid_move:
                             board[cell[0]][cell[1]] = selected_piece
                             selected_piece = none_piece
                             is_white_player = not is_white_player
 
+                        # otherwise, leave everything as it was
                         else:
                             board[current_piece_cell[0]][current_piece_cell[1]] = selected_piece
                             selected_piece = none_piece
