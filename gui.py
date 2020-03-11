@@ -85,11 +85,9 @@ def main():
 
     # control variables
     selected_piece = none_piece
-    current_piece_cell = [0, 0]
+    current_cell = [0, 0]
     is_white_player = True
-    is_valid_move = False
-    # current_event = "select"
-    # final_path = ""
+    final_path = ""
     loaded_final = None
 
     # buttons
@@ -134,30 +132,36 @@ def main():
                         # saves the next move of the selected piece.
                         if is_white_player and selected_piece.get_color() == "white":
                             board[cell[0]][cell[1]] = none_piece
-                            current_piece_cell = [cell[0], cell[1]]
+                            current_cell = [cell[0], cell[1]]
                         elif not is_white_player and selected_piece.get_color() == "black":
                             board[cell[0]][cell[1]] = none_piece
-                            current_piece_cell = [cell[0], cell[1]]
+                            current_cell = [cell[0], cell[1]]
                         else:
                             selected_piece = none_piece
 
                     # cell selection for a movement
                     else:
-                        next_piece_cell = [cell[0], cell[1]]
+                        next_cell = [cell[0], cell[1]]
 
                         # verify if the selected piece is pawn type
                         # is necessary to check if the player who moves is white or black
                         if selected_piece.get_name() == "pawn":
                             if is_white_player:
-                                is_valid_move = get_white_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
-                                                                    next_piece_cell)
+                                is_valid_move = \
+                                    get_white_pawn_moves(board[cell[0]][cell[1]], current_cell, next_cell)
                             else:
-                                is_valid_move = get_black_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
-                                                                     next_piece_cell)
+                                is_valid_move = get_black_pawn_moves(board[cell[0]][cell[1]], current_cell,
+                                                                     next_cell)
                         # verify if the selected piece is rook type
                         elif selected_piece.get_name() == "rook":
-                            is_valid_move = get_rook_moves(board, board[cell[0]][cell[1]], current_piece_cell,
-                                                                next_piece_cell, selected_piece.get_color())
+                            is_valid_move = \
+                                get_rook_moves(board, board[cell[0]][cell[1]],
+                                               current_cell, next_cell, selected_piece.get_color())
+
+                        elif selected_piece.get_name() == "bishop":
+                            is_valid_move = \
+                                get_bishop_moves(board, board[cell[0]][cell[1]],
+                                                 current_cell, next_cell, selected_piece.get_color())
 
                         # default case is false
                         else:
@@ -171,7 +175,7 @@ def main():
 
                         # otherwise, leave everything as it was
                         else:
-                            board[current_piece_cell[0]][current_piece_cell[1]] = selected_piece
+                            board[current_cell[0]][current_cell[1]] = selected_piece
                             selected_piece = none_piece
 
                 # check if it was inside on of the buttons
@@ -191,8 +195,9 @@ def main():
                 elif load_button.is_cursor_inside(mouse):
                     root = Tk()
                     root.iconify()
-                    root.filename = filedialog.askopenfilename(initialdir="/", title="Select file",
-                                                               filetypes=(("Plain Text files", "*.txt"), ("all files", "*.*")))
+                    root.filename = \
+                        filedialog.askopenfilename(initialdir="/", title="Select file",
+                                                   filetypes=(("Plain Text files", "*.txt"), ("all files", "*.*")))
                     print(root.filename)
                     root.destroy()
 
