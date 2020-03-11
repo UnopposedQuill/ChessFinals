@@ -1,4 +1,4 @@
-from objects.piece import *
+from objects.Piece import *
 
 
 def location_translator(row, column):

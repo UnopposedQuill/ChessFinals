@@ -1,7 +1,6 @@
-# import the pygame module, so you can use it
 import pygame
 
-from objects.piece import *
+from objects.Piece import *
 from objects.button import *
 from functions.guifunctions import *
 from functions.loader import load_file
@@ -86,9 +85,11 @@ def main():
 
     # control variables
     selected_piece = none_piece
-    current_player = "white"
-    current_event = "select"
-    final_path = ""
+    current_piece_cell = [0, 0]
+    is_white_player = True
+    is_valid_move = False
+    # current_event = "select"
+    # final_path = ""
     loaded_final = None
 
     # buttons
@@ -129,17 +130,41 @@ def main():
                     # piece selection for a movement, it swaps between black and white
                     if selected_piece.get_name() == "None":
                         selected_piece = board[cell[0]][cell[1]]
-                        if selected_piece.get_color() == current_player:
+
+                        # saves the next move of the selected piece.
+                        if is_white_player and selected_piece.get_color() == "white":
                             board[cell[0]][cell[1]] = none_piece
+                            current_piece_cell = [cell[0], cell[1]]
+                        elif not is_white_player and selected_piece.get_color() == "black":
+                            board[cell[0]][cell[1]] = none_piece
+                            current_piece_cell = [cell[0], cell[1]]
                         else:
                             selected_piece = none_piece
                     else:
-                        board[cell[0]][cell[1]] = selected_piece
-                        selected_piece = none_piece
-                        if current_player == "white":
-                            current_player = "black"
+
+                        next_piece_cell = [cell[0], cell[1]]
+                        if is_white_player:
+                            if selected_piece.get_name() == "pawn":
+                                is_valid_move = get_white_pawn_valid_moves(board[cell[0]][cell[1]], current_piece_cell,
+                                                                    next_piece_cell)
+                            else:
+                                is_valid_move = True
                         else:
-                            current_player = "white"
+                            if selected_piece.get_name() == "pawn":
+                                is_valid_move = get_black_pawn_valid_moves(board[cell[0]][cell[1]], current_piece_cell,
+                                                                    next_piece_cell)
+                            else:
+                                is_valid_move = True
+
+                        if is_valid_move:
+                            board[cell[0]][cell[1]] = selected_piece
+                            selected_piece = none_piece
+                            is_white_player = not is_white_player
+
+                        else:
+                            board[current_piece_cell[0]][current_piece_cell[1]] = selected_piece
+                            selected_piece = none_piece
+
                 # check if it was inside on of the buttons
                 # reset board button
                 elif reset_button.is_cursor_inside(mouse):
