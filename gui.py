@@ -142,21 +142,21 @@ def main():
                             selected_piece = none_piece
                     else:
                         next_piece_cell = [cell[0], cell[1]]
-                        if is_white_player:
-                            if selected_piece.get_name() == "pawn":
+
+                        if selected_piece.get_name() == "pawn":
+                            if is_white_player:
                                 is_valid_move = get_white_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
                                                                     next_piece_cell)
-                            elif selected_piece.get_name() == "rook":
-                                is_valid_move = get_white_rook_moves(board, board[cell[0]][cell[1]], current_piece_cell,
-                                                                    next_piece_cell)
                             else:
-                                is_valid_move = True
-                        else:
-                            if selected_piece.get_name() == "pawn":
                                 is_valid_move = get_black_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
-                                                                    next_piece_cell)
-                            else:
-                                is_valid_move = True
+                                                                     next_piece_cell)
+
+                        elif selected_piece.get_name() == "rook":
+                            is_valid_move = get_rook_moves(board, board[cell[0]][cell[1]], current_piece_cell,
+                                                                next_piece_cell, selected_piece.get_color())
+
+                        else:
+                            is_valid_move = True
 
                         if is_valid_move:
                             board[cell[0]][cell[1]] = selected_piece
