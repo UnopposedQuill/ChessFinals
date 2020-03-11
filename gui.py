@@ -141,17 +141,19 @@ def main():
                         else:
                             selected_piece = none_piece
                     else:
-
                         next_piece_cell = [cell[0], cell[1]]
                         if is_white_player:
                             if selected_piece.get_name() == "pawn":
-                                is_valid_move = get_white_pawn_valid_moves(board[cell[0]][cell[1]], current_piece_cell,
+                                is_valid_move = get_white_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
+                                                                    next_piece_cell)
+                            elif selected_piece.get_name() == "rook":
+                                is_valid_move = get_white_rook_moves(board, board[cell[0]][cell[1]], current_piece_cell,
                                                                     next_piece_cell)
                             else:
                                 is_valid_move = True
                         else:
                             if selected_piece.get_name() == "pawn":
-                                is_valid_move = get_black_pawn_valid_moves(board[cell[0]][cell[1]], current_piece_cell,
+                                is_valid_move = get_black_pawn_moves(board[cell[0]][cell[1]], current_piece_cell,
                                                                     next_piece_cell)
                             else:
                                 is_valid_move = True
@@ -176,7 +178,8 @@ def main():
                         for i in range(len(board)):
                             for j in range(len(board[i])):
                                 board[i][j] = loaded_final[i][j]
-                    current_player = "white"
+                    is_white_player = True
+
                 # load board button
                 elif load_button.is_cursor_inside(mouse):
                     root = Tk()
@@ -192,7 +195,7 @@ def main():
                         for i in range(len(board)):
                             for j in range(len(board[i])):
                                 board[i][j] = loaded_final[i][j]
-                        current_player = "white"
+                        is_white_player = True
                 elif new_button.is_cursor_inside(mouse):
                     loaded_final = None
                     final_path = ""
