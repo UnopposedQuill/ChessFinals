@@ -33,7 +33,7 @@ def get_rook_moves(board, cell_value, current_cell, next_cell, current_color):
     current_j = current_cell[1]
 
     # vertical move
-    if current_cell[1] == next_cell[1] and cell_value.get_name() == "None" and \
+    if current_cell[0] != next_cell[0] and current_cell[1] == next_cell[1] and \
             cell_value.get_color() != current_color:
 
         # move to up loop
@@ -56,7 +56,7 @@ def get_rook_moves(board, cell_value, current_cell, next_cell, current_color):
         return True
 
     # horizontal move
-    elif current_cell[0] == next_cell[0] and cell_value.get_name() == "None" and \
+    elif current_cell[0] == next_cell[0] and current_cell[1] != next_cell[1] and \
             cell_value.get_color() != current_color:
 
         # move to right loop
@@ -83,13 +83,8 @@ def get_rook_moves(board, cell_value, current_cell, next_cell, current_color):
 
 # bishop moves
 def get_bishop_moves(board, cell_value, current_cell, next_cell, current_color):
-    print("posición actual: [" + str(current_cell[0]) + ", " + str(current_cell[1]) + "]")
-    print("posición siguiente: [" + str(next_cell[0]) + ", " + str(next_cell[1]) + "]")
-
     current_i = current_cell[0]
     current_j = current_cell[1]
-    print(current_color)
-    print(cell_value.get_color())
 
     # up diagonal move left to right
     if current_cell[0] > next_cell[0] and current_cell[1] < next_cell[1] and cell_value.get_color() != current_color:
