@@ -136,3 +136,9 @@ def get_bishop_moves(board, cell_value, current_cell, next_cell, current_color):
         return True
     else:
         return False
+
+
+# queen moves
+def get_queen_moves(board, cell_value, current_cell, next_cell, current_color):
+    return get_rook_moves(board, cell_value, current_cell, next_cell, current_color) or \
+           get_bishop_moves(board, cell_value, current_cell, next_cell, current_color)

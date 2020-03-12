@@ -163,6 +163,11 @@ def main():
                                 get_bishop_moves(board, board[cell[0]][cell[1]],
                                                  current_cell, next_cell, selected_piece.get_color())
 
+                        elif selected_piece.get_name() == "queen":
+                            is_valid_move = \
+                                get_queen_moves(board, board[cell[0]][cell[1]],
+                                                current_cell, next_cell, selected_piece.get_color())
+
                         # default case is false
                         else:
                             is_valid_move = False
