@@ -80,6 +80,109 @@ def get_rook_moves(board, cell_value, current_cell, next_cell, current_color):
     else:
         return False
 
+# knight moves
+def get_knight_moves(board, cell_value, current_cell, next_cell, current_color):
+    current_i = current_cell[0]
+    current_j = current_cell[1]
+
+    # north-west moves
+
+    # 2 steps to left, 1 step up
+    if current_cell[1] - 2 == next_cell[1] and current_cell[0] + 1 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] += 1
+        current_cell[1] -= 2
+        return True
+
+    # 2 steps up, 1 step to left
+    elif current_cell[1] - 1 == next_cell[1] and current_cell[0] + 2 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] += 2
+        current_cell[1] -= 1
+        return True          
+
+    # north-east moves
+
+    # 2 steps up, 1 step to right
+    elif current_cell[1] + 1 == next_cell[1] and current_cell[0] + 2 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] += 2
+        current_cell[1] += 1
+        return True
+
+    # 2 steps to right, 1 step up
+    elif current_cell[1] + 2 == next_cell[1] and current_cell[0] + 1 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] += 1
+        current_cell[1] += 2
+        return True
+
+    # south-west moves
+
+    # 2 steps to left, 1 step down
+    elif current_cell[1] - 2 == next_cell[1] and current_cell[0] - 1 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] -= 1
+        current_cell[1] -= 2
+        return True
+
+    # 2 steps down, 1 step to left
+    elif current_cell[1] - 1 == next_cell[1] and current_cell[0] - 2 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] -= 2
+        current_cell[1] -= 1
+        return True
+
+    # south-east moves
+
+    # 2 steps down, 1 step to right
+    elif current_cell[1] + 1 == next_cell[1] and current_cell[0] - 2 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] -= 2
+        current_cell[1] += 1
+        return True
+
+    # 2 steps to right, 1 step down
+    elif current_cell[1] + 2 == next_cell[1] and current_cell[0] - 1 == next_cell[0] and cell_value.get_color() != current_color:
+        piece = board[current_cell[0]][current_cell[1]]
+        if not piece.get_name() == "None":
+            current_cell[0] = current_i
+            current_cell[1] = current_j
+            return False
+        current_cell[0] -= 1
+        current_cell[1] += 2
+        return True
+
+    else:
+        return False
 
 # bishop moves
 def get_bishop_moves(board, cell_value, current_cell, next_cell, current_color):
@@ -111,7 +214,7 @@ def get_bishop_moves(board, cell_value, current_cell, next_cell, current_color):
             current_cell[1] -= 1
         return True
 
-    # up diagonal move left to right
+    # up diagonal move right to left
     elif current_cell[0] > next_cell[0] and current_cell[1] > next_cell[1] and cell_value.get_color() != current_color:
         while next_cell[0] > current_cell[0]:
             piece = board[current_cell[0]][current_cell[1]]

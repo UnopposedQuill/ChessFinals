@@ -158,6 +158,11 @@ def main():
                                 get_rook_moves(board, board[cell[0]][cell[1]],
                                                current_cell, next_cell, selected_piece.get_color())
 
+                        elif selected_piece.get_name() == "knight":
+                            is_valid_move = \
+                                get_knight_moves(board, board[cell[0]][cell[1]],
+                                               current_cell, next_cell, selected_piece.get_color())
+
                         elif selected_piece.get_name() == "bishop":
                             is_valid_move = \
                                 get_bishop_moves(board, board[cell[0]][cell[1]],
