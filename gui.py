@@ -1,6 +1,6 @@
 import pygame
 
-from objects.Piece import *
+from objects.piece import *
 from objects.button import *
 from functions.guifunctions import *
 from functions.loader import load_file
