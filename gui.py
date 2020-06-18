@@ -1,315 +1,424 @@
-import pygame
-
-from objects.piece import *
+import sys
+from functions.ai import *
 from objects.button import *
-from functions.guifunctions import *
-from functions.loader import load_file
 from tkinter import Tk, filedialog
 
+"""
+	PRINCIPAL (INTERFAZ GRÁFICA)
+"""
 
-# main function
+# GUI.
+logo = pygame.image.load("resources/logo32x32.png")
+pygame.init()
+pygame.font.init()  # for text
+background = pygame.image.load("resources/background.jpg")
+font = pygame.font.SysFont("dejavuserif", 20)
+pygame.display.set_icon(logo)
+pygame.display.set_caption("Chess Finals")
+screen = pygame.display.set_mode((860, 560))
+chessboard_background = pygame.image.load("resources/gui_board.png").convert()
+
+reset = pygame.image.load("resources/buttons/reset.png")
+reset_hover = pygame.image.load("resources/buttons/reset_hover.png")
+load = pygame.image.load("resources/buttons/load.png")
+load_hover = pygame.image.load("resources/buttons/load_hover.png")
+new = pygame.image.load("resources/buttons/new.png")
+new_hover = pygame.image.load("resources/buttons/new_hover.png")
+
+# Variables.
+global chessboard, sprite_array, sprite_group
+chessboard = Chessboard()
+clock = pygame.time.Clock()
+board_width = 555
+board_height = 555
+column_margin = 30
+row_margin = 60
+
+# Botones.
+reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=30, width=150, height=30)
+load_button = Button(x_offset=board_width + column_margin + 30, y_offset=80, width=150, height=30)
+new_button = Button(x_offset=board_width + column_margin + 30, y_offset=130, width=150, height=30)
+
+# Inicialización y carga de celdas para los eventos de interfaz gráfica.
+sprite_group = pygame.sprite.Group()
+sprite_array = [piece for row in chessboard.matrix for piece in row if piece]
+sprite_group.add(sprite_array)
+sprite_group.draw(screen)
+
+
+# Función que se encarga de recuperar las coordenadas donde el mouse hace click y así recuperar (mediante la división)
+# la posición exacta en la matriz de piezas (chessboard).
+def select_cell():
+	x, y = pygame.mouse.get_pos()
+	return y // 70, x // 70
+
+
+# Función que se encarga de recorrer el arreglo de objetos Sprite para recuperar una pieza seleccionada por color.s
+def select_piece(color):
+	actual_position = pygame.mouse.get_pos()
+	cell_is_piece_selected = [s for s in sprite_array if s.rect.collidepoint(actual_position)]
+	if len(cell_is_piece_selected) == 1 and cell_is_piece_selected[0].get_color() == color:
+		cell_is_piece_selected[0].select()
+		return cell_is_piece_selected[0]
+
+
+# Función que escribe un mensaje de texto al lado derecho que muestra eventos del juego.
+def game_message(message, colour):
+	screen.blit(background, (560, 0))
+	text = message.splitlines()
+	index = 0
+	for char in text:
+		textsurface = font.render(char, False, colour)
+		screen.blit(textsurface, (600, 450 + index))
+		index += 28
+
+
+# Función para recarga de interfaz.
+def reload():
+	global chessboard, sprite_array, sprite_group
+	chessboard = Chessboard()
+	sprite_group = pygame.sprite.Group()
+	sprite_array = [piece for row in chessboard.matrix for piece in row if piece]
+	sprite_group.add(sprite_array)
+	sprite_group.draw(screen)
+
+
+# Función que carga una partida prestablecida.
+def load_game(filename):
+	global chessboard, sprite_array, sprite_group
+	chessboard = Chessboard(filename)
+	sprite_group = pygame.sprite.Group()
+	sprite_array = [piece for row in chessboard.matrix for piece in row if piece]
+	sprite_group.add(sprite_array)
+	sprite_group.draw(screen)
+
+
+# Función principal.
 def main():
-    # main assets loading
-    # model game pieces
-    none_piece = Piece("None", "None")
-    black_pawn = Piece("black", "pawn")
-    black_rook = Piece("black", "rook")
-    black_knight = Piece("black", "knight")
-    black_bishop = Piece("black", "bishop")
-    black_queen = Piece("black", "queen")
-    black_king = Piece("black", "king")
-    white_pawn = Piece("white", "pawn")
-    white_rook = Piece("white", "rook")
-    white_knight = Piece("white", "knight")
-    white_bishop = Piece("white", "bishop")
-    white_queen = Piece("white", "queen")
-    white_king = Piece("white", "king")
+	screen.blit(background, (560, 0))
+	player = "human"
+	is_game_over = False
+	is_piece_selected = False
+	is_in_check = False
+	game_message('Turno actual:\nJugador', (255, 255, 255))
 
-    # image resources
-    white_rook_image = pygame.image.load("resources/pieces/white-rook.png")
-    black_rook_image = pygame.image.load("resources/pieces/black-rook.png")
-    white_knight_image = pygame.image.load("resources/pieces/white-knight.png")
-    black_knight_image = pygame.image.load("resources/pieces/black-knight.png")
-    white_bishop_image = pygame.image.load("resources/pieces/white-bishop.png")
-    black_bishop_image = pygame.image.load("resources/pieces/black-bishop.png")
-    white_king_image = pygame.image.load("resources/pieces/white-king.png")
-    black_king_image = pygame.image.load("resources/pieces/black-king.png")
-    white_queen_image = pygame.image.load("resources/pieces/white-queen.png")
-    black_queen_image = pygame.image.load("resources/pieces/black-queen.png")
-    white_pawn_image = pygame.image.load("resources/pieces/white-pawn.png")
-    black_pawn_image = pygame.image.load("resources/pieces/black-pawn.png")
-    logo = pygame.image.load("resources/logo32x32.png")
-    background = pygame.image.load("resources/background.jpg")
-    reset = pygame.image.load("resources/buttons/reset.png")
-    reset_hover = pygame.image.load("resources/buttons/reset_hover.png")
-    load = pygame.image.load("resources/buttons/load.png")
-    load_hover = pygame.image.load("resources/buttons/load_hover.png")
-    new = pygame.image.load("resources/buttons/new.png")
-    new_hover = pygame.image.load("resources/buttons/new_hover.png")
+	# Ciclo de juego.
+	while not is_game_over:
 
-    # board variables
-    board = [
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-    ]
+		# Movimientos de la IA.
+		if player == "AI":
 
-    default_board = [
-        [black_rook, black_knight, black_bishop, black_queen, black_king, black_bishop, black_knight, black_rook],
-        [black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn, black_pawn],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece, none_piece],
-        [white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn, white_pawn],
-        [white_rook, white_knight, white_bishop, white_queen, white_king, white_bishop, white_knight, white_rook]
-    ]
+			# Recupera los movimientos del algoritmo minmax alfabeta co una profundidad por defecto de 4.
+			# Si se aumenta la profundidad, el algoritmo tarda más en responder con el movimiento.
+			generated_value, ia_selected_move = minimax(chessboard, 3, float("-inf"), float("inf"), True, dict())
+			print(str(generated_value))
 
-    # dimensions
-    board_width = 555
-    board_height = 555
-    column_margin = 120
-    row_margin = 60
+			# Verificación para saber si el jugador ha ganado la partida.
+			if generated_value == float("-inf") and ia_selected_move == 0:
+				is_game_over = True
+				player = "human"
+				game_message('Jaque Mate:\nJugador gana', (255, 255, 0))
 
-    # gui initializing
-    pygame.init()
-    pygame.display.set_icon(logo)
-    pygame.display.set_caption("Chess Finals")
-    screen = pygame.display.set_mode((1200, 700))
-    clock = pygame.time.Clock()
+			# Movimientos realizados por el algoritmo de computadora (IA).
+			else:
+				start = ia_selected_move[0]
+				end = ia_selected_move[1]
+				piece = chessboard.matrix[start[0]][start[1]]
+				kill_piece = chessboard.matrix[end[0]][end[1]]
 
-    # control variables
-    selected_piece = none_piece
-    current_cell = [0, 0]
-    is_white_player = True
-    final_path = ""
-    loaded_final = None
+				# Selección de la pieza, recupera las coordenadas de la celda para procesar el movimiento.
+				piece_next_cell = chessboard.move_piece(piece, end[0], end[1])
+				if piece_next_cell:
+					sprite_group.add(piece_next_cell[0])
+					sprite_array.append(piece_next_cell[0])
+					sprite_group.remove(piece_next_cell[1])
+					sprite_array.remove(piece_next_cell[1])
 
-    # buttons
-    reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=30, width=150, height=30)
-    load_button = Button(x_offset=board_width + column_margin + 30, y_offset=80, width=150, height=30)
-    new_button = Button(x_offset=board_width + column_margin + 30, y_offset=130, width=150, height=30)
+				# Remueve de los objetos la pieza eliminada.
+				if kill_piece:
+					sprite_group.remove(kill_piece)
+					sprite_array.remove(kill_piece)
+					chessboard.score += chessboard.piece_values[type(kill_piece)]
 
-    # MAIN LOOP.
+				# Verifica si el jugador se encuentra en jaque por la IA.
+				player = "human"
+				attacked = move_gen(chessboard, "b", True)
+				if (chessboard.white_king.y, chessboard.white_king.x) in attacked:
+					game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
+					is_in_check = True
+				else:
+					game_message('Turno actual:\nJugador', (255, 255, 255))
+					is_in_check = False
+
+			# Verifica si la IA gana la partida.
+			if generated_value == float("inf"):
+				print("Player checkmate")
+				is_game_over = True
+				player = 'AI'
+				game_message('Jaque mate:\nIA gana', (255, 255, 0))
+
+		# Movimientos de la persona.
+		# Se toma al jugador humano con el color blanco por defecto.
+		elif player == "human":
+			for event in pygame.event.get():
+				mouse = pygame.mouse.get_pos()
+
+				if event.type == pygame.QUIT:
+					sys.exit()
+
+				# Evento de click en pantalla.
+				if event.type == pygame.MOUSEBUTTONDOWN:
+
+					# Evento de selección de pieza blanca.
+					# En este punto no existe ninguna pieza seleccionada.
+					if not is_piece_selected:
+						piece = select_piece("w")
+
+						# En esta parte se recupera un objeto con todos los movimientos posibles que tiene la ṕieza.
+						# Establece el estado como seleccionado.
+						if piece is not None:
+							possible_moves = piece.get_all_moves(chessboard)
+							is_piece_selected = True
+
+					# Evento de selección de pieza por el mouse.
+					elif is_piece_selected:
+						cell = select_cell()
+						special_moves = special_move_gen(chessboard, "w")
+
+						# Verifica si la celda recuperada en el evento de click está dentro de los posibles movimientos
+						# para dicha pieza.
+						# Es decir, compara la tupla (x, y) del mouse con las tuplas almacenadas.
+						if cell in possible_moves:
+							prev_x, prev_y = piece.x, piece.y
+
+							# Posible pieza a ser eliminada.
+							kill_piece = chessboard.matrix[cell[0]][cell[1]]
+
+							# Selección de la pieza, recupera las coordenadas de la celda para procesar el movimiento.
+							piece_next_cell = chessboard.move_piece(piece, cell[0], cell[1])
+							if piece_next_cell:
+								sprite_group.add(piece_next_cell[0])
+								sprite_array.append(piece_next_cell[0])
+								sprite_group.remove(piece_next_cell[1])
+								sprite_array.remove(piece_next_cell[1])
+
+							# this is needed for proper castling
+							if type(piece) == King or type(piece) == Rook:
+								piece.moved = True
+
+							# Remueve de los objetos la pieza eliminada.
+							if kill_piece:
+								sprite_group.remove(kill_piece)
+								sprite_array.remove(kill_piece)
+
+							# Cambio de turno.
+							attacked = move_gen(chessboard, "b", True)
+							if (chessboard.white_king.y, chessboard.white_king.x) not in attacked:
+								is_piece_selected = False
+								player = "AI"
+								game_message("Turno actual:\nComputadora", (255, 255, 255))
+
+								# Si se elimina una pieza, se actualiza el valor para el MinMax.
+								if kill_piece:
+									chessboard.score -= chessboard.piece_values[type(kill_piece)]
+
+							# Validación para situaciones de jaque del jugador.
+							else:
+								chessboard.move_piece(piece, prev_y, prev_x)
+								if type(piece) == King or type(piece) == Rook:
+									piece.moved = False
+								chessboard.matrix[cell[0]][cell[1]] = kill_piece
+								if kill_piece:
+									sprite_group.add(kill_piece)
+									sprite_array.append(kill_piece)
+								if piece_next_cell:
+									sprite_group.add(piece_next_cell[1])
+									sprite_array.append(piece_next_cell[1])
+								piece.select()
+
+								# Muestra al jugador que se encuentra en jaque..
+								if is_in_check:
+									game_message('Turno actual:\nJugador, sigue en jaque', (255, 0, 0))
+									pygame.display.update()
+									pygame.time.wait(1000)
+									game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
+
+								# Movimiento incorrecto.
+								else:
+									game_message('Turno actual:\nMovimiento suicida', (255, 0, 0))
+									pygame.display.update()
+									pygame.time.wait(1000)
+									game_message('Turno actual:\nJugador', (255, 255, 255))
+
+						# Se encarga de quitar la selección de la casilla actual.
+						elif (piece.y, piece.x) == cell:
+							piece.not_select()
+							is_piece_selected = False
+
+						# Supervición de movimientos especiales de la IA.
+						elif special_moves and cell in special_moves:
+							special = special_moves[cell]
+							if (special == "CR" or special == "CL") and type(piece) == King:
+								chessboard.move_piece(piece, cell[0], cell[1], special)
+								is_piece_selected = False
+								player = "AI"
+
+							# Movimiento especial inválido.
+							else:
+								game_message('Turno actual:\nMovimiento inválido', (255, 0, 0))
+								pygame.display.update()
+								pygame.time.wait(1000)
+								if is_in_check:
+									game_message('Turno actual:\nJugador', (255, 0, 0))
+								else:
+									game_message('Turno actual:\nJugador', (255, 255, 255))
+
+						# Movimiento inválido.
+						else:
+							game_message('Turno actual:\nMovimiento inválido', (255, 0, 0))
+							pygame.display.update()
+							pygame.time.wait(1000)
+							if is_in_check:
+								game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
+							else:
+								game_message('Turno actual:\nJugador', (255, 255, 255))
+
+					# Eventos de click de botones por el usuario.
+					if reset_button.is_cursor_inside(mouse):
+						reload()
+
+					#  Botón de carga de documento.
+					if load_button.is_cursor_inside(mouse):
+						try:
+							root = Tk()
+							root.iconify()
+							root.filename = \
+								filedialog.askopenfilename(initialdir="/", title="Select file",
+								                           filetypes=(
+								                           ("Plain Text files", "*.txt"), ("all files", "*.*")))
+							print(root.filename)
+							root.destroy()
+							load_game(root.filename)
+						except:
+							game_message('ERROR\nfile exception', (255, 0, 0))
+
+					"""elif new_button.is_cursor_inside(mouse):
+						loaded_final = None
+						final_path = ""
+						for i in range(len(board)):
+							for j in range(len(board[i])):
+								board[i][j] = default_board[i][j]"""
+
+		# Botones de funcionalidades.
+		if reset_button.is_cursor_inside(cursor=mouse):
+			screen.blit(reset_hover, (reset_button.x_offset, reset_button.y_offset))
+		else:
+			screen.blit(reset, (reset_button.x_offset, reset_button.y_offset))
+
+		if load_button.is_cursor_inside(cursor=mouse):
+			screen.blit(load_hover, (load_button.x_offset, load_button.y_offset))
+		else:
+			screen.blit(load, (load_button.x_offset, load_button.y_offset))
+
+		if new_button.is_cursor_inside(cursor=mouse):
+			screen.blit(new_hover, (new_button.x_offset, new_button.y_offset))
+		else:
+			screen.blit(new, (new_button.x_offset, new_button.y_offset))
+
+		# Actualización de la interface.
+		screen.blit(chessboard_background, (0, 0))
+		sprite_group.draw(screen)
+		pygame.display.update()
+		clock.tick(60)
+
+
+def game_over():
+	'''
+    This runs before the game quits. A nice game over screen.
+    '''
+	chessboard.print_to_terminal()
+	pygame.display.update()
+	pygame.time.wait(2000)
+	pygame.event.clear()
+	pygame.display.update()
+	while True:
+		for event in pygame.event.get():
+			if event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP:
+				return
+			elif event.type == pygame.QUIT:
+				import sys
+				sys.exit()
+
+	os.remove('assets/avatar.png')
+
+
+"""
+def camstream():
+    try:
+        DEVICE = '/dev/video0'
+        SIZE = (640, 480)
+        FILENAME = 'assets/avatar.png'
+        import pygame.camera
+        pygame.camera.init()
+        display = pygame.display.set_mode((800, 60 * 8), 0)
+        camera = pygame.camera.Camera(DEVICE, SIZE)
+        camera.start()
+        screen = pygame.surface.Surface(SIZE, 0, display)
+        screen = camera.get_image(screen)
+        pygame.image.save(screen, FILENAME)
+        camera.stop()
+        return
+    except:
+        # if camera fails to take a picture, use backup generic avatar
+        from shutil import copyfile
+        copyfile('assets/backupavatar.png', 'assets/avatar.png')
+"""
+
+"""
+def welcome():
+    # wood background
+    menubg = pygame.image.load("assets/menubg.jpg").convert()
+    screen.blit(menubg, (0, 0))
+    bigfont = pygame.font.Font("assets/Roboto-Black.ttf", 80)
+    textsurface = bigfont.render('Python Chess Game', False, (255, 255, 255))
+    screen.blit(textsurface, (30, 10))
+
+    medfont = pygame.font.Font("assets/Roboto-Black.ttf", 50)
+    textsurface = medfont.render(
+        'CMPUT 275 Final Project', False, (255, 255, 255))
+    screen.blit(textsurface, (100, 100))
+    textsurface = myfont.render(
+        'Press any key to begin!', False, (255, 255, 255))
+    screen.blit(textsurface, (250, 170))
+
+    # king and queen images
+    menuking = pygame.image.load("assets/menuking.png").convert_alpha()
+    menuqueen = pygame.image.load("assets/menuqueen.png").convert_alpha()
+    menuking = pygame.transform.scale(menuking, (200, 200))
+    menuqueen = pygame.transform.scale(menuqueen, (200, 200))
+    screen.blit(menuking, (100, 230))
+    screen.blit(menuqueen, (500, 230))
+
+    # our names
+    textsurface = myfont.render(
+        'Arun Woosaree', False, (255, 255, 255))
+    screen.blit(textsurface, (100, 420))
+
+    textsurface = myfont.render(
+        'Tamara Bojovic', False, (255, 255, 255))
+    screen.blit(textsurface, (500, 420))
+
+    # infinite loop until player wants to begin
+    pygame.display.update()
+    pygame.event.clear()
     while True:
-        # background image loading
-        screen.blit(background, (0, 0))
-
-        # i wish to surround the board with a black line
-        pygame.draw.rect(screen, (0, 0, 0), [column_margin - 2, row_margin - 2, board_height + 2, board_height + 2])
-
-        # cells drawing needs to be intermittent to make it black and white
-        white = True
-
-        # variables for checking mouse position
-        mouse = pygame.mouse.get_pos()
-        x = mouse[0]
-        y = mouse[1]
-
-        # mouse and keys events handler
         for event in pygame.event.get():
-
-            # exit event
-            if event.type == pygame.QUIT:
+            if event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP:
                 return
+            elif event.type == pygame.QUIT:
+                sys.exit()
+"""
 
-            # mouse handler
-            # turns, selected pieces and movements; click and cell/piece selection
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                # check if it's inside the board
-                if 671 >= x >= 120 and 632 >= y >= 60:
-                    cell = get_cell_piece(x, y)
-
-                    # piece selection for a movement, it swaps between black and white
-                    if selected_piece.get_name() == "None":
-                        selected_piece = board[cell[0]][cell[1]]
-
-                        # saves the next move of the selected piece.
-                        if is_white_player and selected_piece.get_color() == "white":
-                            board[cell[0]][cell[1]] = none_piece
-                            current_cell = [cell[0], cell[1]]
-                        elif not is_white_player and selected_piece.get_color() == "black":
-                            board[cell[0]][cell[1]] = none_piece
-                            current_cell = [cell[0], cell[1]]
-                        else:
-                            selected_piece = none_piece
-
-                    # cell selection for a movement
-                    else:
-                        next_cell = [cell[0], cell[1]]
-
-                        # verify if the selected piece is pawn type
-                        # is necessary to check if the player who moves is white or black
-                        if selected_piece.get_name() == "pawn":
-                            if is_white_player:
-                                is_valid_move = \
-                                    get_white_pawn_moves(board[cell[0]][cell[1]], current_cell, next_cell)
-                            else:
-                                is_valid_move = get_black_pawn_moves(board[cell[0]][cell[1]], current_cell,
-                                                                     next_cell)
-                        # verify if the selected piece is rook type
-                        elif selected_piece.get_name() == "rook":
-                            is_valid_move = \
-                                get_rook_moves(board, board[cell[0]][cell[1]],
-                                               current_cell, next_cell, selected_piece.get_color())
-
-                        elif selected_piece.get_name() == "knight":
-                            is_valid_move = \
-                                get_knight_moves(board, board[cell[0]][cell[1]],
-                                               current_cell, next_cell, selected_piece.get_color())
-
-                        elif selected_piece.get_name() == "bishop":
-                            is_valid_move = \
-                                get_bishop_moves(board, board[cell[0]][cell[1]],
-                                                 current_cell, next_cell, selected_piece.get_color())
-
-                        elif selected_piece.get_name() == "queen":
-                            is_valid_move = \
-                                get_queen_moves(board, board[cell[0]][cell[1]],
-                                                current_cell, next_cell, selected_piece.get_color())
-
-                        elif selected_piece.get_name() == "king":
-                            is_valid_move = \
-                                get_king_moves(board[cell[0]][cell[1]],
-                                               current_cell, next_cell, selected_piece.get_color())
-
-                        # default case is false
-                        else:
-                            is_valid_move = False
-
-                        # if the move is correct, updates the gui and the board
-                        if is_valid_move:
-                            board[cell[0]][cell[1]] = selected_piece
-                            selected_piece = none_piece
-                            is_white_player = not is_white_player
-
-                        # otherwise, leave everything as it was
-                        else:
-                            board[current_cell[0]][current_cell[1]] = selected_piece
-                            selected_piece = none_piece
-
-                # check if it was inside on of the buttons
-                # reset board button
-                elif reset_button.is_cursor_inside(mouse):
-                    if loaded_final is None:
-                        for i in range(len(board)):
-                            for j in range(len(board[i])):
-                                board[i][j] = default_board[i][j]
-                    else:
-                        for i in range(len(board)):
-                            for j in range(len(board[i])):
-                                board[i][j] = loaded_final[i][j]
-                    is_white_player = True
-
-                # load board button
-                elif load_button.is_cursor_inside(mouse):
-                    root = Tk()
-                    root.iconify()
-                    root.filename = \
-                        filedialog.askopenfilename(initialdir="/", title="Select file",
-                                                   filetypes=(("Plain Text files", "*.txt"), ("all files", "*.*")))
-                    print(root.filename)
-                    root.destroy()
-
-                    # time to load the board
-                    final_path, loaded_final = load_file(root.filename)
-                    if loaded_final is not None:
-                        for i in range(len(board)):
-                            for j in range(len(board[i])):
-                                board[i][j] = loaded_final[i][j]
-                        is_white_player = True
-                elif new_button.is_cursor_inside(mouse):
-                    loaded_final = None
-                    final_path = ""
-                    for i in range(len(board)):
-                        for j in range(len(board[i])):
-                            board[i][j] = default_board[i][j]
-
-        # i need to draw the board
-        for row in range(0, 8):
-            for column in range(0, 8):
-                if white:
-                    color = (255, 255, 255)
-                else:
-                    color = (0, 0, 0)
-
-                board_width_value = (board_width // 8) * column + column_margin
-                board_height_value = (board_height // 8) * row + row_margin
-
-                pygame.draw.rect(screen, color,
-                                 [board_width_value, board_height_value, board_width // 8, board_height // 8])
-
-                # draws said piece on the board
-                piece = board[row][column]
-                if piece.get_name() == "pawn":
-                    if piece.color == "black":
-                        screen.blit(black_pawn_image, (board_width_value, board_height_value))
-                    else:
-                        screen.blit(white_pawn_image, (board_width_value, board_height_value))
-
-                elif piece.get_name() == "rook":
-                    if piece.color == "black":
-                        screen.blit(black_rook_image, (board_width_value, board_height_value))
-                    else:
-                        screen.blit(white_rook_image, (board_width_value, board_height_value))
-
-                elif piece.get_name() == "knight":
-                    if piece.color == "black":
-                        screen.blit(black_knight_image, (board_width_value, board_height_value))
-                    else:
-                        screen.blit(white_knight_image, (board_width_value, board_height_value))
-
-                elif piece.get_name() == "bishop":
-                    if piece.color == "black":
-                        screen.blit(black_bishop_image, (board_width_value, board_height_value))
-                    else:
-                        screen.blit(white_bishop_image, (board_width_value, board_height_value))
-
-                elif piece.get_name() == "queen":
-                    if piece.color == "black":
-                        screen.blit(black_queen_image, (board_width_value, board_height_value))
-                    else:
-                        screen.blit(white_queen_image, (board_width_value, board_height_value))
-
-                elif piece.get_name() == "king":
-                    if piece.color == "black":
-                        screen.blit(black_king_image, (board_width_value, board_height_value))
-                    else:
-                        screen.blit(white_king_image, (board_width_value, board_height_value))
-
-                white = not white
-            white = not white
-
-        # visual buttons handling
-        if reset_button.is_cursor_inside(cursor=mouse):
-            screen.blit(reset_hover, (reset_button.x_offset, reset_button.y_offset))
-        else:
-            screen.blit(reset, (reset_button.x_offset, reset_button.y_offset))
-
-        if load_button.is_cursor_inside(cursor=mouse):
-            screen.blit(load_hover, (load_button.x_offset, load_button.y_offset))
-        else:
-            screen.blit(load, (load_button.x_offset, load_button.y_offset))
-
-        if new_button.is_cursor_inside(cursor=mouse):
-            screen.blit(new_hover, (new_button.x_offset, new_button.y_offset))
-        else:
-            screen.blit(new, (new_button.x_offset, new_button.y_offset))
-
-        # make this 60 times per second
-        clock.tick(60)
-
-        # and now commit the draw
-        pygame.display.flip()
-
-
-# run the main function only if this module is executed as the main script
-# (if you import this as a module then nothing is executed)
 if __name__ == "__main__":
-    # call the main function
-    main()
+	main()
+	game_over()
