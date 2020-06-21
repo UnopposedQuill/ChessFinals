@@ -1,7 +1,10 @@
 import sys
+from tkinter import Tk, filedialog
+
 from functions.ai import *
 from objects.button import *
-from tkinter import Tk, filedialog
+from objects.chessboard import Chessboard
+from objects.pieces import *
 
 """
 	PRINCIPAL (INTERFAZ GRÁFICA)
@@ -110,7 +113,7 @@ def main():
 
 			# Recupera los movimientos del algoritmo minmax alfabeta co una profundidad por defecto de 4.
 			# Si se aumenta la profundidad, el algoritmo tarda más en responder con el movimiento.
-			generated_value, ia_selected_move = minimax(chessboard, 3, float("-inf"), float("inf"), True, dict())
+			generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict())
 			print(str(generated_value))
 
 			# Verificación para saber si el jugador ha ganado la partida.
@@ -294,8 +297,8 @@ def main():
 							root.iconify()
 							root.filename = \
 								filedialog.askopenfilename(initialdir="/", title="Select file",
-								                           filetypes=(
-								                           ("Plain Text files", "*.txt"), ("all files", "*.*")))
+														   filetypes=(
+															   ("Plain Text files", "*.txt"), ("all files", "*.*")))
 							print(root.filename)
 							root.destroy()
 							load_game(root.filename)

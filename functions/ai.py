@@ -1,4 +1,3 @@
-from objects.chessboard import *
 
 def matrix_to_tuple(array, empty_array):
     """
@@ -10,11 +9,12 @@ def matrix_to_tuple(array, empty_array):
         empty_array[i] = tuple(array[i])
     return tuple(empty_array)
 
-def check_castling(chessboard,c,side):
-    '''
+
+def check_castling(chessboard, c, side):
+    """
     Checks if castling is possible, given a chessboard state, a color, and the side
     for the castle.
-    '''
+    """
     castleLeft = False
     castleRight = False
 
@@ -27,23 +27,23 @@ def check_castling(chessboard,c,side):
     elif c == "b":
         king = chessboard.black_king
         leftRook = chessboard.black_rook_left
-        rightRook =  chessboard.black_rook_right
+        rightRook = chessboard.black_rook_right
         attacked = move_gen(chessboard, "w", True)
         row = 0
 
     squares = set()
 
-    if king.moved == False: # cannot castle if the king has moved
+    if not king.moved:  # cannot castle if the king has moved
         # left castle, check to see if the rook has moved
         if chessboard.matrix[row][0] == leftRook and leftRook.moved == False:
-            #squares between the rook and the king have to be empty and cannot be in check
-            squares = {(row,1),(row,2),(row,3)}
+            # squares between the rook and the king have to be empty and cannot be in check
+            squares = {(row, 1), (row, 2), (row, 3)}
             if not chessboard.matrix[row][1] and not chessboard.matrix[row][2] and not chessboard.matrix[row][3]:
                 if not attacked.intersection(squares):
                     castleLeft = True
         # right castle
         if chessboard.matrix[row][7] == rightRook and rightRook.moved == False:
-            #squares between the rook and the king have to be empty and cannot be in check
+            # squares between the rook and the king have to be empty and cannot be in check
             squares = {(row,6),(row,5)}
             if not chessboard.matrix[row][6] and not chessboard.matrix[row][5]:
                 if not attacked.intersection(squares):
@@ -54,16 +54,17 @@ def check_castling(chessboard,c,side):
     elif side == "l":
         return castleLeft
 
-def special_move_gen(chessboard,color,moves = None):
-    '''
+
+def special_move_gen(chessboard, color, moves=None):
+    """
     From a chessboard state and a color, returns a move dict with the possible
     special moves. Currently only returns castling moves as pawn promotion is
     implemented in a different way.
 
     Key in the moves dict is where the player has to 'click' to perform the move.
     Value is the special move code.
-    '''
-    if moves == None:
+    """
+    if moves is None:
         moves = dict()
     if color == "w":
         x = 7
@@ -73,14 +74,14 @@ def special_move_gen(chessboard,color,moves = None):
     leftCastle = check_castling(chessboard,color,"l")
 
     if rightCastle:
-        moves[(x,6)] = "CR"
+        moves[(x, 6)] = "CR"
     if leftCastle:
-        moves[(x,2)] = "CL"
+        moves[(x, 2)] = "CL"
 
     return moves
 
 
-def move_gen(chessboard, color, attc = False):
+def move_gen(chessboard, color, attc=False):
     """
     Generates the pseudo-legal moves from a chessboard state, for a specific color.
     Does not check to see if the move puts you in check, this must be done
@@ -99,14 +100,15 @@ def move_gen(chessboard, color, attc = False):
     for j in range(8):
         for i in range(8):
             piece = chessboard.matrix[i][j]
-            if piece != None and piece.color == color:
+            if piece is not None and piece.color == color:
                 legal_moves = piece.get_all_moves(chessboard)
                 if legal_moves and not attc:
-                    moves[(i,j)] = legal_moves
+                    moves[(i, j)] = legal_moves
                 elif legal_moves and attc:
                     moves = moves.union(legal_moves)
 
     return moves
+
 
 # IF FUNCTION RETURNS value= -INF (or move = 0), AI IS IN CHECKMATE
 # (returning +inf for value indicates player checkmate)
@@ -126,7 +128,7 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo):
     # convert the 2D list to a tuple, so it can be used as a key in memo
     tuple_mat = matrix_to_tuple(chessboard.matrix, chessboard.get_null_row())
 
-    if tuple_mat in memo and depth != 3: # set this to the depth of the initial call
+    if tuple_mat in memo and depth != 4:  # set this to the depth of the initial call
         return memo[tuple_mat], 0
 
     if depth == 0: # end of the search is reached
@@ -151,10 +153,10 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo):
                 pawn_promotion = chessboard.move_piece(piece,end[0],end[1])
 
                 # see if the move puts you in check
-                attacked = move_gen(chessboard,"w",True) #return spaces attacked by white
-                if (chessboard.black_king.y,chessboard.black_king.x) in attacked:
+                attacked = move_gen(chessboard, "w", True)  # return spaces attacked by white
+                if (chessboard.black_king.y, chessboard.black_king.x) in attacked:
                     # reverse the move
-                    chessboard.move_piece(piece,start[0],start[1],True)
+                    chessboard.move_piece(piece, start[0], start[1], True)
                     chessboard.matrix[end[0]][end[1]] = dest
                     if pawn_promotion:
                         chessboard.score -= 9 # revert the score from the promotion
