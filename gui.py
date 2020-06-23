@@ -18,7 +18,8 @@ background = pygame.image.load("resources/background.jpg")
 font = pygame.font.SysFont("dejavuserif", 20)
 pygame.display.set_icon(logo)
 pygame.display.set_caption("Chess Finals")
-screen = pygame.display.set_mode((860, 560))
+screen = pygame.display.set_mode((860, 600))
+# screen = pygame.display.set_mode((860, 560))
 chessboard_background = pygame.image.load("resources/gui_board.png").convert()
 
 reset = pygame.image.load("resources/buttons/reset.png")
@@ -29,11 +30,10 @@ new = pygame.image.load("resources/buttons/new.png")
 new_hover = pygame.image.load("resources/buttons/new_hover.png")
 
 # Variables.
-global chessboard, sprite_array, sprite_group
 chessboard = Chessboard()
 clock = pygame.time.Clock()
-board_width = 555
-board_height = 555
+board_width = 600
+board_height = 600
 column_margin = 30
 row_margin = 60
 
@@ -72,7 +72,7 @@ def game_message(message, colour):
 	index = 0
 	for char in text:
 		textsurface = font.render(char, False, colour)
-		screen.blit(textsurface, (600, 450 + index))
+		screen.blit(textsurface, (board_width + column_margin + 30, 450 + index))
 		index += 28
 
 
