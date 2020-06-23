@@ -156,7 +156,8 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo):
 
                 # see if the move puts you in check
                 attacked = move_gen(chessboard, "w", True)  # return spaces attacked by white
-                if (chessboard.black_king.y, chessboard.black_king.x) in attacked:
+                king = chessboard.get_king("b")
+                if (king.y, king.x) in attacked:
                     # reverse the move
                     chessboard.move_piece(piece, start[0], start[1], True)
                     chessboard.matrix[end[0]][end[1]] = dest
