@@ -28,6 +28,9 @@ load = pygame.image.load("resources/buttons/load.png")
 load_hover = pygame.image.load("resources/buttons/load_hover.png")
 new = pygame.image.load("resources/buttons/new.png")
 new_hover = pygame.image.load("resources/buttons/new_hover.png")
+black_color = pygame.image.load("resources/buttons/black.png")
+white_color = pygame.image.load("resources/buttons/white.png")
+color_change = pygame.image.load("resources/buttons/color_change.png")
 
 # Variables.
 chessboard = Chessboard()
@@ -41,6 +44,7 @@ row_margin = 60
 reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=30, width=150, height=30)
 load_button = Button(x_offset=board_width + column_margin + 30, y_offset=80, width=150, height=30)
 new_button = Button(x_offset=board_width + column_margin + 30, y_offset=130, width=150, height=30)
+color_button = Button(x_offset=board_width + column_margin + 30, y_offset=180, width=150, height=30)
 
 # Inicialización y carga de celdas para los eventos de interfaz gráfica.
 sprite_group = pygame.sprite.Group()
@@ -100,6 +104,7 @@ def load_game(filename):
 def main():
 	screen.blit(background, (560, 0))
 	player = "human"
+	color = white_color
 	is_game_over = False
 	is_piece_selected = False
 	is_in_check = False
@@ -113,7 +118,10 @@ def main():
 
 			# Recupera los movimientos del algoritmo minmax alfabeta co una profundidad por defecto de 4.
 			# Si se aumenta la profundidad, el algoritmo tarda más en responder con el movimiento.
-			generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict())
+			if color == white_color:
+				generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict())
+			else:
+				generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), False, dict())
 			print(str(generated_value))
 
 			# Verificación para saber si el jugador ha ganado la partida.
@@ -145,13 +153,22 @@ def main():
 
 				# Verifica si el jugador se encuentra en jaque por la IA.
 				player = "human"
-				attacked = move_gen(chessboard, "b", True)
-				if (chessboard.white_king.y, chessboard.white_king.x) in attacked:
-					game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
-					is_in_check = True
+				if color == white_color:
+					attacked = move_gen(chessboard, "b", True)
+					if (chessboard.white_king.y, chessboard.white_king.x) in attacked:
+						game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
+						is_in_check = True
+					else:
+						game_message('Turno actual:\nJugador', (255, 255, 255))
+						is_in_check = False
 				else:
-					game_message('Turno actual:\nJugador', (255, 255, 255))
-					is_in_check = False
+					attacked = move_gen(chessboard, "w", True)
+					if (chessboard.black_king.y, chessboard.black_king.x) in attacked:
+						game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
+						is_in_check = True
+					else:
+						game_message('Turno actual:\nJugador', (255, 255, 255))
+						is_in_check = False
 
 			# Verifica si la IA gana la partida.
 			if generated_value == float("inf"):
@@ -175,9 +192,12 @@ def main():
 					# Evento de selección de pieza blanca.
 					# En este punto no existe ninguna pieza seleccionada.
 					if not is_piece_selected:
-						piece = select_piece("w")
+						if color == white_color:
+							piece = select_piece("w")
+						else:
+							piece = select_piece("b")
 
-						# En esta parte se recupera un objeto con todos los movimientos posibles que tiene la ṕieza.
+						# En esta parte se recupera un objeto con todos los movimientos posibles que tiene la pieza.
 						# Establece el estado como seleccionado.
 						if piece is not None:
 							possible_moves = piece.get_all_moves(chessboard)
@@ -186,7 +206,10 @@ def main():
 					# Evento de selección de pieza por el mouse.
 					elif is_piece_selected:
 						cell = select_cell()
-						special_moves = special_move_gen(chessboard, "w")
+						if color == white_color:
+							special_moves = special_move_gen(chessboard, "w")
+						else:
+							special_moves = special_move_gen(chessboard, "b")
 
 						# Verifica si la celda recuperada en el evento de click está dentro de los posibles movimientos
 						# para dicha pieza.
@@ -215,43 +238,82 @@ def main():
 								sprite_array.remove(kill_piece)
 
 							# Cambio de turno.
-							attacked = move_gen(chessboard, "b", True)
-							if (chessboard.white_king.y, chessboard.white_king.x) not in attacked:
-								is_piece_selected = False
-								player = "AI"
-								game_message("Turno actual:\nComputadora", (255, 255, 255))
+							if color == white_color:
+								attacked = move_gen(chessboard, "b", True)
+								if (chessboard.white_king.y, chessboard.white_king.x) not in attacked:
+									is_piece_selected = False
+									player = "AI"
+									game_message("Turno actual:\nComputadora", (255, 255, 255))
 
-								# Si se elimina una pieza, se actualiza el valor para el MinMax.
-								if kill_piece:
-									chessboard.score -= chessboard.piece_values[type(kill_piece)]
+									# Si se elimina una pieza, se actualiza el valor para el MinMax.
+									if kill_piece:
+										chessboard.score -= chessboard.piece_values[type(kill_piece)]
 
-							# Validación para situaciones de jaque del jugador.
-							else:
-								chessboard.move_piece(piece, prev_y, prev_x)
-								if type(piece) == King or type(piece) == Rook:
-									piece.moved = False
-								chessboard.matrix[cell[0]][cell[1]] = kill_piece
-								if kill_piece:
-									sprite_group.add(kill_piece)
-									sprite_array.append(kill_piece)
-								if piece_next_cell:
-									sprite_group.add(piece_next_cell[1])
-									sprite_array.append(piece_next_cell[1])
-								piece.select()
-
-								# Muestra al jugador que se encuentra en jaque..
-								if is_in_check:
-									game_message('Turno actual:\nJugador, sigue en jaque', (255, 0, 0))
-									pygame.display.update()
-									pygame.time.wait(1000)
-									game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
-
-								# Movimiento incorrecto.
+								# Validación para situaciones de jaque del jugador.
 								else:
-									game_message('Turno actual:\nMovimiento suicida', (255, 0, 0))
-									pygame.display.update()
-									pygame.time.wait(1000)
-									game_message('Turno actual:\nJugador', (255, 255, 255))
+									chessboard.move_piece(piece, prev_y, prev_x)
+									if type(piece) == King or type(piece) == Rook:
+										piece.moved = False
+									chessboard.matrix[cell[0]][cell[1]] = kill_piece
+									if kill_piece:
+										sprite_group.add(kill_piece)
+										sprite_array.append(kill_piece)
+									if piece_next_cell:
+										sprite_group.add(piece_next_cell[1])
+										sprite_array.append(piece_next_cell[1])
+									piece.select()
+
+									# Muestra al jugador que se encuentra en jaque..
+									if is_in_check:
+										game_message('Turno actual:\nJugador, sigue en jaque', (255, 0, 0))
+										pygame.display.update()
+										pygame.time.wait(1000)
+										game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
+
+									# Movimiento incorrecto.
+									else:
+										game_message('Turno actual:\nMovimiento suicida', (255, 0, 0))
+										pygame.display.update()
+										pygame.time.wait(1000)
+										game_message('Turno actual:\nJugador', (255, 255, 255))
+							else:
+								attacked = move_gen(chessboard, "w", True)
+								if (chessboard.black_king.y, chessboard.black_king.x) not in attacked:
+									is_piece_selected = False
+									player = "AI"
+									game_message("Turno actual:\nComputadora", (255, 255, 255))
+
+									# Si se elimina una pieza, se actualiza el valor para el MinMax.
+									if kill_piece:
+										chessboard.score -= chessboard.piece_values[type(kill_piece)]
+
+								# Validación para situaciones de jaque del jugador.
+								else:
+									chessboard.move_piece(piece, prev_y, prev_x)
+									if type(piece) == King or type(piece) == Rook:
+										piece.moved = False
+									chessboard.matrix[cell[0]][cell[1]] = kill_piece
+									if kill_piece:
+										sprite_group.add(kill_piece)
+										sprite_array.append(kill_piece)
+									if piece_next_cell:
+										sprite_group.add(piece_next_cell[1])
+										sprite_array.append(piece_next_cell[1])
+									piece.select()
+
+									# Muestra al jugador que se encuentra en jaque..
+									if is_in_check:
+										game_message('Turno actual:\nJugador, sigue en jaque', (255, 0, 0))
+										pygame.display.update()
+										pygame.time.wait(1000)
+										game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
+
+									# Movimiento incorrecto.
+									else:
+										game_message('Turno actual:\nMovimiento suicida', (255, 0, 0))
+										pygame.display.update()
+										pygame.time.wait(1000)
+										game_message('Turno actual:\nJugador', (255, 255, 255))
 
 						# Se encarga de quitar la selección de la casilla actual.
 						elif (piece.y, piece.x) == cell:
@@ -305,12 +367,14 @@ def main():
 						except:
 							game_message('ERROR\nfile exception', (255, 0, 0))
 
-					"""elif new_button.is_cursor_inside(mouse):
-						loaded_final = None
-						final_path = ""
-						for i in range(len(board)):
-							for j in range(len(board[i])):
-								board[i][j] = default_board[i][j]"""
+					# Botón de cambio de color
+					if color_button.is_cursor_inside(mouse):
+						if color == white_color:
+							color = black_color
+						else:
+							color = white_color
+						# Se sabe que este es el turno del jugador
+						player = "AI"
 
 		# Botones de funcionalidades.
 		if reset_button.is_cursor_inside(cursor=mouse):
@@ -328,6 +392,11 @@ def main():
 		else:
 			screen.blit(new, (new_button.x_offset, new_button.y_offset))
 
+		if color_button.is_cursor_inside(cursor=mouse):
+			screen.blit(color_change, (color_button.x_offset, color_button.y_offset))
+		else:
+			screen.blit(color, (color_button.x_offset, color_button.y_offset))
+
 		# Actualización de la interface.
 		screen.blit(chessboard_background, (0, 0))
 		sprite_group.draw(screen)
@@ -336,9 +405,9 @@ def main():
 
 
 def game_over():
-	'''
-    This runs before the game quits. A nice game over screen.
-    '''
+	"""
+	This runs before the game quits. A nice game over screen.
+	"""
 	chessboard.print_to_terminal()
 	pygame.display.update()
 	pygame.time.wait(2000)
@@ -352,75 +421,6 @@ def game_over():
 				import sys
 				sys.exit()
 
-	os.remove('assets/avatar.png')
-
-
-"""
-def camstream():
-    try:
-        DEVICE = '/dev/video0'
-        SIZE = (640, 480)
-        FILENAME = 'assets/avatar.png'
-        import pygame.camera
-        pygame.camera.init()
-        display = pygame.display.set_mode((800, 60 * 8), 0)
-        camera = pygame.camera.Camera(DEVICE, SIZE)
-        camera.start()
-        screen = pygame.surface.Surface(SIZE, 0, display)
-        screen = camera.get_image(screen)
-        pygame.image.save(screen, FILENAME)
-        camera.stop()
-        return
-    except:
-        # if camera fails to take a picture, use backup generic avatar
-        from shutil import copyfile
-        copyfile('assets/backupavatar.png', 'assets/avatar.png')
-"""
-
-"""
-def welcome():
-    # wood background
-    menubg = pygame.image.load("assets/menubg.jpg").convert()
-    screen.blit(menubg, (0, 0))
-    bigfont = pygame.font.Font("assets/Roboto-Black.ttf", 80)
-    textsurface = bigfont.render('Python Chess Game', False, (255, 255, 255))
-    screen.blit(textsurface, (30, 10))
-
-    medfont = pygame.font.Font("assets/Roboto-Black.ttf", 50)
-    textsurface = medfont.render(
-        'CMPUT 275 Final Project', False, (255, 255, 255))
-    screen.blit(textsurface, (100, 100))
-    textsurface = myfont.render(
-        'Press any key to begin!', False, (255, 255, 255))
-    screen.blit(textsurface, (250, 170))
-
-    # king and queen images
-    menuking = pygame.image.load("assets/menuking.png").convert_alpha()
-    menuqueen = pygame.image.load("assets/menuqueen.png").convert_alpha()
-    menuking = pygame.transform.scale(menuking, (200, 200))
-    menuqueen = pygame.transform.scale(menuqueen, (200, 200))
-    screen.blit(menuking, (100, 230))
-    screen.blit(menuqueen, (500, 230))
-
-    # our names
-    textsurface = myfont.render(
-        'Arun Woosaree', False, (255, 255, 255))
-    screen.blit(textsurface, (100, 420))
-
-    textsurface = myfont.render(
-        'Tamara Bojovic', False, (255, 255, 255))
-    screen.blit(textsurface, (500, 420))
-
-    # infinite loop until player wants to begin
-    pygame.display.update()
-    pygame.event.clear()
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP:
-                return
-            elif event.type == pygame.QUIT:
-                sys.exit()
-"""
 
 if __name__ == "__main__":
 	main()

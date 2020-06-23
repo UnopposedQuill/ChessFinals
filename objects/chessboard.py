@@ -169,3 +169,12 @@ class Chessboard:
 				else:
 					arr.append("--")
 			print(arr)
+
+	# Returns amount of pieces left in the board
+	def piece_count(self):
+		count = 0
+		for row in self.matrix:
+			for piece in row:
+				if piece is not None:
+					count += 1
+		return count
