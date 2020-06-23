@@ -169,3 +169,15 @@ class Chessboard:
 				else:
 					arr.append("--")
 			print(arr)
+
+	def get_king(self, color):
+		if color == "b":
+			for row in self.matrix:
+				for piece in row:
+					if isinstance(piece, King) and piece.color == "b":
+						return piece
+		else:
+			for row in self.matrix:
+				for piece in row:
+					if isinstance(piece, King) and piece.color == "w":
+						return piece

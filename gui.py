@@ -336,9 +336,9 @@ def main():
 
 
 def game_over():
-	'''
-    This runs before the game quits. A nice game over screen.
-    '''
+	"""
+	This runs before the game quits. A nice game over screen.
+	"""
 	chessboard.print_to_terminal()
 	pygame.display.update()
 	pygame.time.wait(2000)
@@ -352,75 +352,6 @@ def game_over():
 				import sys
 				sys.exit()
 
-	os.remove('assets/avatar.png')
-
-
-"""
-def camstream():
-    try:
-        DEVICE = '/dev/video0'
-        SIZE = (640, 480)
-        FILENAME = 'assets/avatar.png'
-        import pygame.camera
-        pygame.camera.init()
-        display = pygame.display.set_mode((800, 60 * 8), 0)
-        camera = pygame.camera.Camera(DEVICE, SIZE)
-        camera.start()
-        screen = pygame.surface.Surface(SIZE, 0, display)
-        screen = camera.get_image(screen)
-        pygame.image.save(screen, FILENAME)
-        camera.stop()
-        return
-    except:
-        # if camera fails to take a picture, use backup generic avatar
-        from shutil import copyfile
-        copyfile('assets/backupavatar.png', 'assets/avatar.png')
-"""
-
-"""
-def welcome():
-    # wood background
-    menubg = pygame.image.load("assets/menubg.jpg").convert()
-    screen.blit(menubg, (0, 0))
-    bigfont = pygame.font.Font("assets/Roboto-Black.ttf", 80)
-    textsurface = bigfont.render('Python Chess Game', False, (255, 255, 255))
-    screen.blit(textsurface, (30, 10))
-
-    medfont = pygame.font.Font("assets/Roboto-Black.ttf", 50)
-    textsurface = medfont.render(
-        'CMPUT 275 Final Project', False, (255, 255, 255))
-    screen.blit(textsurface, (100, 100))
-    textsurface = myfont.render(
-        'Press any key to begin!', False, (255, 255, 255))
-    screen.blit(textsurface, (250, 170))
-
-    # king and queen images
-    menuking = pygame.image.load("assets/menuking.png").convert_alpha()
-    menuqueen = pygame.image.load("assets/menuqueen.png").convert_alpha()
-    menuking = pygame.transform.scale(menuking, (200, 200))
-    menuqueen = pygame.transform.scale(menuqueen, (200, 200))
-    screen.blit(menuking, (100, 230))
-    screen.blit(menuqueen, (500, 230))
-
-    # our names
-    textsurface = myfont.render(
-        'Arun Woosaree', False, (255, 255, 255))
-    screen.blit(textsurface, (100, 420))
-
-    textsurface = myfont.render(
-        'Tamara Bojovic', False, (255, 255, 255))
-    screen.blit(textsurface, (500, 420))
-
-    # infinite loop until player wants to begin
-    pygame.display.update()
-    pygame.event.clear()
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP:
-                return
-            elif event.type == pygame.QUIT:
-                sys.exit()
-"""
 
 if __name__ == "__main__":
 	main()
