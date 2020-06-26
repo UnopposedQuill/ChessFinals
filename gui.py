@@ -19,7 +19,6 @@ font = pygame.font.SysFont("dejavuserif", 30)
 pygame.display.set_icon(logo)
 pygame.display.set_caption("Chess Finals")
 screen = pygame.display.set_mode((860, 600))
-# screen = pygame.display.set_mode((860, 560))
 chessboard_background = pygame.image.load("resources/gui_board.png").convert()
 
 reset = pygame.image.load("resources/buttons/reset.png")
@@ -103,6 +102,7 @@ def main():
 	is_game_over = False
 	is_piece_selected = False
 	is_in_check = False
+	final_file_name = ""
 	game_message('Turno actual:\nJugador', (255, 255, 255))
 
 	# Ciclo de juego.
@@ -288,7 +288,10 @@ def main():
 
 					# Eventos de click de botones por el usuario.
 					if reset_button.is_cursor_inside(mouse):
-						reload()
+						if final_file_name == "":
+							reload()
+						else:
+							load_game(final_file_name)
 
 					#  Botón de carga de documento.
 					if load_button.is_cursor_inside(mouse):
@@ -302,15 +305,14 @@ def main():
 							print(root.filename)
 							root.destroy()
 							load_game(root.filename)
+							final_file_name = root.filename
 						except:
 							game_message('ERROR\nfile exception', (255, 0, 0))
 
-					"""elif new_button.is_cursor_inside(mouse):
-						loaded_final = None
-						final_path = ""
-						for i in range(len(board)):
-							for j in range(len(board[i])):
-								board[i][j] = default_board[i][j]"""
+					if new_button.is_cursor_inside(mouse):
+						final_file_name = ""
+						reload()
+
 
 		# Botones de funcionalidades.
 		if reset_button.is_cursor_inside(cursor=mouse):
