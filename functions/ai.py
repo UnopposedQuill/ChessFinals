@@ -35,14 +35,14 @@ def check_castling(chessboard, c, side):
 
     if not king.moved:  # cannot castle if the king has moved
         # left castle, check to see if the rook has moved
-        if not chessboard.matrix[row][0] == left_rook and left_rook.moved:
+        if chessboard.matrix[row][0] == left_rook and not left_rook.moved:
             # squares between the rook and the king have to be empty and cannot be in check
             squares = {(row, 1), (row, 2), (row, 3)}
             if not chessboard.matrix[row][1] and not chessboard.matrix[row][2] and not chessboard.matrix[row][3]:
                 if not attacked.intersection(squares):
                     castle_left = True
         # right castle
-        if not chessboard.matrix[row][7] == right_rook and right_rook.moved:
+        if chessboard.matrix[row][7] == right_rook and not right_rook.moved:
             # squares between the rook and the king have to be empty and cannot be in check
             squares = {(row, 6), (row, 5)}
             if not chessboard.matrix[row][6] and not chessboard.matrix[row][5]:

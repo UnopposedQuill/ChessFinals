@@ -150,14 +150,16 @@ class Pawn(Piece):
 		if 0 <= next_y < 8 and chessboard.matrix[next_y][self.x] is None:
 			move_set.add((next_y, self.x))
 
-		# Si el peón no se ha movido, generar las siguientes dos
-		if not self.moved:
+		# Si el peón no se ha movido, generar las siguientes dos, verificar que no hayan piezas en el destino
+		if not self.moved and (	(self.color == "w" and chessboard.matrix[self.y - 2][self.x] is None) or
+								(self.color == "b" and chessboard.matrix[self.y + 2][self.x] is None)):
 			move_set.add((self.y - 2 if self.color == "w" else self.y + 2, self.x))
 
 		for s in sums:
 			next_x = self.x + s
 			next_y = self.y - 1 if self.color == "w" else self.y + 1
-			if move_piece(self.color, next_y, next_x, chessboard) and kill_piece(self.color, next_y, next_x, chessboard):
+			if move_piece(self.color, next_y, next_x, chessboard) and kill_piece(self.color, next_y, next_x,
+																				 chessboard):
 				move_set.add((next_y, next_x))
 			else:
 				continue

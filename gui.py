@@ -277,6 +277,7 @@ def main():
 								chessboard.move_piece(piece, cell[0], cell[1], special)
 								is_piece_selected = False
 								player = "AI"
+								game_message("Turno actual:\nComputadora", (255, 255, 255))
 
 							# Movimiento especial inválido.
 							else:
