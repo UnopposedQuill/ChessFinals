@@ -133,6 +133,7 @@ class Pawn(Piece):
 	def __init__(self, color, y, x):
 		super().__init__(color, y, x)  # Pieza.
 		self.symbol = "P"
+		self.moved = False
 
 		# Verificación de color para la inicialización de la pieza en la interfaz.
 		if self.color == "b":
@@ -148,6 +149,11 @@ class Pawn(Piece):
 		next_y = self.y - 1 if self.color == "w" else self.y + 1
 		if 0 <= next_y < 8 and chessboard.matrix[next_y][self.x] is None:
 			move_set.add((next_y, self.x))
+
+		# Si el peón no se ha movido, generar las siguientes dos
+		if not self.moved:
+			move_set.add((self.y - 2 if self.color == "w" else self.y + 2, self.x))
+
 		for s in sums:
 			next_x = self.x + s
 			next_y = self.y - 1 if self.color == "w" else self.y + 1
