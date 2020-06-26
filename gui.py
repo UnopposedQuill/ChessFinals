@@ -128,9 +128,9 @@ def main():
 				end = ia_selected_move[1]
 				piece = chessboard.matrix[start[0]][start[1]]
 				kill_piece = chessboard.matrix[end[0]][end[1]]
-
 				# Selección de la pieza, recupera las coordenadas de la celda para procesar el movimiento.
 				piece_next_cell = chessboard.move_piece(piece, end[0], end[1])
+				piece.focus_moved()
 				if piece_next_cell:
 					sprite_group.add(piece_next_cell[0])
 					sprite_array.append(piece_next_cell[0])

@@ -26,6 +26,7 @@ class Piece(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.x, self.rect.y = x * 70, y * 70
 		self.is_select = False
+		self.is_focused = False
 
 	# Función que retorna una lista de movimientos válidos en formato tupla (coordenadas) para las piezas que pueden
 	# moverse vertical y horizontalmente.
@@ -89,6 +90,16 @@ class Piece(pygame.sprite.Sprite):
 		self.image.convert_alpha()
 		self.image.blit(self.sprite, (0, 0))
 		self.is_select = False
+
+	def focus_moved(self):
+		pygame.draw.rect(self.image, (255, 128, 128), (0, 0, 70, 70), 5)
+		self.is_focused = True
+
+	def un_focus_moved(self):
+		self.image = pygame.Surface((70, 70), pygame.SRCALPHA, 32)
+		self.image.convert_alpha()
+		self.image.blit(self.sprite, (0, 0))
+		self.is_focused = False
 
 	# Funciones GET/SET
 	def get_color(self):
