@@ -27,6 +27,8 @@ load = pygame.image.load("resources/buttons/load.png")
 load_hover = pygame.image.load("resources/buttons/load_hover.png")
 new = pygame.image.load("resources/buttons/new.png")
 new_hover = pygame.image.load("resources/buttons/new_hover.png")
+casual = pygame.image.load("resources/buttons/casual.png")
+finals = pygame.image.load("resources/buttons/finals.png")
 
 # Variables.
 chessboard = Chessboard()
@@ -40,6 +42,7 @@ row_margin = 60
 reset_button = Button(x_offset=board_width + column_margin + 30, y_offset=30, width=150, height=30)
 load_button = Button(x_offset=board_width + column_margin + 30, y_offset=80, width=150, height=30)
 new_button = Button(x_offset=board_width + column_margin + 30, y_offset=130, width=150, height=30)
+ia_mode_button = Button(x_offset=board_width + column_margin + 30, y_offset=180, width=150, height=30)
 
 # Inicialización y carga de celdas para los eventos de interfaz gráfica.
 sprite_group = pygame.sprite.Group()
@@ -103,6 +106,7 @@ def main():
 	is_piece_selected = False
 	is_in_check = False
 	final_file_name = ""
+	ia_mode = "casual"
 	game_message('Turno actual:\nJugador', (255, 255, 255))
 
 	# Ciclo de juego.
@@ -113,7 +117,10 @@ def main():
 
 			# Recupera los movimientos del algoritmo minmax alfabeta co una profundidad por defecto de 4.
 			# Si se aumenta la profundidad, el algoritmo tarda más en responder con el movimiento.
-			generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict())
+			if ia_mode == "casual":
+				generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict(), False)
+			else:  # ia_mode == "finals"
+				generated_value, ia_selected_move = minimax(chessboard, 6, float("-inf"), float("inf"), True, dict(), True)
 			print(str(generated_value))
 
 			# Verificación para saber si el jugador ha ganado la partida.
@@ -313,6 +320,11 @@ def main():
 						final_file_name = ""
 						reload()
 
+					if ia_mode_button.is_cursor_inside(mouse):
+						if ia_mode == "casual":
+							ia_mode = "finals"
+						else:
+							ia_mode = "casuals"
 
 		# Botones de funcionalidades.
 		if reset_button.is_cursor_inside(cursor=mouse):
@@ -329,6 +341,11 @@ def main():
 			screen.blit(new_hover, (new_button.x_offset, new_button.y_offset))
 		else:
 			screen.blit(new, (new_button.x_offset, new_button.y_offset))
+
+		if ia_mode == "casual":
+			screen.blit(casual, (ia_mode_button.x_offset, ia_mode_button.y_offset))
+		else:
+			screen.blit(finals, (ia_mode_button.x_offset, ia_mode_button.y_offset))
 
 		# Actualización de la interface.
 		screen.blit(chessboard_background, (0, 0))
