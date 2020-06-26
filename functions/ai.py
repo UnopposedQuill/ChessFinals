@@ -114,7 +114,7 @@ def move_gen(chessboard, color, attack=False):
 
 # IF FUNCTION RETURNS value= -INF (or move = 0), AI IS IN CHECKMATE
 # (returning +inf for value indicates player checkmate)
-def minimax(chessboard, depth, alpha, beta, maximizing, memo):
+def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
     """
     Minimax algorithm with alpha-beta pruning determines the best move for
     black from the current chessboard state.
@@ -130,7 +130,12 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo):
     # convert the 2D list to a tuple, so it can be used as a key in memo
     tuple_mat = matrix_to_tuple(chessboard.matrix, chessboard.get_null_row())
 
-    if tuple_mat in memo and depth != 4:  # set this to the depth of the initial call
+    if finals:
+        initial_depth = 6
+    else:
+        initial_depth = 4
+
+    if tuple_mat in memo and depth != initial_depth:  # set this to the depth of the initial call
         return memo[tuple_mat], 0
 
     if depth == 0:  # end of the search is reached
@@ -171,7 +176,7 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo):
 
                 # search deeper for the children, this time its the minimizing
                 # player's turn
-                v, __ = minimax(chessboard, depth - 1, alpha, beta, False, memo)
+                v, __ = minimax(chessboard, depth - 1, alpha, beta, False, memo, finals)
 
                 # revert the chessboard and the score
                 chessboard.move_piece(piece, start[0], start[1], True)
@@ -209,7 +214,8 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo):
 
                 # see if the move puts you in check
                 attacked = move_gen(chessboard, "b", True)  # return spaces attacked by white
-                if (chessboard.white_king.y, chessboard.white_king.x) in attacked:
+                king = chessboard.get_king("w")
+                if (king.y, king.x) in attacked:
                     chessboard.move_piece(piece, start[0], start[1], True)
                     chessboard.matrix[end[0]][end[1]] = dest
                     if pawn_promotion:
@@ -220,7 +226,7 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo):
                 if dest is not None:
                     chessboard.score -= chessboard.piece_values[type(dest)]
 
-                v, __ = minimax(chessboard, depth - 1, alpha, beta, True, memo)
+                v, __ = minimax(chessboard, depth - 1, alpha, beta, True, memo, finals)
 
                 best_value = min(v, best_value)
                 beta = min(beta, best_value)
