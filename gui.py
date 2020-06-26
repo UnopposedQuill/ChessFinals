@@ -15,7 +15,7 @@ logo = pygame.image.load("resources/logo32x32.png")
 pygame.init()
 pygame.font.init()  # for text
 background = pygame.image.load("resources/background.jpg")
-font = pygame.font.SysFont("dejavuserif", 20)
+font = pygame.font.SysFont("dejavuserif", 30)
 pygame.display.set_icon(logo)
 pygame.display.set_caption("Chess Finals")
 screen = pygame.display.set_mode((860, 600))
