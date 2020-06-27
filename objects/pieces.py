@@ -145,7 +145,7 @@ class Pawn(Piece):
 	# Movimientos esperados para el tipo de pieza Peón.
 	def get_all_moves(self, chessboard):
 		move_set = set()
-		sums = [-1, 1]
+
 		next_y = self.y - 1 if self.color == "w" else self.y + 1
 		if 0 <= next_y < 8 and chessboard.matrix[next_y][self.x] is None:
 			move_set.add((next_y, self.x))
@@ -154,6 +154,18 @@ class Pawn(Piece):
 		if not self.moved and (	(self.color == "w" and chessboard.matrix[self.y - 2][self.x] is None) or
 								(self.color == "b" and chessboard.matrix[self.y + 2][self.x] is None)):
 			move_set.add((self.y - 2 if self.color == "w" else self.y + 2, self.x))
+
+		# Agregar aquellas casillas que esté atacando
+		move_set.union(self.get_attacked(chessboard))
+
+		return move_set
+
+	def get_attacked(self, chessboard):
+		"""
+		Retorna todas las casillas que ataca este peón
+		"""
+		move_set = set()
+		sums = [-1, 1]
 
 		for s in sums:
 			next_x = self.x + s
@@ -164,7 +176,6 @@ class Pawn(Piece):
 			else:
 				continue
 		return move_set
-
 
 class Rook(Piece):
 
