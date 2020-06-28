@@ -1,3 +1,5 @@
+from objects.pieces import *
+
 
 def matrix_to_tuple(array, empty_array):
     """
@@ -35,14 +37,14 @@ def check_castling(chessboard, c, side):
 
     if not king.moved:  # cannot castle if the king has moved
         # left castle, check to see if the rook has moved
-        if not chessboard.matrix[row][0] == left_rook and left_rook.moved:
+        if chessboard.matrix[row][0] == left_rook and not left_rook.moved:
             # squares between the rook and the king have to be empty and cannot be in check
             squares = {(row, 1), (row, 2), (row, 3)}
             if not chessboard.matrix[row][1] and not chessboard.matrix[row][2] and not chessboard.matrix[row][3]:
                 if not attacked.intersection(squares):
                     castle_left = True
         # right castle
-        if not chessboard.matrix[row][7] == right_rook and right_rook.moved:
+        if chessboard.matrix[row][7] == right_rook and not right_rook.moved:
             # squares between the rook and the king have to be empty and cannot be in check
             squares = {(row, 6), (row, 5)}
             if not chessboard.matrix[row][6] and not chessboard.matrix[row][5]:
@@ -159,6 +161,11 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 # if a pawn promotion occurs, return the pieces involved
                 pawn_promotion = chessboard.move_piece(piece, end[0], end[1])
 
+                moved_piece = False
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    moved_piece = piece.moved
+                    piece.moved = True
+
                 # see if the move puts you in check
                 attacked = move_gen(chessboard, "w", True)  # return spaces attacked by white
                 king = chessboard.get_king("b")
@@ -174,6 +181,10 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 if dest is not None:
                     chessboard.score += chessboard.piece_values[type(dest)]
 
+                # now I'll check the attacked locations for this player, the more attacked the better
+                attacked_slots = move_gen(chessboard, "b", True)
+                chessboard.score += len(attacked_slots)
+
                 # search deeper for the children, this time its the minimizing
                 # player's turn
                 v, __ = minimax(chessboard, depth - 1, alpha, beta, False, memo, finals)
@@ -181,6 +192,10 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 # revert the chessboard and the score
                 chessboard.move_piece(piece, start[0], start[1], True)
                 chessboard.matrix[end[0]][end[1]] = dest
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    piece.moved = moved_piece
+
+                chessboard.score -= len(attacked_slots)
                 if pawn_promotion:
                     chessboard.score -= 9
                 if dest is not None:
@@ -212,8 +227,13 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 dest = chessboard.matrix[end[0]][end[1]]
                 pawn_promotion = chessboard.move_piece(piece, end[0], end[1])
 
+                moved_piece = False
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    moved_piece = piece.moved
+                    piece.moved = True
+
                 # see if the move puts you in check
-                attacked = move_gen(chessboard, "b", True)  # return spaces attacked by white
+                attacked = move_gen(chessboard, "b", True)  # return spaces attacked by black
                 king = chessboard.get_king("w")
                 if (king.y, king.x) in attacked:
                     chessboard.move_piece(piece, start[0], start[1], True)
@@ -226,6 +246,10 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 if dest is not None:
                     chessboard.score -= chessboard.piece_values[type(dest)]
 
+                # now I'll check the attacked locations for this player, the more attacked the better
+                attacked_slots = move_gen(chessboard, "w", True)
+                chessboard.score -= len(attacked_slots)
+
                 v, __ = minimax(chessboard, depth - 1, alpha, beta, True, memo, finals)
 
                 best_value = min(v, best_value)
@@ -234,6 +258,10 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 # reverse the move, revert the score
                 chessboard.move_piece(piece, start[0], start[1], True)
                 chessboard.matrix[end[0]][end[1]] = dest
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    piece.moved = moved_piece
+                chessboard.score += len(attacked_slots)
+
                 if pawn_promotion:
                     chessboard.score += 9
                 if dest is not None:

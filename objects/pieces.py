@@ -133,6 +133,7 @@ class Pawn(Piece):
 	def __init__(self, color, y, x):
 		super().__init__(color, y, x)  # Pieza.
 		self.symbol = "P"
+		self.moved = False
 
 		# Verificación de color para la inicialización de la pieza en la interfaz.
 		if self.color == "b":
@@ -144,19 +145,42 @@ class Pawn(Piece):
 	# Movimientos esperados para el tipo de pieza Peón.
 	def get_all_moves(self, chessboard):
 		move_set = set()
-		sums = [-1, 1]
+
 		next_y = self.y - 1 if self.color == "w" else self.y + 1
 		if 0 <= next_y < 8 and chessboard.matrix[next_y][self.x] is None:
 			move_set.add((next_y, self.x))
+
+		# Si el peón no se ha movido, generar las siguientes dos, verificar que no hayan piezas en el destino
+		if not self.moved:
+			if self.color == "w":
+				if chessboard.matrix[self.y - 2][self.x] is None:
+					move_set.add((self.y - 2, self.x))
+			elif self.color == "b":
+				if chessboard.matrix[self.y + 2][self.x] is None:
+					move_set.add((self.y + 2, self.x))
+
+		# Agregar aquellas casillas que esté atacando
+		attack_set = self.get_attacked(chessboard)
+		move_set.update(attack_set)
+
+		return move_set
+
+	def get_attacked(self, chessboard):
+		"""
+		Retorna todas las casillas que ataca este peón
+		"""
+		move_set = set()
+		sums = [-1, 1]
+
 		for s in sums:
 			next_x = self.x + s
 			next_y = self.y - 1 if self.color == "w" else self.y + 1
-			if move_piece(self.color, next_y, next_x, chessboard) and kill_piece(self.color, next_y, next_x, chessboard):
+			if move_piece(self.color, next_y, next_x, chessboard) and kill_piece(self.color, next_y, next_x,
+																				 chessboard):
 				move_set.add((next_y, next_x))
 			else:
 				continue
 		return move_set
-
 
 class Rook(Piece):
 

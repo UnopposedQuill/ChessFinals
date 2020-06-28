@@ -69,7 +69,7 @@ def select_piece(color):
 
 # Función que escribe un mensaje de texto al lado derecho que muestra eventos del juego.
 def game_message(message, colour):
-	screen.blit(background, (560, 0))
+	screen.blit(background, (600, 0))
 	text = message.splitlines()
 	index = 0
 	for char in text:
@@ -138,6 +138,11 @@ def main():
 				# Selección de la pieza, recupera las coordenadas de la celda para procesar el movimiento.
 				piece_next_cell = chessboard.move_piece(piece, end[0], end[1])
 				piece.focus_moved()
+
+				# Si es un peón, rey o torre necesito marcarlo como movido
+				if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+					piece.moved = True
+
 				if piece_next_cell:
 					sprite_group.add(piece_next_cell[0])
 					sprite_array.append(piece_next_cell[0])
@@ -213,7 +218,7 @@ def main():
 								sprite_array.remove(piece_next_cell[1])
 
 							# this is needed for proper castling
-							if type(piece) == King or type(piece) == Rook:
+							if type(piece) == King or type(piece) == Rook or type(piece) == Pawn:
 								piece.moved = True
 
 							# Remueve de los objetos la pieza eliminada.
@@ -272,6 +277,7 @@ def main():
 								chessboard.move_piece(piece, cell[0], cell[1], special)
 								is_piece_selected = False
 								player = "AI"
+								game_message("Turno actual:\nComputadora", (255, 255, 255))
 
 							# Movimiento especial inválido.
 							else:

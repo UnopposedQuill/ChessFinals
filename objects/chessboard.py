@@ -113,6 +113,12 @@ class Chessboard:
 				line = file.readline()
 			file.close()
 
+			# Se establece que todas las piezas han sido movidas al menos una vez
+			for row in self.matrix:
+				for piece in row:
+					if isinstance(piece, Pawn) or isinstance(piece, King) or isinstance(piece, Rook):
+						piece.moved = True
+
 	# Función que retorna una fila de peones para la matriz de juego.
 	@staticmethod
 	def get_pawn_row(color):
@@ -158,6 +164,14 @@ class Chessboard:
 		else:
 			self.matrix[y][x] = piece
 			piece.not_select()
+			if np == "CR":
+				# Enroque derecho:		corto
+				self.matrix[y][x-1] = self.matrix[y][x+1]
+				self.matrix[y][x+1] = None
+			elif np == "CL":
+				# Enroque izquierdo:	largo
+				self.matrix[y][x + 1] = self.matrix[y][0]
+				self.matrix[y][0] = None
 
 	# Imprime el tablero.
 	def print_to_terminal(self):
@@ -181,3 +195,4 @@ class Chessboard:
 				for piece in row:
 					if isinstance(piece, King) and piece.color == "w":
 						return piece
+		raise ValueError('King not found')
