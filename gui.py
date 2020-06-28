@@ -1,6 +1,7 @@
 import sys
 from tkinter import Tk, filedialog
 
+from functions.logging_utils import *
 from functions.ai import *
 from objects.button import *
 from objects.chessboard import Chessboard
@@ -109,28 +110,42 @@ def main():
 	ia_mode = "casual"
 	game_message('Turno actual:\nJugador', (255, 255, 255))
 
+	log_file_name = "Log " + get_now_formatted() + ".log"
+	log_file = open(log_file_name, '+w')
+
+	print("Logging Information into: " + log_file_name)
+	log_file.write("Chess Finals Log File\t" + get_now_formatted() + "\n"
+					+ "Creando Partida Nueva\t" + get_now_formatted() + "\n")
+
+	ai_logging_file = "Game " + get_now_formatted() + ".log"
+	ai = Ai(ai_logging_file)
+
 	# Ciclo de juego.
 	while not is_game_over:
 
 		# Movimientos de la IA.
 		if player == "AI":
 
+			log_file.write("\tTurno de la IA\t" + get_now_formatted() + "\n")
+
 			# Recupera los movimientos del algoritmo minmax alfabeta co una profundidad por defecto de 4.
 			# Si se aumenta la profundidad, el algoritmo tarda más en responder con el movimiento.
 			if ia_mode == "casual":
-				generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict(), False)
+				generated_value, ia_selected_move = ai.minimax(chessboard, 4, float("-inf"), float("inf"), True, dict(), False)
 			else:  # ia_mode == "finals"
-				generated_value, ia_selected_move = minimax(chessboard, 6, float("-inf"), float("inf"), True, dict(), True)
-			print(str(generated_value))
+				generated_value, ia_selected_move = ai.minimax(chessboard, 6, float("-inf"), float("inf"), True, dict(), True)
+			print("Valor Generado: " + str(generated_value))
 
 			# Verificación para saber si el jugador ha ganado la partida.
 			if generated_value == float("-inf") and ia_selected_move == 0:
+				log_file.write("Partida Terminada, Jugador gana\t" + get_now_formatted() + "\n")
 				is_game_over = True
 				player = "human"
 				game_message('Jaque Mate:\nJugador gana', (255, 255, 0))
 
 			# Movimientos realizados por el algoritmo de computadora (IA).
 			else:
+				log_file.write("")
 				start = ia_selected_move[0]
 				end = ia_selected_move[1]
 				piece = chessboard.matrix[start[0]][start[1]]
@@ -157,7 +172,7 @@ def main():
 
 				# Verifica si el jugador se encuentra en jaque por la IA.
 				player = "human"
-				attacked = move_gen(chessboard, "b", True)
+				attacked = Ai.move_gen(chessboard, "b", True)
 				if (chessboard.white_king.y, chessboard.white_king.x) in attacked:
 					game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
 					is_in_check = True
@@ -198,7 +213,7 @@ def main():
 					# Evento de selección de pieza por el mouse.
 					elif is_piece_selected:
 						cell = select_cell()
-						special_moves = special_move_gen(chessboard, "w")
+						special_moves = Ai.special_move_gen(chessboard, "w")
 
 						# Verifica si la celda recuperada en el evento de click está dentro de los posibles movimientos
 						# para dicha pieza.
@@ -227,7 +242,7 @@ def main():
 								sprite_array.remove(kill_piece)
 
 							# Cambio de turno.
-							attacked = move_gen(chessboard, "b", True)
+							attacked = Ai.move_gen(chessboard, "b", True)
 							if (chessboard.white_king.y, chessboard.white_king.x) not in attacked:
 								is_piece_selected = False
 								player = "AI"
@@ -365,7 +380,7 @@ def game_over():
 	"""
 	This runs before the game quits. A nice game over screen.
 	"""
-	chessboard.print_to_terminal()
+	# chessboard.print_to_terminal()
 	pygame.display.update()
 	pygame.time.wait(2000)
 	pygame.event.clear()

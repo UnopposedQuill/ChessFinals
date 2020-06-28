@@ -20,6 +20,19 @@ def location_translator(row, column):
 		return 8 - row, 7
 
 
+def to_algebraic(piece, dest):
+	"""
+	Traduce una pieza y una tupla de destino a notación algebraica
+	"""
+	string = ""
+	if piece.color == "w":
+		string += "B"
+	else:
+		string += "N"
+
+	return
+
+
 """
 ------------------------------------------------------------------------------------------------------------------------
 ---------- CLASE TABLERO -----------------------------------------------------------------------------------------------

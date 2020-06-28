@@ -1,5 +1,6 @@
 import pygame
 
+# <editor-fold defaultstate="collapsed" desc="Pieza">
 """
 ------------------------------------------------------------------------------------------------------------------------
 ---------- CLASE PIEZA -------------------------------------------------------------------------------------------------
@@ -120,6 +121,8 @@ class Piece(pygame.sprite.Sprite):
 	def set_y(self, y):
 		self.y = y
 
+# </editor-fold>
+
 
 """
 ------------------------------------------------------------------------------------------------------------------------
@@ -128,6 +131,7 @@ class Piece(pygame.sprite.Sprite):
 """
 
 
+# <editor-fold defaultstate="collapsed" desc="Peón">
 class Pawn(Piece):
 
 	def __init__(self, color, y, x):
@@ -182,6 +186,13 @@ class Pawn(Piece):
 				continue
 		return move_set
 
+	def get_name(self):
+		return "P"
+
+# </editor-fold>
+
+
+# <editor-fold defaultstate="collapsed" desc="Torre">
 class Rook(Piece):
 
 	def __init__(self, color, y, x):
@@ -199,7 +210,12 @@ class Rook(Piece):
 	def get_all_moves(self, chessboard):
 		return self.get_all_vertical_horizontal_moves(chessboard)
 
+	def get_name(self):
+		return "T"
+# </editor-fold>
 
+
+# <editor-fold defaultstate="collapsed" desc="Alfil">
 class Bishop(Piece):
 
 	def __init__(self, color, y, x):
@@ -216,7 +232,12 @@ class Bishop(Piece):
 	def get_all_moves(self, chessboard):
 		return self.get_all_diagonal_moves(chessboard)
 
+	def get_name(self):
+		return "A"
+# </editor-fold>
 
+
+# <editor-fold defaultstate="collapsed" desc="Caballero">
 class Knight(Piece):
 
 	def __init__(self, color, y, x):
@@ -240,7 +261,12 @@ class Knight(Piece):
 				moves.add((next_y, next_x))
 		return moves
 
+	def get_name(self):
+		return "C"
+# </editor-fold>
 
+
+# <editor-fold defaultstate="collapsed" desc="Rey">
 class King(Piece):
 
 	def __init__(self, color, y, x):
@@ -265,7 +291,12 @@ class King(Piece):
 				moves.add((next_y, next_x))
 		return moves
 
+	def get_name(self):
+		return "R"
+# </editor-fold>
 
+
+# <editor-fold defaultstate="collapsed" desc="Reina">
 class Queen(Piece):
 
 	def __init__(self, color, y, x):
@@ -284,7 +315,12 @@ class Queen(Piece):
 		diagonal_moves = self.get_all_diagonal_moves(chessboard)
 		return get_all_vertical_horizontal_moves.union(diagonal_moves)
 
+	def get_name(self):
+		return "D"
+# </editor-fold>
 
+
+# <editor-fold defaultstate="collapsed" desc="Funciones Auxiliares">
 """
 ------------------------------------------------------------------------------------------------------------------------
 ---------- FUNCIONES AUXILIARES ----------------------------------------------------------------------------------------
@@ -310,3 +346,4 @@ def move_piece(color, y, x, chessboard):
 		return True
 	else:
 		return True if piece.color != color else False
+# </editor-fold>
