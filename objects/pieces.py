@@ -151,12 +151,17 @@ class Pawn(Piece):
 			move_set.add((next_y, self.x))
 
 		# Si el peón no se ha movido, generar las siguientes dos, verificar que no hayan piezas en el destino
-		if not self.moved and (	(self.color == "w" and chessboard.matrix[self.y - 2][self.x] is None) or
-								(self.color == "b" and chessboard.matrix[self.y + 2][self.x] is None)):
-			move_set.add((self.y - 2 if self.color == "w" else self.y + 2, self.x))
+		if not self.moved:
+			if self.color == "w":
+				if chessboard.matrix[self.y - 2][self.x] is None:
+					move_set.add((self.y - 2, self.x))
+			elif self.color == "b":
+				if chessboard.matrix[self.y + 2][self.x] is None:
+					move_set.add((self.y + 2, self.x))
 
 		# Agregar aquellas casillas que esté atacando
-		move_set.union(self.get_attacked(chessboard))
+		attack_set = self.get_attacked(chessboard)
+		move_set.update(attack_set)
 
 		return move_set
 

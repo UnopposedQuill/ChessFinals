@@ -1,5 +1,6 @@
 from objects.pieces import *
 
+
 def matrix_to_tuple(array, empty_array):
     """
     Given a 2D list, converts it to 2D tuple. This is useful for using a
@@ -108,10 +109,7 @@ def move_gen(chessboard, color, attack=False):
                 if legal_moves and not attack:
                     moves[(i, j)] = legal_moves
                 elif legal_moves and attack:
-                    if type(piece) == Pawn:
-                        moves = piece.get_attacked(chessboard)
-                    else:
-                        moves = moves.union(legal_moves)
+                    moves = moves.union(legal_moves)
 
     return moves
 
@@ -163,6 +161,11 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 # if a pawn promotion occurs, return the pieces involved
                 pawn_promotion = chessboard.move_piece(piece, end[0], end[1])
 
+                moved_piece = False
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    moved_piece = piece.moved
+                    piece.moved = True
+
                 # see if the move puts you in check
                 attacked = move_gen(chessboard, "w", True)  # return spaces attacked by white
                 king = chessboard.get_king("b")
@@ -189,6 +192,10 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 # revert the chessboard and the score
                 chessboard.move_piece(piece, start[0], start[1], True)
                 chessboard.matrix[end[0]][end[1]] = dest
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    piece.moved = moved_piece
+
+                chessboard.score -= len(attacked_slots)
                 if pawn_promotion:
                     chessboard.score -= 9
                 if dest is not None:
@@ -220,6 +227,11 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 dest = chessboard.matrix[end[0]][end[1]]
                 pawn_promotion = chessboard.move_piece(piece, end[0], end[1])
 
+                moved_piece = False
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    moved_piece = piece.moved
+                    piece.moved = True
+
                 # see if the move puts you in check
                 attacked = move_gen(chessboard, "b", True)  # return spaces attacked by black
                 king = chessboard.get_king("w")
@@ -246,6 +258,10 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
                 # reverse the move, revert the score
                 chessboard.move_piece(piece, start[0], start[1], True)
                 chessboard.matrix[end[0]][end[1]] = dest
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    piece.moved = moved_piece
+                chessboard.score += len(attacked_slots)
+
                 if pawn_promotion:
                     chessboard.score += 9
                 if dest is not None:

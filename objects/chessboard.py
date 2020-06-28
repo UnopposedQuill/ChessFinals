@@ -195,3 +195,4 @@ class Chessboard:
 				for piece in row:
 					if isinstance(piece, King) and piece.color == "w":
 						return piece
+		raise ValueError('King not found')
