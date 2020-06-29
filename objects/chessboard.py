@@ -34,6 +34,7 @@ class Chessboard:
 		# Valores iniciales para el algoritmo de MinMax
 		self.score = 0
 		self.piece_values = {King: 200, Queen: 10, Rook: 5, Knight: 3, Bishop: 3, Pawn: 1}
+		self.log = ""
 
 		# Piezas negras.
 		self.black_rook_left = Rook("b", 0, 0)
@@ -109,7 +110,7 @@ class Chessboard:
 						self.matrix[x][y] = Knight("w", x, y)
 					elif line[1] == 'P':
 						self.matrix[x][y] = Pawn("w", x, y)
-				self.print_to_terminal()
+				self.save_current_status(0)
 				line = file.readline()
 			file.close()
 
@@ -125,11 +126,13 @@ class Chessboard:
 		return [Pawn("w", 6, i) for i in range(8)] if color == "w" else [Pawn("b", 1, i) for i in range(8)]
 
 	# Función que devuelve una fila vacía.
+	# noinspection PyUnusedLocal
 	@staticmethod
 	def get_null_row():
 		return [None for i in range(8)]
 
 	# Función que devuelve una fila de coordenadas vacías.
+	# noinspection PyUnusedLocal
 	@staticmethod
 	def get_empty_row_column():
 		return [[None for x in range(8)] for y in range(8)]
@@ -142,6 +145,10 @@ class Chessboard:
 		else:
 			row, inc = 6, 1
 		return True if type(piece) == Pawn and piece.y == row and y == piece.y + inc else False
+
+	# Recupera el log
+	def get_log_file(self):
+		return self.log
 
 	# Función que se encarga de setear el movimiento de la pieza por el tablero.
 	def move_piece(self, piece, y, x, np=False):
@@ -173,17 +180,7 @@ class Chessboard:
 				self.matrix[y][x + 1] = self.matrix[y][0]
 				self.matrix[y][0] = None
 
-	# Imprime el tablero.
-	def print_to_terminal(self):
-		for j in range(8):
-			arr = []
-			for piece in self.matrix[j]:
-				if piece is not None:
-					arr.append(piece.color + piece.symbol)
-				else:
-					arr.append("--")
-			print(arr)
-
+	# Recupera la pieza Rey.
 	def get_king(self, color):
 		if color == "b":
 			for row in self.matrix:
@@ -196,3 +193,33 @@ class Chessboard:
 					if isinstance(piece, King) and piece.color == "w":
 						return piece
 		raise ValueError('King not found')
+
+
+
+	# Imprime el tablero.
+	def save_current_status(self, moves):
+		chars = ["A", "B", "C", "D", "E", "F", "G", "H"]
+		numbers = ["8", "7", "6", "5", "4", "3", "2", "1"]
+
+		current_status = "Movimientos totales: " + str(moves) + "\n"
+		if moves % 2 == 0:
+			current_status += "Turno de IA.\n\n"
+		else:
+			current_status += "Turno de humano.\n\n"
+
+		for i in range(9):
+			if i < 8:
+				for j in range(9):
+					if j < 8:
+						piece = self.matrix[i][j]
+						if piece is not None:
+							current_status += "\t" + piece.color + piece.symbol + "\t"
+						else:
+							current_status += "\t\t"
+					else:
+						current_status += "\t" + numbers[i] + "\n\n"
+			else:
+				current_status += "\n"
+				for char in chars:
+					current_status += "\t" + char + "\t"
+		self.log += "Número de turnos jugados: " + str(moves) + "\n\n" + current_status + "\n\n"

@@ -1,0 +1,1608 @@
+Número de turnos jugados: 1
+
+Movimientos totales: 1
+Turno de humano.
+
+	bR		bN		bB		bQ		bK		bB		bN		bR		8
+
+	bP		bP		bP		bP		bP		bP		bP		bP		7
+
+																	6
+
+																	5
+
+																	4
+
+							wP										3
+
+	wP		wP		wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB		wN		wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 2
+
+Movimientos totales: 2
+Turno de IA.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+	bP		bP		bP		bP		bP		bP		bP		bP		7
+
+											bN						6
+
+																	5
+
+																	4
+
+							wP										3
+
+	wP		wP		wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB		wN		wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 3
+
+Movimientos totales: 3
+Turno de humano.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+	bP		bP		bP		bP		bP		bP		bP		bP		7
+
+											bN						6
+
+																	5
+
+							wP										4
+
+																	3
+
+	wP		wP		wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB		wN		wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 4
+
+Movimientos totales: 4
+Turno de IA.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP		bN						6
+
+																	5
+
+							wP										4
+
+																	3
+
+	wP		wP		wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB		wN		wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 5
+
+Movimientos totales: 5
+Turno de humano.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP		bN						6
+
+																	5
+
+							wP										4
+
+											wN						3
+
+	wP		wP		wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 6
+
+Movimientos totales: 6
+Turno de IA.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+			bP		bP		bP				bP		bP		bP		7
+
+									bP		bN						6
+
+	bP																5
+
+							wP										4
+
+											wN						3
+
+	wP		wP		wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 7
+
+Movimientos totales: 7
+Turno de humano.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+			bP		bP		bP				bP		bP		bP		7
+
+									bP		bN						6
+
+	bP																5
+
+							wP										4
+
+			wP								wN						3
+
+	wP				wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 8
+
+Movimientos totales: 8
+Turno de IA.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP						bP		bN						6
+
+	bP																5
+
+							wP										4
+
+			wP								wN						3
+
+	wP				wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 9
+
+Movimientos totales: 9
+Turno de humano.
+
+	bR		bN		bB		bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP						bP		bN						6
+
+	bP																5
+
+							wP										4
+
+	wP		wP								wN						3
+
+					wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 10
+
+Movimientos totales: 10
+Turno de IA.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+			bB		bP		bP				bP		bP		bP		7
+
+			bP						bP		bN						6
+
+	bP																5
+
+							wP										4
+
+	wP		wP								wN						3
+
+					wP				wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 11
+
+Movimientos totales: 11
+Turno de humano.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+			bB		bP		bP				bP		bP		bP		7
+
+			bP						bP		bN						6
+
+	bP																5
+
+							wP										4
+
+	wP		wP		wP						wN						3
+
+									wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 12
+
+Movimientos totales: 12
+Turno de IA.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB				bP		bN						6
+
+	bP																5
+
+							wP										4
+
+	wP		wP		wP						wN						3
+
+									wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 13
+
+Movimientos totales: 13
+Turno de humano.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB				bP		bN						6
+
+	bP																5
+
+							wP								wN		4
+
+	wP		wP		wP												3
+
+									wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 14
+
+Movimientos totales: 14
+Turno de IA.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB						bN						6
+
+	bP								bP								5
+
+							wP								wN		4
+
+	wP		wP		wP												3
+
+									wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 15
+
+Movimientos totales: 15
+Turno de humano.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB						bN						6
+
+	bP								wP								5
+
+															wN		4
+
+	wP		wP		wP												3
+
+									wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 16
+
+Movimientos totales: 16
+Turno de IA.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB												6
+
+	bP						bN		wP								5
+
+															wN		4
+
+	wP		wP		wP												3
+
+									wP		wP		wP		wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 17
+
+Movimientos totales: 17
+Turno de humano.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB												6
+
+	bP						bN		wP								5
+
+															wN		4
+
+	wP		wP		wP								wP				3
+
+									wP		wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 18
+
+Movimientos totales: 18
+Turno de IA.
+
+	bR		bN		bQ				bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB												6
+
+	bP						bN		wP								5
+
+															wN		4
+
+	wP		wP		wP								wP				3
+
+									wP		wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 19
+
+Movimientos totales: 19
+Turno de humano.
+
+	bR		bN		bQ				bK		bB				bR		8
+
+					bP		bP				bP		bP		bP		7
+
+			bP		bB												6
+
+	bP						bN		wP								5
+
+															wN		4
+
+	wP		wP		wP				wP				wP				3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 20
+
+Movimientos totales: 20
+Turno de IA.
+
+	bR		bN		bQ				bK		bB				bR		8
+
+					bP		bP				bP				bP		7
+
+			bP		bB								bP				6
+
+	bP						bN		wP								5
+
+															wN		4
+
+	wP		wP		wP				wP				wP				3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 21
+
+Movimientos totales: 21
+Turno de humano.
+
+	bR		bN		bQ				bK		bB				bR		8
+
+					bP		bP				bP				bP		7
+
+			bP		bB								wN				6
+
+	bP						bN		wP								5
+
+																	4
+
+	wP		wP		wP				wP				wP				3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 22
+
+Movimientos totales: 22
+Turno de IA.
+
+	bR		bN				bQ		bK		bB				bR		8
+
+					bP		bP				bP				bP		7
+
+			bP		bB								wN				6
+
+	bP						bN		wP								5
+
+																	4
+
+	wP		wP		wP				wP				wP				3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 23
+
+Movimientos totales: 23
+Turno de humano.
+
+	bR		bN				bQ		bK		bB				wN		8
+
+					bP		bP				bP				bP		7
+
+			bP		bB												6
+
+	bP						bN		wP								5
+
+																	4
+
+	wP		wP		wP				wP				wP				3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 24
+
+Movimientos totales: 24
+Turno de IA.
+
+	bR		bN						bK		bB				wN		8
+
+					bP		bP				bP				bP		7
+
+			bP		bB												6
+
+	bP						bN		wP								5
+
+															bQ		4
+
+	wP		wP		wP				wP				wP				3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 25
+
+Movimientos totales: 25
+Turno de humano.
+
+	bR		bN						bK		bB				wN		8
+
+					bP		bP				bP				bP		7
+
+			bP		bB												6
+
+	bP						bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 26
+
+Movimientos totales: 26
+Turno de IA.
+
+	bR		bN						bK		bB				wN		8
+
+					bP		bP				bP						7
+
+			bP		bB										bP		6
+
+	bP						bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 27
+
+Movimientos totales: 27
+Turno de humano.
+
+	bR		bN						bK		bB						8
+
+					bP		bP				wN						7
+
+			bP		bB										bP		6
+
+	bP						bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 28
+
+Movimientos totales: 28
+Turno de IA.
+
+	bR		bN								bB						8
+
+					bP		bP		bK		wN						7
+
+			bP		bB										bP		6
+
+	bP						bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 29
+
+Movimientos totales: 29
+Turno de humano.
+
+	bR		bN								bB						8
+
+					bP		bP		bK								7
+
+			bP		bB										wN		6
+
+	bP						bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 30
+
+Movimientos totales: 30
+Turno de IA.
+
+	bR		bN								bB						8
+
+					bP		bP		bK								7
+
+					bB										wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB				wR		1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 31
+
+Movimientos totales: 31
+Turno de humano.
+
+	bR		bN								bB						8
+
+					bP		bP		bK								7
+
+					bB										wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB		wR				1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 32
+
+Movimientos totales: 32
+Turno de IA.
+
+	bR		bN								bB						8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB		wR				1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 33
+
+Movimientos totales: 33
+Turno de humano.
+
+	bR		bN								bB		wR				8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 34
+
+Movimientos totales: 34
+Turno de IA.
+
+	bR		bN								bB		wR				8
+
+					bP		bP		bK								7
+
+					bB										wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 35
+
+Movimientos totales: 35
+Turno de humano.
+
+	bR		bN								wR						8
+
+					bP		bP		bK								7
+
+					bB										wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 36
+
+Movimientos totales: 36
+Turno de IA.
+
+	bR		bN								wR						8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 37
+
+Movimientos totales: 37
+Turno de humano.
+
+	bR		wR														8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 38
+
+Movimientos totales: 38
+Turno de IA.
+
+			bR														8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP		bP				bN		wP								5
+
+															wP		4
+
+	wP		wP		wP				wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 39
+
+Movimientos totales: 39
+Turno de humano.
+
+			bR														8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP		bP				bN		wP								5
+
+					wP										wP		4
+
+	wP		wP						wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 40
+
+Movimientos totales: 40
+Turno de IA.
+
+			bR														8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP						bN		wP								5
+
+					bP										wP		4
+
+	wP		wP						wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 41
+
+Movimientos totales: 41
+Turno de humano.
+
+			bR														8
+
+					bP		bP										7
+
+					bB				bK						wN		6
+
+	bP						bN		wP								5
+
+					wP										wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 42
+
+Movimientos totales: 42
+Turno de IA.
+
+			bR														8
+
+					bP		bP										7
+
+					bB										wN		6
+
+	bP						bN		bK								5
+
+					wP										wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 43
+
+Movimientos totales: 43
+Turno de humano.
+
+			bR														8
+
+					bP		bP										7
+
+					bB										wN		6
+
+	bP						wP		bK								5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 44
+
+Movimientos totales: 44
+Turno de IA.
+
+			bR														8
+
+					bP		bP										7
+
+															wN		6
+
+	bP						wP		bK								5
+
+	bB														wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 45
+
+Movimientos totales: 45
+Turno de humano.
+
+			bR														8
+
+					bP		bP										7
+
+							wP								wN		6
+
+	bP								bK								5
+
+	bB														wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wQ		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 46
+
+Movimientos totales: 46
+Turno de IA.
+
+			bR														8
+
+					bP		bP										7
+
+							wP								wN		6
+
+	bP								bK								5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		bB		wK		wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 47
+
+Movimientos totales: 47
+Turno de humano.
+
+			bR														8
+
+					bP		bP										7
+
+							wP								wN		6
+
+	bP								bK								5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 48
+
+Movimientos totales: 48
+Turno de IA.
+
+			bR														8
+
+					bP		bP										7
+
+							wP		bK						wN		6
+
+	bP																5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 49
+
+Movimientos totales: 49
+Turno de humano.
+
+			bR														8
+
+					wP		bP										7
+
+									bK						wN		6
+
+	bP																5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 50
+
+Movimientos totales: 50
+Turno de IA.
+
+													bR				8
+
+					wP		bP										7
+
+									bK						wN		6
+
+	bP																5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 51
+
+Movimientos totales: 51
+Turno de humano.
+
+													wN				8
+
+					wP		bP										7
+
+									bK								6
+
+	bP																5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 52
+
+Movimientos totales: 52
+Turno de IA.
+
+													wN				8
+
+					wP		bP										7
+
+																	6
+
+	bP										bK						5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 53
+
+Movimientos totales: 53
+Turno de humano.
+
+					wQ								wN				8
+
+							bP										7
+
+																	6
+
+	bP										bK						5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 54
+
+Movimientos totales: 54
+Turno de IA.
+
+					wQ								wN				8
+
+							bP										7
+
+																	6
+
+	bP								bK								5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 55
+
+Movimientos totales: 55
+Turno de humano.
+
+													wN				8
+
+							wQ										7
+
+																	6
+
+	bP								bK								5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 56
+
+Movimientos totales: 56
+Turno de IA.
+
+													wN				8
+
+							wQ										7
+
+																	6
+
+	bP																5
+
+									bK						wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 57
+
+Movimientos totales: 57
+Turno de humano.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP																5
+
+									bK						wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 58
+
+Movimientos totales: 58
+Turno de IA.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP										bK						5
+
+															wP		4
+
+	wP								wP								3
+
+											wP				wP		2
+
+	wR		wN		wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 59
+
+Movimientos totales: 59
+Turno de humano.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP										bK						5
+
+															wP		4
+
+	wP				wN				wP								3
+
+											wP				wP		2
+
+	wR				wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 60
+
+Movimientos totales: 60
+Turno de IA.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP																5
+
+													bK		wP		4
+
+	wP				wN				wP								3
+
+											wP				wP		2
+
+	wR				wB		wK				wB						1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 61
+
+Movimientos totales: 61
+Turno de humano.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP																5
+
+													bK		wP		4
+
+	wP				wN				wP								3
+
+									wB		wP				wP		2
+
+	wR				wB		wK										1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 62
+
+Movimientos totales: 62
+Turno de IA.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP										bK						5
+
+															wP		4
+
+	wP				wN				wP								3
+
+									wB		wP				wP		2
+
+	wR				wB		wK										1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 63
+
+Movimientos totales: 63
+Turno de humano.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP										bK						5
+
+															wP		4
+
+	wP				wN		wB		wP								3
+
+											wP				wP		2
+
+	wR				wB		wK										1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 64
+
+Movimientos totales: 64
+Turno de IA.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP																5
+
+													bK		wP		4
+
+	wP				wN		wB		wP								3
+
+											wP				wP		2
+
+	wR				wB		wK										1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 65
+
+Movimientos totales: 65
+Turno de humano.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP																5
+
+													bK		wP		4
+
+	wP				wN				wP								3
+
+									wB		wP				wP		2
+
+	wR				wB		wK										1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 66
+
+Movimientos totales: 66
+Turno de IA.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP										bK						5
+
+															wP		4
+
+	wP				wN				wP								3
+
+									wB		wP				wP		2
+
+	wR				wB		wK										1
+
+
+	A		B		C		D		E		F		G		H	
+
+Número de turnos jugados: 67
+
+Movimientos totales: 67
+Turno de humano.
+
+													wN				8
+
+																	7
+
+							wQ										6
+
+	bP										bK						5
+
+									wP						wP		4
+
+	wP				wN												3
+
+									wB		wP				wP		2
+
+	wR				wB		wK										1
+
+
+	A		B		C		D		E		F		G		H	
+

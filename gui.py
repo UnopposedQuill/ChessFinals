@@ -1,6 +1,6 @@
 import sys
+import datetime
 from tkinter import Tk, filedialog
-
 from functions.ai import *
 from objects.button import *
 from objects.chessboard import Chessboard
@@ -18,7 +18,7 @@ background = pygame.image.load("resources/background.jpg")
 font = pygame.font.SysFont("dejavuserif", 30)
 pygame.display.set_icon(logo)
 pygame.display.set_caption("Chess Finals")
-screen = pygame.display.set_mode((860, 600))
+screen = pygame.display.set_mode((1000, 600))
 chessboard_background = pygame.image.load("resources/gui_board.png").convert()
 
 reset = pygame.image.load("resources/buttons/reset.png")
@@ -99,6 +99,7 @@ def load_game(filename):
 
 
 # Función principal.
+# noinspection PyBroadException,PyShadowingNames
 def main():
 	screen.blit(background, (560, 0))
 	player = "human"
@@ -108,6 +109,7 @@ def main():
 	final_file_name = ""
 	ia_mode = "casual"
 	game_message('Turno actual:\nJugador', (255, 255, 255))
+	moves = 0
 
 	# Ciclo de juego.
 	while not is_game_over:
@@ -121,7 +123,6 @@ def main():
 				generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict(), False)
 			else:  # ia_mode == "finals"
 				generated_value, ia_selected_move = minimax(chessboard, 6, float("-inf"), float("inf"), True, dict(), True)
-			print(str(generated_value))
 
 			# Verificación para saber si el jugador ha ganado la partida.
 			if generated_value == float("-inf") and ia_selected_move == 0:
@@ -164,10 +165,11 @@ def main():
 				else:
 					game_message('Turno actual:\nJugador', (255, 255, 255))
 					is_in_check = False
+				moves += 1
+				chessboard.save_current_status(moves)
 
 			# Verifica si la IA gana la partida.
 			if generated_value == float("inf"):
-				print("Player checkmate")
 				is_game_over = True
 				player = 'AI'
 				game_message('Jaque mate:\nIA gana', (255, 255, 0))
@@ -209,7 +211,7 @@ def main():
 							# Posible pieza a ser eliminada.
 							kill_piece = chessboard.matrix[cell[0]][cell[1]]
 
-							# Selección de la pieza, recupera las coordenadas de la celda para procesar el movimiento.
+							# Limpieza de sprites obsoletos.
 							piece_next_cell = chessboard.move_piece(piece, cell[0], cell[1])
 							if piece_next_cell:
 								sprite_group.add(piece_next_cell[0])
@@ -217,7 +219,7 @@ def main():
 								sprite_group.remove(piece_next_cell[1])
 								sprite_array.remove(piece_next_cell[1])
 
-							# this is needed for proper castling
+							# Movimientos de rey y torre.
 							if type(piece) == King or type(piece) == Rook or type(piece) == Pawn:
 								piece.moved = True
 
@@ -233,6 +235,8 @@ def main():
 								is_piece_selected = False
 								player = "AI"
 								game_message("Turno actual:\nComputadora", (255, 255, 255))
+								moves += 1
+								chessboard.save_current_status(moves)
 
 								# Si se elimina una pieza, se actualiza el valor para el MinMax.
 								if kill_piece:
@@ -271,7 +275,7 @@ def main():
 							piece.not_select()
 							is_piece_selected = False
 
-						# Supervición de movimientos especiales de la IA.
+						# Supervición de movimientos especiales.
 						elif special_moves and cell in special_moves:
 							special = special_moves[cell]
 							if (special == "CR" or special == "CL") and type(piece) == King:
@@ -279,6 +283,8 @@ def main():
 								is_piece_selected = False
 								player = "AI"
 								game_message("Turno actual:\nComputadora", (255, 255, 255))
+								moves += 1
+								chessboard.save_current_status(moves)
 
 							# Movimiento especial inválido.
 							else:
@@ -314,13 +320,14 @@ def main():
 							root.iconify()
 							root.filename = \
 								filedialog.askopenfilename(initialdir="/", title="Select file",
-														   filetypes=(
-															   ("Plain Text files", "*.txt"), ("all files", "*.*")))
+								                           filetypes=(
+									                           ("Plain Text files", "*.txt"), ("all files", "*.*")))
 							print(root.filename)
 							root.destroy()
 							load_game(root.filename)
 							final_file_name = root.filename
 							ia_mode = "finals"
+
 						except:
 							game_message('ERROR\nfile exception', (255, 0, 0))
 
@@ -362,11 +369,17 @@ def main():
 		clock.tick(60)
 
 
+# Guarda el documento en un archivo de log,
+def create_log_file(data):
+	name = "Partida " + str(datetime.datetime.now())
+	file = open(name, "wt")
+	file.write(data)
+	file.close()
+
+
+# Función que muestra mensaje de ganador.
 def game_over():
-	"""
-	This runs before the game quits. A nice game over screen.
-	"""
-	chessboard.print_to_terminal()
+	create_log_file(chessboard.get_log_file())
 	pygame.display.update()
 	pygame.time.wait(2000)
 	pygame.event.clear()

@@ -175,12 +175,12 @@ class Pawn(Piece):
 		for s in sums:
 			next_x = self.x + s
 			next_y = self.y - 1 if self.color == "w" else self.y + 1
-			if move_piece(self.color, next_y, next_x, chessboard) and kill_piece(self.color, next_y, next_x,
-																				 chessboard):
+			if move_piece(self.color, next_y, next_x, chessboard) and kill_piece(self.color, next_y, next_x, chessboard):
 				move_set.add((next_y, next_x))
 			else:
 				continue
 		return move_set
+
 
 class Rook(Piece):
 
