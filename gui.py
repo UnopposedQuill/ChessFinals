@@ -158,7 +158,8 @@ def main():
 				# Verifica si el jugador se encuentra en jaque por la IA.
 				player = "human"
 				attacked = move_gen(chessboard, "b", True)
-				if (chessboard.white_king.y, chessboard.white_king.x) in attacked:
+				king = chessboard.get_king('w')
+				if (king.y, king.x) in attacked:
 					game_message('Turno actual:\nJugador, en jaque', (255, 0, 0))
 					is_in_check = True
 				else:
