@@ -186,7 +186,7 @@ class Rook(Piece):
 
 	def __init__(self, color, y, x):
 		super().__init__(color, y, x)
-		self.symbol = "R"
+		self.symbol = "T"
 
 		# Verificación de color para la inicialización de la pieza en la interfaz.
 		if self.color == "b":
@@ -204,7 +204,7 @@ class Bishop(Piece):
 
 	def __init__(self, color, y, x):
 		super().__init__(color, y, x)
-		self.symbol = "B"
+		self.symbol = "A"
 
 		# Verificación de color para la inicialización de la pieza en la interfaz.
 		if self.color == "b":
@@ -221,7 +221,7 @@ class Knight(Piece):
 
 	def __init__(self, color, y, x):
 		super().__init__(color, y, x)
-		self.symbol = "N"
+		self.symbol = "C"
 
 		# Verificación de color para la inicialización de la pieza en la interfaz.
 		if self.color == "b":
@@ -245,7 +245,7 @@ class King(Piece):
 
 	def __init__(self, color, y, x):
 		super().__init__(color, y, x)
-		self.symbol = "K"
+		self.symbol = "R"
 
 		# Verificación de color para la inicialización de la pieza en la interfaz.
 		if self.color == "b":

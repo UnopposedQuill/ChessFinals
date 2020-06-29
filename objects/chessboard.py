@@ -20,6 +20,25 @@ def location_translator(row, column):
 		return 8 - row, 7
 
 
+def str_local_translator(row, column):
+	if row == 0:
+		return "A" + str(8 - column)
+	elif row == 1:
+		return "B" + str(8 - column)
+	elif row == 2:
+		return "C" + str(8 - column)
+	elif row == 3:
+		return "D" + str(8 - column)
+	elif row == 4:
+		return "E" + str(8 - column)
+	elif row == 5:
+		return "F" + str(8 - column)
+	elif row == 6:
+		return "G" + str(8 - column)
+	else:
+		return "H" + str(8 - column)
+
+
 """
 ------------------------------------------------------------------------------------------------------------------------
 ---------- CLASE TABLERO -----------------------------------------------------------------------------------------------
@@ -194,19 +213,29 @@ class Chessboard:
 						return piece
 		raise ValueError('King not found')
 
-
-
 	# Imprime el tablero.
-	def save_current_status(self, moves):
+	def save_current_status(self, moves, piece, cell, isIa):
 		chars = ["A", "B", "C", "D", "E", "F", "G", "H"]
 		numbers = ["8", "7", "6", "5", "4", "3", "2", "1"]
 
-		current_status = "Movimientos totales: " + str(moves) + "\n"
+		# Se valida el tipo de jugador, ya que IA tiene invertidos el (x, y).
+		if isIa:
+			prev_pos = str_local_translator(cell[1], cell[0])
+		else:
+			prev_pos = str_local_translator(cell[0], cell[1])
+
+		# Recuperación de movimientos totales.
+		current_status = "Movimientos totales: " + str(moves) + "\n\n"
 		if moves % 2 == 0:
 			current_status += "Turno de IA.\n\n"
 		else:
 			current_status += "Turno de humano.\n\n"
 
+		# Se agrega el dato de movimiento.
+		current_status += "Movimiento registrado:\n" + piece.color + piece.symbol + "-" + prev_pos + " => " + \
+		                  piece.color + piece.symbol + "-" + str_local_translator(piece.x, piece.y) + "\n"
+
+		# Ciclo de almacenamiento de tablero.
 		for i in range(9):
 			if i < 8:
 				for j in range(9):
@@ -222,4 +251,4 @@ class Chessboard:
 				current_status += "\n"
 				for char in chars:
 					current_status += "\t" + char + "\t"
-		self.log += "Número de turnos jugados: " + str(moves) + "\n\n" + current_status + "\n\n"
+		self.log += current_status + "\n\n\n\n"

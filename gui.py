@@ -166,7 +166,7 @@ def main():
 					game_message('Turno actual:\nJugador', (255, 255, 255))
 					is_in_check = False
 				moves += 1
-				chessboard.save_current_status(moves)
+				chessboard.save_current_status(moves, piece, start, True)
 
 			# Verifica si la IA gana la partida.
 			if generated_value == float("inf"):
@@ -207,6 +207,7 @@ def main():
 						# Es decir, compara la tupla (x, y) del mouse con las tuplas almacenadas.
 						if cell in possible_moves:
 							prev_x, prev_y = piece.x, piece.y
+							prev_pos = [piece.x, piece.y]
 
 							# Posible pieza a ser eliminada.
 							kill_piece = chessboard.matrix[cell[0]][cell[1]]
@@ -236,7 +237,7 @@ def main():
 								player = "AI"
 								game_message("Turno actual:\nComputadora", (255, 255, 255))
 								moves += 1
-								chessboard.save_current_status(moves)
+								chessboard.save_current_status(moves, piece, prev_pos, False)
 
 								# Si se elimina una pieza, se actualiza el valor para el MinMax.
 								if kill_piece:
@@ -284,7 +285,7 @@ def main():
 								player = "AI"
 								game_message("Turno actual:\nComputadora", (255, 255, 255))
 								moves += 1
-								chessboard.save_current_status(moves)
+								chessboard.save_current_status(moves, piece, prev_pos, False)
 
 							# Movimiento especial inválido.
 							else:

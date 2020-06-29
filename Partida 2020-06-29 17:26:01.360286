@@ -1,0 +1,1485 @@
+Movimientos totales: 1
+
+Turno de humano.
+
+Movimiento registrado:
+wP-B2 => wP-B3
+	bT		bC		bA		bQ		bR		bA		bC		bT		8
+
+	bP		bP		bP		bP		bP		bP		bP		bP		7
+
+																	6
+
+																	5
+
+																	4
+
+			wP														3
+
+	wP				wP		wP		wP		wP		wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 2
+
+Turno de IA.
+
+Movimiento registrado:
+bC-G8 => bC-F6
+	bT		bC		bA		bQ		bR		bA				bT		8
+
+	bP		bP		bP		bP		bP		bP		bP		bP		7
+
+											bC						6
+
+																	5
+
+																	4
+
+			wP														3
+
+	wP				wP		wP		wP		wP		wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 3
+
+Turno de humano.
+
+Movimiento registrado:
+wP-B3 => wP-B4
+	bT		bC		bA		bQ		bR		bA				bT		8
+
+	bP		bP		bP		bP		bP		bP		bP		bP		7
+
+											bC						6
+
+																	5
+
+			wP														4
+
+																	3
+
+	wP				wP		wP		wP		wP		wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 4
+
+Turno de IA.
+
+Movimiento registrado:
+bP-E7 => bP-E6
+	bT		bC		bA		bQ		bR		bA				bT		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP		bC						6
+
+																	5
+
+			wP														4
+
+																	3
+
+	wP				wP		wP		wP		wP		wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 5
+
+Turno de humano.
+
+Movimiento registrado:
+wP-F2 => wP-F3
+	bT		bC		bA		bQ		bR		bA				bT		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP		bC						6
+
+																	5
+
+			wP														4
+
+											wP						3
+
+	wP				wP		wP		wP				wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 6
+
+Turno de IA.
+
+Movimiento registrado:
+bC-F6 => bC-D5
+	bT		bC		bA		bQ		bR		bA				bT		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP								6
+
+							bC										5
+
+			wP														4
+
+											wP						3
+
+	wP				wP		wP		wP				wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 7
+
+Turno de humano.
+
+Movimiento registrado:
+wP-E2 => wP-E3
+	bT		bC		bA		bQ		bR		bA				bT		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP								6
+
+							bC										5
+
+			wP														4
+
+									wP		wP						3
+
+	wP				wP		wP						wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 8
+
+Turno de IA.
+
+Movimiento registrado:
+bQ-D8 => bQ-H4
+	bT		bC		bA				bR		bA				bT		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP								6
+
+							bC										5
+
+			wP												bQ		4
+
+									wP		wP						3
+
+	wP				wP		wP						wP		wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 9
+
+Turno de humano.
+
+Movimiento registrado:
+wP-G2 => wP-G3
+	bT		bC		bA				bR		bA				bT		8
+
+	bP		bP		bP		bP				bP		bP		bP		7
+
+									bP								6
+
+							bC										5
+
+			wP												bQ		4
+
+									wP		wP		wP				3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 10
+
+Turno de IA.
+
+Movimiento registrado:
+bP-B7 => bP-B5
+	bT		bC		bA				bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+									bP								6
+
+			bP				bC										5
+
+			wP												bQ		4
+
+									wP		wP		wP				3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 11
+
+Turno de humano.
+
+Movimiento registrado:
+wP-G3 => wP-H4
+	bT		bC		bA				bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+									bP								6
+
+			bP				bC										5
+
+			wP												wP		4
+
+									wP		wP						3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 12
+
+Turno de IA.
+
+Movimiento registrado:
+bA-C8 => bA-A6
+	bT		bC						bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+	bA								bP								6
+
+			bP				bC										5
+
+			wP												wP		4
+
+									wP		wP						3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 13
+
+Turno de humano.
+
+Movimiento registrado:
+wP-H4 => wP-H5
+	bT		bC						bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+	bA								bP								6
+
+			bP				bC								wP		5
+
+			wP														4
+
+									wP		wP						3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 14
+
+Turno de IA.
+
+Movimiento registrado:
+bP-E6 => bP-E5
+	bT		bC						bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+	bA																6
+
+			bP				bC		bP						wP		5
+
+			wP														4
+
+									wP		wP						3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wC		wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 15
+
+Turno de humano.
+
+Movimiento registrado:
+wC-G1 => wC-H3
+	bT		bC						bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+	bA																6
+
+			bP				bC		bP						wP		5
+
+			wP														4
+
+									wP		wP				wC		3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 16
+
+Turno de IA.
+
+Movimiento registrado:
+bP-E5 => bP-E4
+	bT		bC						bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+	bA																6
+
+			bP				bC								wP		5
+
+			wP						bP								4
+
+									wP		wP				wC		3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 17
+
+Turno de humano.
+
+Movimiento registrado:
+wP-F3 => wP-E4
+	bT		bC						bR		bA				bT		8
+
+	bP				bP		bP				bP		bP		bP		7
+
+	bA																6
+
+			bP				bC								wP		5
+
+			wP						wP								4
+
+									wP						wC		3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 18
+
+Turno de IA.
+
+Movimiento registrado:
+bP-A7 => bP-A5
+	bT		bC						bR		bA				bT		8
+
+					bP		bP				bP		bP		bP		7
+
+	bA																6
+
+	bP		bP				bC								wP		5
+
+			wP						wP								4
+
+									wP						wC		3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 19
+
+Turno de humano.
+
+Movimiento registrado:
+wP-E4 => wP-D5
+	bT		bC						bR		bA				bT		8
+
+					bP		bP				bP		bP		bP		7
+
+	bA																6
+
+	bP		bP				wP								wP		5
+
+			wP														4
+
+									wP						wC		3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 20
+
+Turno de IA.
+
+Movimiento registrado:
+bA-F8 => bA-B4
+	bT		bC						bR						bT		8
+
+					bP		bP				bP		bP		bP		7
+
+	bA																6
+
+	bP		bP				wP								wP		5
+
+			bA														4
+
+									wP						wC		3
+
+	wP				wP		wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 21
+
+Turno de humano.
+
+Movimiento registrado:
+wP-C2 => wP-C3
+	bT		bC						bR						bT		8
+
+					bP		bP				bP		bP		bP		7
+
+	bA																6
+
+	bP		bP				wP								wP		5
+
+			bA														4
+
+					wP				wP						wC		3
+
+	wP						wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 22
+
+Turno de IA.
+
+Movimiento registrado:
+bA-B4 => bA-D6
+	bT		bC						bR						bT		8
+
+					bP		bP				bP		bP		bP		7
+
+	bA						bA										6
+
+	bP		bP				wP								wP		5
+
+																	4
+
+					wP				wP						wC		3
+
+	wP						wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA				wT		1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 23
+
+Turno de humano.
+
+Movimiento registrado:
+wT-H1 => wT-G1
+	bT		bC						bR						bT		8
+
+					bP		bP				bP		bP		bP		7
+
+	bA						bA										6
+
+	bP		bP				wP								wP		5
+
+																	4
+
+					wP				wP						wC		3
+
+	wP						wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 24
+
+Turno de IA.
+
+Movimiento registrado:
+bP-G7 => bP-G5
+	bT		bC						bR						bT		8
+
+					bP		bP				bP				bP		7
+
+	bA						bA										6
+
+	bP		bP				wP						bP		wP		5
+
+																	4
+
+					wP				wP						wC		3
+
+	wP						wP								wP		2
+
+	wT		wC		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 25
+
+Turno de humano.
+
+Movimiento registrado:
+wC-B1 => wC-A3
+	bT		bC						bR						bT		8
+
+					bP		bP				bP				bP		7
+
+	bA						bA										6
+
+	bP		bP				wP						bP		wP		5
+
+																	4
+
+	wC				wP				wP						wC		3
+
+	wP						wP								wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 26
+
+Turno de IA.
+
+Movimiento registrado:
+bR-E8 => bR-F8
+	bT		bC								bR				bT		8
+
+					bP		bP				bP				bP		7
+
+	bA						bA										6
+
+	bP		bP				wP						bP		wP		5
+
+																	4
+
+	wC				wP				wP						wC		3
+
+	wP						wP								wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 27
+
+Turno de humano.
+
+Movimiento registrado:
+wC-H3 => wC-G5
+	bT		bC								bR				bT		8
+
+					bP		bP				bP				bP		7
+
+	bA						bA										6
+
+	bP		bP				wP						wC		wP		5
+
+																	4
+
+	wC				wP				wP								3
+
+	wP						wP								wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 28
+
+Turno de IA.
+
+Movimiento registrado:
+bP-H7 => bP-H6
+	bT		bC								bR				bT		8
+
+					bP		bP				bP						7
+
+	bA						bA								bP		6
+
+	bP		bP				wP						wC		wP		5
+
+																	4
+
+	wC				wP				wP								3
+
+	wP						wP								wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 29
+
+Turno de humano.
+
+Movimiento registrado:
+wC-G5 => wC-E4
+	bT		bC								bR				bT		8
+
+					bP		bP				bP						7
+
+	bA						bA								bP		6
+
+	bP		bP				wP								wP		5
+
+									wC								4
+
+	wC				wP				wP								3
+
+	wP						wP								wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 30
+
+Turno de IA.
+
+Movimiento registrado:
+bT-H8 => bT-H7
+	bT		bC								bR						8
+
+					bP		bP				bP				bT		7
+
+	bA						bA								bP		6
+
+	bP		bP				wP								wP		5
+
+									wC								4
+
+	wC				wP				wP								3
+
+	wP						wP								wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 31
+
+Turno de humano.
+
+Movimiento registrado:
+wP-D2 => wP-D3
+	bT		bC								bR						8
+
+					bP		bP				bP				bT		7
+
+	bA						bA								bP		6
+
+	bP		bP				wP								wP		5
+
+									wC								4
+
+	wC				wP		wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 32
+
+Turno de IA.
+
+Movimiento registrado:
+bT-H7 => bT-H8
+	bT		bC								bR				bT		8
+
+					bP		bP				bP						7
+
+	bA						bA								bP		6
+
+	bP		bP				wP								wP		5
+
+									wC								4
+
+	wC				wP		wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 33
+
+Turno de humano.
+
+Movimiento registrado:
+wP-C3 => wP-C4
+	bT		bC								bR				bT		8
+
+					bP		bP				bP						7
+
+	bA						bA								bP		6
+
+	bP		bP				wP								wP		5
+
+					wP				wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 34
+
+Turno de IA.
+
+Movimiento registrado:
+bT-H8 => bT-H7
+	bT		bC								bR						8
+
+					bP		bP				bP				bT		7
+
+	bA						bA								bP		6
+
+	bP		bP				wP								wP		5
+
+					wP				wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 35
+
+Turno de humano.
+
+Movimiento registrado:
+wP-C4 => wP-B5
+	bT		bC								bR						8
+
+					bP		bP				bP				bT		7
+
+	bA						bA								bP		6
+
+	bP		wP				wP								wP		5
+
+									wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 36
+
+Turno de IA.
+
+Movimiento registrado:
+bR-F8 => bR-E8
+	bT		bC						bR								8
+
+					bP		bP				bP				bT		7
+
+	bA						bA								bP		6
+
+	bP		wP				wP								wP		5
+
+									wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 37
+
+Turno de humano.
+
+Movimiento registrado:
+wP-B5 => wP-A6
+	bT		bC						bR								8
+
+					bP		bP				bP				bT		7
+
+	wP						bA								bP		6
+
+	bP						wP								wP		5
+
+									wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 38
+
+Turno de IA.
+
+Movimiento registrado:
+bT-H7 => bT-H8
+	bT		bC						bR						bT		8
+
+					bP		bP				bP						7
+
+	wP						bA								bP		6
+
+	bP						wP								wP		5
+
+									wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+	wT				wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 39
+
+Turno de humano.
+
+Movimiento registrado:
+wT-A1 => wT-B1
+	bT		bC						bR						bT		8
+
+					bP		bP				bP						7
+
+	wP						bA								bP		6
+
+	bP						wP								wP		5
+
+									wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 40
+
+Turno de IA.
+
+Movimiento registrado:
+bT-H8 => bT-H7
+	bT		bC						bR								8
+
+					bP		bP				bP				bT		7
+
+	wP						bA								bP		6
+
+	bP						wP								wP		5
+
+									wC								4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 41
+
+Turno de humano.
+
+Movimiento registrado:
+wC-E4 => wC-D6
+	bT		bC						bR								8
+
+					bP		bP				bP				bT		7
+
+	wP						wC								bP		6
+
+	bP						wP								wP		5
+
+																	4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 42
+
+Turno de IA.
+
+Movimiento registrado:
+bR-E8 => bR-F8
+	bT		bC								bR						8
+
+					bP		bP				bP				bT		7
+
+	wP						wC								bP		6
+
+	bP						wP								wP		5
+
+																	4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 43
+
+Turno de humano.
+
+Movimiento registrado:
+wC-D6 => wC-F7
+	bT		bC								bR						8
+
+					bP		bP				wC				bT		7
+
+	wP														bP		6
+
+	bP						wP								wP		5
+
+																	4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 44
+
+Turno de IA.
+
+Movimiento registrado:
+bT-H7 => bT-G7
+	bT		bC								bR						8
+
+					bP		bP				wC		bT				7
+
+	wP														bP		6
+
+	bP						wP								wP		5
+
+																	4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA		wT				1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 45
+
+Turno de humano.
+
+Movimiento registrado:
+wT-G1 => wT-G7
+	bT		bC								bR						8
+
+					bP		bP				wC		wT				7
+
+	wP														bP		6
+
+	bP						wP								wP		5
+
+																	4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 46
+
+Turno de IA.
+
+Movimiento registrado:
+bP-A5 => bP-A4
+	bT		bC								bR						8
+
+					bP		bP				wC		wT				7
+
+	wP														bP		6
+
+							wP								wP		5
+
+	bP																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 47
+
+Turno de humano.
+
+Movimiento registrado:
+wC-F7 => wC-H6
+	bT		bC								bR						8
+
+					bP		bP						wT				7
+
+	wP														wC		6
+
+							wP								wP		5
+
+	bP																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 48
+
+Turno de IA.
+
+Movimiento registrado:
+bP-D7 => bP-D6
+	bT		bC								bR						8
+
+					bP								wT				7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	bP																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 49
+
+Turno de humano.
+
+Movimiento registrado:
+wT-G7 => wT-H7
+	bT		bC								bR						8
+
+					bP										wT		7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	bP																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 50
+
+Turno de IA.
+
+Movimiento registrado:
+bR-F8 => bR-E8
+	bT		bC						bR								8
+
+					bP										wT		7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	bP																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA		wQ		wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 51
+
+Turno de humano.
+
+Movimiento registrado:
+wQ-D1 => wQ-G4
+	bT		bC						bR								8
+
+					bP										wT		7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	bP												wQ				4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA				wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 52
+
+Turno de IA.
+
+Movimiento registrado:
+bR-E8 => bR-F8
+	bT		bC								bR						8
+
+					bP										wT		7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	bP												wQ				4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA				wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 53
+
+Turno de humano.
+
+Movimiento registrado:
+wQ-G4 => wQ-A4
+	bT		bC								bR						8
+
+					bP										wT		7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	wQ																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA				wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 54
+
+Turno de IA.
+
+Movimiento registrado:
+bT-A8 => bT-A7
+			bC								bR						8
+
+	bT				bP										wT		7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	wQ																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+			wT		wA				wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
+Movimientos totales: 55
+
+Turno de humano.
+
+Movimiento registrado:
+wT-B1 => wT-B8
+			wT								bR						8
+
+	bT				bP										wT		7
+
+	wP						bP								wC		6
+
+							wP								wP		5
+
+	wQ																4
+
+	wC						wP		wP								3
+
+	wP														wP		2
+
+					wA				wR		wA						1
+
+
+	A		B		C		D		E		F		G		H	
+
+
+
