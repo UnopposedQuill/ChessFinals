@@ -228,7 +228,8 @@ def main():
 
 							# Cambio de turno.
 							attacked = move_gen(chessboard, "b", True)
-							if (chessboard.white_king.y, chessboard.white_king.x) not in attacked:
+							king = chessboard.get_king("w")
+							if (king.y, king.x) not in attacked:
 								is_piece_selected = False
 								player = "AI"
 								game_message("Turno actual:\nComputadora", (255, 255, 255))
