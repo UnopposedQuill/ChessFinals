@@ -122,7 +122,7 @@ def main():
 			if ia_mode == "casual":
 				generated_value, ia_selected_move = minimax(chessboard, 4, float("-inf"), float("inf"), True, dict(), False)
 			else:  # ia_mode == "finals"
-				generated_value, ia_selected_move = minimax(chessboard, 6, float("-inf"), float("inf"), True, dict(), True)
+				generated_value, ia_selected_move = minimax(chessboard, 7, float("-inf"), float("inf"), True, dict(), True)
 
 			# Verificación para saber si el jugador ha ganado la partida.
 			if generated_value == float("-inf") and ia_selected_move == 0:
@@ -321,9 +321,8 @@ def main():
 							root = Tk()
 							root.iconify()
 							root.filename = \
-								filedialog.askopenfilename(initialdir="/", title="Select file",
-								                           filetypes=(
-									                           ("Plain Text files", "*.txt"), ("all files", "*.*")))
+								filedialog.askopenfilename(title="Select file",
+															filetypes=(("Plain Text files", "*.txt"), ("all files", "*.*")))
 							print(root.filename)
 							root.destroy()
 							load_game(root.filename)
@@ -341,7 +340,7 @@ def main():
 						if ia_mode == "casual":
 							ia_mode = "finals"
 						else:
-							ia_mode = "casuals"
+							ia_mode = "casual"
 
 		# Botones de funcionalidades.
 		if reset_button.is_cursor_inside(cursor=mouse):
