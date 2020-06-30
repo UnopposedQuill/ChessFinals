@@ -153,11 +153,14 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
 		for start, move_set in black_moves.items():
 			for end in move_set:
 
-				# perform the move
-				# preserve the start and the end pieces, in case the move
-				# needs to be reversed
-				piece = chessboard.matrix[start[0]][start[1]]
-				dest = chessboard.matrix[end[0]][end[1]]
+                # First I'll preserve the score
+                previous_score = chessboard.score
+
+                # perform the move
+                # preserve the start and the end pieces, in case the move
+                # needs to be reversed
+                piece = chessboard.matrix[start[0]][start[1]]
+                dest = chessboard.matrix[end[0]][end[1]]
 
 				# if a pawn promotion occurs, return the pieces involved
 				pawn_promotion = chessboard.move_piece(piece, end[0], end[1])
@@ -178,9 +181,14 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
 						chessboard.score -= 9  # revert the score from the promotion
 					continue  # the move is illegal, thus we don't care and move on
 
-				# change the score if a piece was captured
-				if dest is not None:
-					chessboard.score += chessboard.piece_values[type(dest)]
+                # If this moves places the piece in a bad position, this board is worse
+                # // 2 so that it might choose to sacrifice the piece
+                if (piece.y, piece.x) in attacked:
+                    chessboard.score -= chessboard.piece_values[type(piece)] // 2
+
+                # change the score if a piece was captured
+                if dest is not None:
+                    chessboard.score += chessboard.piece_values[type(dest)]
 
 				# now I'll check the attacked locations for this player, the more attacked the better
 				attacked_slots = move_gen(chessboard, "b", True)
@@ -196,11 +204,7 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
 				if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
 					piece.moved = moved_piece
 
-				chessboard.score -= len(attacked_slots)
-				if pawn_promotion:
-					chessboard.score -= 9
-				if dest is not None:
-					chessboard.score -= chessboard.piece_values[type(dest)]
+                chessboard.score = previous_score
 
 				if v >= best_value:  # move is better than best, store it
 					move = (start, (end[0], end[1]))
@@ -220,9 +224,13 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
 		best_value = float("inf")
 		white_moves = move_gen(chessboard, "w")
 
-		# explore all the potential moves from this chessboard state
-		for start, move_set in white_moves.items():
-			for end in move_set:
+                # First I'll preserve the score
+                previous_score = chessboard.score
+
+                # perform the move
+                piece = chessboard.matrix[start[0]][start[1]]
+                dest = chessboard.matrix[end[0]][end[1]]
+                pawn_promotion = chessboard.move_piece(piece, end[0], end[1])
 
 				# perform the move
 				piece = chessboard.matrix[start[0]][start[1]]
@@ -234,15 +242,14 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
 					moved_piece = piece.moved
 					piece.moved = True
 
-				# see if the move puts you in check
-				attacked = move_gen(chessboard, "b", True)  # return spaces attacked by black
-				king = chessboard.get_king("w")
-				if (king.y, king.x) in attacked:
-					chessboard.move_piece(piece, start[0], start[1], True)
-					chessboard.matrix[end[0]][end[1]] = dest
-					if pawn_promotion:
-						chessboard.score += 9
-					continue  # move is illegal, don't consider it
+                # If this moves places the piece in a bad position, this board is worse
+                # // 2 so that it might choose to sacrifice the piece
+                if (piece.y, piece.x) in attacked:
+                    chessboard.score += chessboard.piece_values[type(piece)] // 2
+
+                # update the score
+                if dest is not None:
+                    chessboard.score -= chessboard.piece_values[type(dest)]
 
 				# update the score
 				if dest is not None:
@@ -254,15 +261,13 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
 
 				v, __ = minimax(chessboard, depth - 1, alpha, beta, True, memo, finals)
 
-				best_value = min(v, best_value)
-				beta = min(beta, best_value)
+                # reverse the move, revert the score
+                chessboard.move_piece(piece, start[0], start[1], True)
+                chessboard.matrix[end[0]][end[1]] = dest
+                if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
+                    piece.moved = moved_piece
 
-				# reverse the move, revert the score
-				chessboard.move_piece(piece, start[0], start[1], True)
-				chessboard.matrix[end[0]][end[1]] = dest
-				if isinstance(piece, Pawn) or isinstance(piece, Rook) or isinstance(piece, King):
-					piece.moved = moved_piece
-				chessboard.score += len(attacked_slots)
+                chessboard.score = previous_score
 
 				if pawn_promotion:
 					chessboard.score += 9
