@@ -134,7 +134,7 @@ def minimax(chessboard, depth, alpha, beta, maximizing, memo, finals):
     tuple_mat = matrix_to_tuple(chessboard.matrix, chessboard.get_null_row())
 
     if finals:
-        initial_depth = 6
+        initial_depth = 7
     else:
         initial_depth = 4
 
