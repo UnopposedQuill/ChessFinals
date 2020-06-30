@@ -329,7 +329,7 @@ def main():
 							final_file_name = root.filename
 							ia_mode = "finals"
 
-						except:
+						except IOError:
 							game_message('ERROR\nfile exception', (255, 0, 0))
 
 					if new_button.is_cursor_inside(mouse):
@@ -372,8 +372,9 @@ def main():
 
 # Guarda el documento en un archivo de log,
 def create_log_file(data):
-	name = "Partida " + str(datetime.datetime.now())
-	file = open(name, "wt")
+	date_format_string = "%H %M %d-%m-%Y"
+	name = "Partida " + datetime.datetime.now().strftime(date_format_string) + '.log'
+	file = open(name, "w+")
 	file.write(data)
 	file.close()
 

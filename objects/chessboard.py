@@ -129,7 +129,7 @@ class Chessboard:
 						self.matrix[x][y] = Knight("w", x, y)
 					elif line[1] == 'P':
 						self.matrix[x][y] = Pawn("w", x, y)
-				self.save_current_status(0)
+				# self.save_current_status(0)
 				line = file.readline()
 			file.close()
 
@@ -233,7 +233,7 @@ class Chessboard:
 
 		# Se agrega el dato de movimiento.
 		current_status += "Movimiento registrado:\n" + piece.color + piece.symbol + "-" + prev_pos + " => " + \
-		                  piece.color + piece.symbol + "-" + str_local_translator(piece.x, piece.y) + "\n"
+							piece.color + piece.symbol + "-" + str_local_translator(piece.x, piece.y) + "\n"
 
 		# Ciclo de almacenamiento de tablero.
 		for i in range(9):
